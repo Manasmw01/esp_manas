@@ -19,11 +19,11 @@
 
 #define STATE_SIZE 6  // Number of states n
 #define MEAS_SIZE 164  // Number of measurements m
-// #define SAMPLES 1  // Number of measurements m
+#define SAMPLES 2  // Number of measurements m
 
-#define iterations 2
-#define dimensions 6
-#define const_mat_dim 6
+#define iterations SAMPLES
+#define dimensions STATE_SIZE
+#define const_mat_dim STATE_SIZE
 
 
 /* <<--defines-->> */

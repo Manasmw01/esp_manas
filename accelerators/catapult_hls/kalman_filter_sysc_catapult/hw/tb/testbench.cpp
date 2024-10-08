@@ -205,7 +205,7 @@ void testbench::proc()
 
     measurement_vecs_base_address = constant_matrices_size;
 
-    input_vecs_total_size = measurement_vecs_base_address + MEAS_SIZE;
+    input_vecs_total_size = measurement_vecs_base_address + SAMPLES*MEAS_SIZE;
 
     output_size_per_iter = STATE_SIZE + STATE_SIZE*STATE_SIZE; // xp and Pp
     output_total_size = output_size_per_iter;
@@ -343,27 +343,28 @@ void testbench::partition()
     }
 
     for (int i = 0; i < STATE_SIZE; i++)
+    {
         for (int j = 0; j < STATE_SIZE; j++)
         {
             master_array[Mat_P_address + (i*STATE_SIZE + j)] = 0; 
             // std::cout << "Mat_P[" << Mat_P_address + (i*STATE_SIZE + j) << "]:\t" << master_array[Mat_P_address + (i*STATE_SIZE + j)] << std::endl;
         }
-        int iter = 1;
-        // // std::cout << "MEAS START[" << measurement_vecs_base_address + MEAS_SIZE*iter << std::endl;
-        // // std::cout << "MEAS END [" << measurement_vecs_base_address + MEAS_SIZE*(iter+1) << std::endl;
-
-        std::cout << "MEAS ADD[" << measurement_vecs_base_address + MEAS_SIZE*iter-MEAS_SIZE*iter << std::endl;
-        std::cout << "MEAS ENDD[" << measurement_vecs_base_address + MEAS_SIZE*(iter+1) - 1 -MEAS_SIZE*iter << std::endl;
-
+    }
+    for(int iter = 1; iter <= SAMPLES; iter++)
+    {
         for(int i = MEAS_SIZE*iter; i < MEAS_SIZE*(iter+1); i++)
         {
-            master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter] = measurements[i];    
+            master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1)] = measurements[i];    
             // if(i == MEAS_SIZE*(iter+1) - 1)
-            if(i < (MEAS_SIZE*iter + 6))
-                std::cout << "TB ZK:\t" << measurements[i] << std::endl;
+            // if(i < (MEAS_SIZE*iter + 6))
+            // {
+            //     std::cout << "iter: " << iter << "\ti:" << i << "\tMEAS_SIZE*iter: " << MEAS_SIZE*iter << "\tTB ZK[" << measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1) << "]:" << master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1)] << "\t" << measurements[i] << std::endl;
+            // }
                 // std::cout << "TB ZK:\t" << measurement_vecs_base_address + i-MEAS_SIZE*iter << std::endl;
 
         }
+        std::cout << std::endl;
+    }
 }
 
 

@@ -194,4 +194,5 @@ inline void addVectors(FPDATA vector1[N], FPDATA vector2[N], FPDATA result[N], u
         result[i] = vector1[i] + vector2[i];
     }
 }
+
 #endif

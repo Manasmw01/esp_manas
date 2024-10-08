@@ -110,8 +110,9 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         else
             input_measurements_word=in_pong_rd.Pop().data[0];            
         int2fx(input_measurements_word,input_measurements_fx);
-            zk[k] = input_measurements_fx;
-            cout << "zk:(" << k << "):\t" << zk[k] << endl; 
+            vec_Z[k] = input_measurements_fx;
+            if(k < 2)
+                cout << "zk:(" << k << "):\t" << vec_Z[k] << endl; 
     }
 
     uint32_t rows = 0;
@@ -159,99 +160,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         {
             Mat_P[current_address - Mat_P_address] = input_regs_fx;
             // cout << "Mat_P[" << current_address << "]\t" << std::setprecision(20) << Mat_P[current_address - Mat_P_address] << "\n";
-        }
-        // if(current_address >= constant_matrices_size && current_address < constant_matrices_size + MEAS_SIZE)
-        // {
-        //     vec_Z[current_address - constant_matrices_size] = input_regs_fx;
-        //     cout << "vec_Z[" << current_address << "]\t" << std::setprecision(20) << vec_Z[current_address - constant_matrices_size] << "\n";
-        // }
-
-        // if(current_address >= Mat_H_address && current_address < Mat_H_address + 5)
-        // {
-        //     cout << "Mat_H[" << current_address << "]\t" << input_regs_fx << "\n";           
-        // }
-
-        // if(current_address >= Mat_P_address && current_address < Mat_P_address + 5)
-        // {
-        //     cout << "Mat_P[" << current_address << "]\t" << input_regs_fx << "\n";           
-        // }
-
-        // if(current_address >= phi_base_address && current_address < Q_base_address)
-        // {
-        //     phi_cpp[rows][cols] = input_regs_fx;
-        //     cols++;
-        //     if(cols >= kalman_mat_dim)
-        //     {
-        //         rows++;
-        //         cols = 0; 
-        //     }
-        //     if(rows >= kalman_mat_dim)
-        //     {
-        //         rows = 0;
-        //         cols = 0; 
-        //     }
-        // }
-        // if(current_address >= Q_base_address && current_address < H_base_address)
-        // {
-        //     Q_cpp[rows][cols] = input_regs_fx;
-        //     cols++;
-        //     if(cols >= kalman_mat_dim)
-        //     {
-        //         rows++;
-        //         cols = 0; 
-        //     }
-        //     if(rows >= kalman_mat_dim)
-        //     {
-        //         rows = 0;
-        //         cols = 0; 
-        //     }
-        // }
-        // if(current_address >= H_base_address && current_address < R_base_address)
-        // {
-        //     H_cpp[rows][cols] = input_regs_fx;
-        //     cols++;
-        //     if(cols >= kalman_mat_dim)
-        //     {
-        //         rows++;
-        //         cols = 0; 
-        //     }
-        //     if(rows >= kalman_mat_dim)
-        //     {
-        //         rows = 0;
-        //         cols = 0; 
-        //     }
-        // }
-        // if(current_address >= R_base_address && current_address < Pp_base_address)
-        // {
-        //     R_cpp[rows][cols] = input_regs_fx;
-        //     cols++;
-        //     if(cols >= kalman_mat_dim)
-        //     {
-        //         rows++;
-        //         cols = 0; 
-        //     }
-        //     if(rows >= kalman_mat_dim)
-        //     {
-        //         rows = 0;
-        //         cols = 0; 
-        //     }
-        // }
-        // if(current_address >= Pp_base_address && current_address < constant_matrices_size)
-        // {
-        //     Pp_cpp[rows][cols] = input_regs_fx;
-        //     // cout << "PP LOOP[" << rows << "]\t" << current_address << "\t" << Pp_cpp[rows][cols] << "\n"; 
-        //     cols++;
-        //     if(cols >= kalman_mat_dim)
-        //     {
-        //         rows++;
-        //         cols = 0; 
-        //     }
-        //     if(rows >= kalman_mat_dim)
-        //     {
-        //         rows = 0;
-        //         cols = 0; 
-        //     }
-        // }        
+        }   
     }
 
         // #ifdef PRINT_STATEMENTS
@@ -264,15 +173,15 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         // print_matrix(Pp_cpp, kalman_mat_dim);
         // #endif
 
-    if(iter == 0)
-    {
-        X_cpp[0] = zk[0];
-        X_cpp[1] = zk[1];
-        X_cpp[2] = zk[2];
-        X_cpp[3] = zk[3];
-        X_cpp[4] = zk[4];
-        X_cpp[5] = zk[5];
-    }
+    // if(iter == 0)
+    // {
+    //     X_cpp[0] = zk[0];
+    //     X_cpp[1] = zk[1];
+    //     X_cpp[2] = zk[2];
+    //     X_cpp[3] = zk[3];
+    //     X_cpp[4] = zk[4];
+    //     X_cpp[5] = zk[5];
+    // }
 
 
     FPDATA_WORD op_word;
@@ -329,6 +238,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         // std::cout << "X_Cpp: " << iter << "\n";
         // print_vector(X_cpp, kalman_mat_dim);
         // #endif
+
 
         multiplyMatrixVector(phi_cpp, X_cpp, Xp, kalman_mat_dim); // Xp = phi * X0;
 

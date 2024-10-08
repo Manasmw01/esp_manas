@@ -82,8 +82,9 @@ void kalman_filter_sysc_catapult:: load() {
         uint32_t regs_base_address = 0;
         uint32_t regs_size = 5*kalman_mat_rows* kalman_mat_rows;
 
-        cout << "Load_b: " << regs_base_address << "\t" << input_vecs_total_size << "\t" << input_vecs_total_size << "\n";
-        load_b(ping_pong, regs_base_address, input_vecs_total_size);
+        cout << "Load_b: " << regs_base_address << "\t" << constant_matrices_size << "\t" << constant_matrices_size << "\n";
+        load_b(ping_pong, regs_base_address, constant_matrices_size);
+        // load_b(ping_pong, regs_base_address, input_vecs_total_size);
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             // load_d(ping_pong, regs_base_address, regs_size);
