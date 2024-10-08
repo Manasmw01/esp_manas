@@ -290,7 +290,7 @@ void testbench::load_data(float *inn, uint32_t inn_size)
             // ac_ieee_float32 data = inn[i* DMA_WORD_PER_BEAT + wordd];
             // ac_float< 5, 3, 3, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
             // cout << "OUT 1" << endl; 
-            ac_float< DATA_WIDTH, FPDATA_IL, 8, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
+            ac_float< DATA_WIDTH, FPDATA_IL, 7, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
             // cout << "OUT 2" << endl; 
 
             // FPDATA fpdata=data.convert_to_ac_fixed<FPDATA_WL,FPDATA_IL,true,AC_TRN, AC_WRAP>();

@@ -14,7 +14,6 @@ typedef float data_type;
 #include "esp_dma_info_sysc.hpp"
 #include "esp_dma_controller.hpp"
 
-
 #define num_iterations iterations // From kalman_specs.hpp
 #define matrix_dim dimensions
 

@@ -64,27 +64,35 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     FPDATA Mat_I[STATE_SIZE*STATE_SIZE];
 
 
-    FPDATA  phi_cpp[const_mat_dim][const_mat_dim];
-    FPDATA Q_cpp[const_mat_dim][const_mat_dim];
-    FPDATA  H_cpp[const_mat_dim][const_mat_dim];
-    FPDATA  R_cpp[const_mat_dim][const_mat_dim];
+    // FPDATA x[STATE_SIZE];
+    // FPDATA prediction_x[STATE_SIZE];
+    // FPDATA prediction_ref[STATE_SIZE];
+    // FPDATA temp_meas[MEAS_SIZE];
+    // FPDATA P[STATE_SIZE * STATE_SIZE];
+    // FPDATA A_transpose[STATE_SIZE * STATE_SIZE];
+    // FPDATA Pp[STATE_SIZE * STATE_SIZE];
+    // FPDATA H_transpose[MEAS_SIZE * STATE_SIZE];
+    // FPDATA K[STATE_SIZE * MEAS_SIZE];
+    // FPDATA HP[MEAS_SIZE * STATE_SIZE];
+    // FPDATA HPHT[MEAS_SIZE * MEAS_SIZE];
+    // FPDATA HPHT_R[MEAS_SIZE * MEAS_SIZE];
+    // FPDATA KtH[STATE_SIZE * MEAS_SIZE];
+    // FPDATA KtHP[STATE_SIZE * STATE_SIZE];
+    // FPDATA I[STATE_SIZE * STATE_SIZE];
+    // FPDATA temp1[STATE_SIZE * STATE_SIZE];
+    // FPDATA xp[STATE_SIZE];
+
+
+
+
+
     FPDATA  Pp_cpp[const_mat_dim][const_mat_dim];
 
 
     
 
     FPDATA  X_cpp[const_mat_dim];
-    FPDATA  Xp[const_mat_dim];
 
-    FPDATA  Zk[const_mat_dim];
-    FPDATA K_cpp[const_mat_dim][const_mat_dim];
-    FPDATA tmp_mat1[const_mat_dim][const_mat_dim];
-    FPDATA tmp_mat2[const_mat_dim][const_mat_dim];
-    FPDATA tmp_mat3[const_mat_dim][const_mat_dim];
-    FPDATA tmp_trans[const_mat_dim][const_mat_dim];
-    FPDATA tmp_vec[const_mat_dim];
-    FPDATA tmp_vec2[const_mat_dim];
-    FPDATA L[const_mat_dim][const_mat_dim]; // Lower triangular matrix
 
     FPDATA  output_to_send[const_mat_dim];
 
@@ -97,7 +105,6 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     FPDATA_WORD input_measurements_word;
     FPDATA input_measurements_fx;
 
-    FPDATA zk_plus_1[const_mat_dim];
     FPDATA zk[const_mat_dim];
 
     // uint32_t current_address = 0;
@@ -163,26 +170,6 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         }   
     }
 
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "PHI: " << iter << "\n";
-        // print_matrix(phi_cpp, kalman_mat_dim);
-        // #endif
-
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "Pp_cpp: " << iter << "\n";
-        // print_matrix(Pp_cpp, kalman_mat_dim);
-        // #endif
-
-    // if(iter == 0)
-    // {
-    //     X_cpp[0] = zk[0];
-    //     X_cpp[1] = zk[1];
-    //     X_cpp[2] = zk[2];
-    //     X_cpp[3] = zk[3];
-    //     X_cpp[4] = zk[4];
-    //     X_cpp[5] = zk[5];
-    // }
-
 
     FPDATA_WORD op_word;
     FPDATA op_fx;
@@ -237,76 +224,94 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         // #ifdef PRINT_STATEMENTS
         // std::cout << "X_Cpp: " << iter << "\n";
         // print_vector(X_cpp, kalman_mat_dim);
-        // #endif
+    // #endif
+        FPDATA Y[MEAS_SIZE];
+        FPDATA Mat_S[MEAS_SIZE*MEAS_SIZE];
+        FPDATA Mat_S_2D[MEAS_SIZE][MEAS_SIZE];
 
 
-        multiplyMatrixVector(phi_cpp, X_cpp, Xp, kalman_mat_dim); // Xp = phi * X0;
+        // FPDATA HtF[MEAS_SIZE * STATE_SIZE];
+        FPDATA HtF[MEAS_SIZE * MEAS_SIZE];
+        matrix_multiply(Mat_H, Mat_F, HtF, MEAS_SIZE,   STATE_SIZE, STATE_SIZE); // xp = A*x2
 
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "Xp\n";
-        // print_vector(Xp, kalman_mat_dim);
-        // #endif
+        // printf("HtF\n");
+        // print_matrix_new(HtF, MEAS_SIZE, STATE_SIZE);
+
+        FPDATA H_F_X[MEAS_SIZE];
+        matrix_multiply(HtF, vec_X, H_F_X, MEAS_SIZE,   STATE_SIZE, 1); // xp = A*x2
+        // printf("H_F_X\n");
+        // print_matrix_new(H_F_X, MEAS_SIZE, 1);
+
+
+        matrix_subtract(vec_Z, H_F_X, Y, MEAS_SIZE); // P3 = Pp - (K * H * Pp)
+
+    FPDATA F_Transpose[STATE_SIZE * STATE_SIZE];
+    matrix_transpose(Mat_F, F_Transpose, STATE_SIZE, STATE_SIZE); // A^T
+
+    FPDATA H_Transpose[STATE_SIZE * MEAS_SIZE];
+    matrix_transpose(Mat_H, H_Transpose, MEAS_SIZE, STATE_SIZE); // A^T
+
+    FPDATA FtP[STATE_SIZE * STATE_SIZE];
+    matrix_multiply(Mat_F, Mat_P, FtP, STATE_SIZE,   STATE_SIZE, STATE_SIZE); 
+
+    FPDATA F_P_FT[STATE_SIZE * STATE_SIZE];
+    matrix_multiply(FtP, F_Transpose, F_P_FT, STATE_SIZE,   STATE_SIZE, STATE_SIZE); 
+
+    FPDATA F_P_FT_Q[STATE_SIZE * STATE_SIZE];
+    matrix_add(F_P_FT, Mat_Q, F_P_FT_Q, STATE_SIZE, STATE_SIZE); // Pp = (A * P2) * A^T + Q
+
+    FPDATA H_times_F_P_FT_Q[MEAS_SIZE * STATE_SIZE];
+    matrix_multiply(Mat_H, F_P_FT_Q, H_times_F_P_FT_Q, MEAS_SIZE,   STATE_SIZE, STATE_SIZE); 
+    printf("H_times_F_P_FT_Q\n");
+    print_matrix_new(H_times_F_P_FT_Q, MEAS_SIZE, STATE_SIZE);
+
+    // FPDATA H_times_F_P_FT_Q_times_HT[MEAS_SIZE * MEAS_SIZE];
+    // matrix_multiply(H_times_F_P_FT_Q, H_Transpose, H_times_F_P_FT_Q_times_HT, MEAS_SIZE,   STATE_SIZE, MEAS_SIZE); 
+    // matrix_add(H_times_F_P_FT_Q_times_HT, Mat_R, Mat_S, MEAS_SIZE, MEAS_SIZE); // Pp = (A * P2) * A^T + Q
+
+    // FPDATA S_inv[MEAS_SIZE * MEAS_SIZE];
+    // FPDATA S_inv_2D[MEAS_SIZE][MEAS_SIZE]; // Replace FPDATA with the appropriate type (e.g., float)
+    // gauss_inverse(Mat_S, S_inv, MEAS_SIZE); 
+
+
+    // FPDATA F_P_FT_Q_times_HT[STATE_SIZE*MEAS_SIZE];
+    // matrix_multiply(F_P_FT_Q, H_Transpose, F_P_FT_Q_times_HT, STATE_SIZE,   STATE_SIZE, MEAS_SIZE); 
+
+    // matrix_multiply(F_P_FT_Q_times_HT, S_inv, Mat_K, STATE_SIZE,   MEAS_SIZE, MEAS_SIZE); 
+ 
+    // FPDATA FtX[STATE_SIZE];
+    // matrix_multiply(Mat_F, vec_X, FtX, STATE_SIZE,   STATE_SIZE, 1); 
+
+    // // FPDATA Mat_K[STATE_SIZE * MEAS_SIZE];
+    // // FPDATA Y[MEAS_SIZE];
+    // FPDATA KtY[STATE_SIZE];
+    // matrix_multiply(Mat_K, Y, KtY, STATE_SIZE,   MEAS_SIZE, 1); 
+
+    // matrix_add(FtX, KtY, vec_X, STATE_SIZE, 1); // Pp = (A * P2) * A^T + Q
+
+    // matrix_multiply(Mat_K, Mat_H, KtH, STATE_SIZE,   MEAS_SIZE, STATE_SIZE); 
+
+    // FPDATA I_minus_KtH[STATE_SIZE * STATE_SIZE];
+    // matrix_subtract(Mat_I, KtH, I_minus_KtH, STATE_SIZE*STATE_SIZE); // P3 = Pp - (K * H * Pp)
+
+
+    // matrix_multiply(I_minus_KtH, F_P_FT_Q, Mat_P, STATE_SIZE,   STATE_SIZE, STATE_SIZE);
+    // // printf("Mat_P\n");
+    // // print_matrix(Mat_P, STATE_SIZE, STATE_SIZE);
+
+
+
+
 
         FPDATA phi_x_pp[const_mat_dim][const_mat_dim];
         FPDATA phi_trans[const_mat_dim][const_mat_dim];
         FPDATA temp_mat_x[const_mat_dim][const_mat_dim];
-
-        // Pp = phi * Pp * phi' + Q
-                    multiplyMatrices(phi_cpp, Pp_cpp, phi_x_pp, kalman_mat_dim); 
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "phi_x_pp\n";
-        // print_matrix(phi_x_pp, kalman_mat_dim);
-        // #endif
-                    transposeMatrix(phi_cpp, phi_trans, kalman_mat_dim);
-                    multiplyMatrices(phi_x_pp, phi_trans, temp_mat_x, kalman_mat_dim);
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "temp_mat_x\n";
-        // print_matrix(temp_mat_x, kalman_mat_dim);
-        // #endif
-                    addMatrices(temp_mat_x, Q_cpp, Pp_cpp, kalman_mat_dim);
-        // // End Pp = phi * Pp * phi' + Q
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "Pp\n";
-        // print_matrix(Pp_cpp, kalman_mat_dim);
-        // #endif
-
-
-
         FPDATA H_x_pp[const_mat_dim][const_mat_dim];
         FPDATA H_trans[const_mat_dim][const_mat_dim];
         FPDATA H_Pp_H_trans[const_mat_dim][const_mat_dim];
         FPDATA before_invv[const_mat_dim][const_mat_dim];
         FPDATA after_invv[const_mat_dim][const_mat_dim];
         FPDATA Pp_x_H_trans[const_mat_dim][const_mat_dim];
-
-    // // Compute Kalman Gain
-    //     // K = Pp * H' * inv(H * Pp * H' + R);
-            multiplyMatrices(H_cpp, Pp_cpp, H_x_pp, kalman_mat_dim);  // H * Pp
-            transposeMatrix(H_cpp, H_trans, kalman_mat_dim);          // H'
-            multiplyMatrices(H_x_pp, H_trans, H_Pp_H_trans, kalman_mat_dim); // (H * Pp) * H'
-            addMatrices(H_Pp_H_trans, R_cpp, before_invv, kalman_mat_dim); // H * Pp * H' + R
-            // gauss_inverse(before_invv, after_invv, kalman_mat_dim); // inv(H * Pp * H' + R)                    
-
-            multiplyMatrices(Pp_cpp, H_trans, Pp_x_H_trans, kalman_mat_dim); // Pp * H'
-            multiplyMatrices(Pp_x_H_trans, after_invv, K_cpp, kalman_mat_dim); // Pp * H' * inv(H * Pp * H' + R)
-    //     // END COMPUTE KALMAN GAIN
-
-    //     //Update
-    //     // X(:,i+1) = Xp + K * (Zk - H * Xp);
-        
-            multiplyMatrixVector(H_cpp, Xp, tmp_vec, kalman_mat_dim); // H * Xp
-            subtractVectors(zk, tmp_vec, tmp_vec2, kalman_mat_dim); // Zk - H * Xp
-
-            multiplyMatrixVector(K_cpp, tmp_vec2, tmp_vec, kalman_mat_dim); // K * (Zk - H * Xp)
-            addVectors(Xp, tmp_vec, X_cpp, kalman_mat_dim);
-
-    //     //Update
-    //     // Pp = Pp - K*H*Pp;
-            multiplyMatrices(K_cpp, H_cpp, tmp_mat1, kalman_mat_dim); 
-            multiplyMatrices(tmp_mat1, Pp_cpp, tmp_mat2, kalman_mat_dim);  // K*H*Pp
-            subtractMatrices(Pp_cpp, tmp_mat2, tmp_mat1, kalman_mat_dim);
-            copymat(tmp_mat1, Pp_cpp, kalman_mat_dim);
-        // Update Pp done
 
         FPDATA send_output_array[100];
         
