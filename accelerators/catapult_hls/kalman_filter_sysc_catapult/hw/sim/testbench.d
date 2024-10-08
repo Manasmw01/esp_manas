@@ -283,5 +283,6 @@ testbench.o: ../tb/testbench.cpp ../tb/testbench.hpp \
  ../../../common/inc/core/systems/esp_dma_controller.i.hpp \
  ../../../common/matchlib_toolkit/examples/ac_math/include/ac_math/ac_random.h \
  ../../../common/matchlib_toolkit/examples/ac_simutils/include/mc_scverify.h \
- ../tb/data_init.h ../tb/csv_time.h ../tb/csv_x_acc.h ../tb/csv_x_gps.h \
- ../tb/csv_y_acc.h ../tb/csv_y_gps.h
+ ../tb/A_array.h ../tb/H_array.h ../tb/initial_state_array.h \
+ ../tb/measurements_array.h ../tb/P_array.h ../tb/prediction_array.h \
+ ../tb/Q_array.h ../tb/real_array.h ../tb/W_array.h

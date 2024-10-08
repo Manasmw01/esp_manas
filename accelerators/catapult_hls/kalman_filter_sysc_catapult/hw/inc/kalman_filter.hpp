@@ -42,8 +42,8 @@ public:
 inline void compute_req(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong);
   
 inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, 
-                                    uint32_t phi_base_address, uint32_t Q_base_address, uint32_t H_base_address, uint32_t R_base_address, 
-                                    uint32_t Pp_base_address, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong);
+                                    uint32_t vec_X_address, uint32_t Mat_F_address  , uint32_t Mat_Q_address, uint32_t Mat_R_address, 
+                                    uint32_t Mat_H_address, uint32_t Mat_P_address, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong);
 
   // SC_CTOR(kalman_filter_sysc_catapult):  
   //     plm_in_ping("plm_in_ping"), 

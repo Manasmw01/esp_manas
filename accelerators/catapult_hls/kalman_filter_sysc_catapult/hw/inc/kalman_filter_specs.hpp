@@ -13,18 +13,26 @@
 #include "esp_dma_info_sysc.hpp"
 #include <ArbitratedScratchpadDP.h>
 
-#define const_mat_dim 16
 
-#define iterations 7
+// #define iterations 7
+// #define dimensions 6
+
+#define STATE_SIZE 6  // Number of states n
+#define MEAS_SIZE 164  // Number of measurements m
+// #define SAMPLES 1  // Number of measurements m
+
+#define iterations 2
 #define dimensions 6
+#define const_mat_dim 6
+
 
 /* <<--defines-->> */
 #define DATA_WIDTH 32
 #define DMA_SIZE SIZE_WORD
 // #define PLM_OUT_WORD 100
 // #define PLM_IN_WORD 6400
-#define PLM_IN_WORD 6400
-#define PLM_OUT_WORD 800
+#define PLM_IN_WORD 32000
+#define PLM_OUT_WORD 32000
 #define MEM_SIZE 416000/(DMA_WIDTH/8)
 
 #if (DMA_WIDTH == 32)

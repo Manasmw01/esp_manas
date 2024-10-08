@@ -75,20 +75,27 @@ void kalman_filter_sysc_catapult:: load() {
         uint32_t kalman_iters = conf.kalman_iters;
         uint32_t kalman_mat_rows = conf.kalman_mat_rows;
 
+        uint32_t constant_matrices_size = conf.constant_matrices_size;
+        uint32_t input_vecs_total_size = conf.input_vecs_total_size;
+        
         uint32_t inputs_base_address;
         uint32_t regs_base_address = 0;
         uint32_t regs_size = 5*kalman_mat_rows* kalman_mat_rows;
 
-        load_b(ping_pong, regs_base_address, regs_size);
+        cout << "Load_b: " << regs_base_address << "\t" << input_vecs_total_size << "\t" << input_vecs_total_size << "\n";
+        load_b(ping_pong, regs_base_address, input_vecs_total_size);
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             // load_d(ping_pong, regs_base_address, regs_size);
-            inputs_base_address = regs_size + (iter * kalman_mat_rows);
+
+            // inputs_base_address = input_vecs_total_size + (iter * MEAS_SIZE);
+            inputs_base_address = constant_matrices_size + (iter * MEAS_SIZE);
 
             #ifdef PRINT_STATEMENTS
             // cout << "Load_d: " << inputs_base_address << "\t" << kalman_mat_rows << "\t" << (inputs_base_address + kalman_mat_rows) << "\n";
             #endif
-            load_d(ping_pong, inputs_base_address, kalman_mat_rows);
+            cout << "Load_d: " << inputs_base_address << "\t" << MEAS_SIZE << "\t" << (inputs_base_address + MEAS_SIZE) << "\n";
+            load_d(ping_pong, inputs_base_address, MEAS_SIZE);
             sync12.sync_out();
             sync12b.sync_out();
             // ping_pong = !ping_pong;
@@ -187,17 +194,20 @@ void kalman_filter_sysc_catapult:: compute() {
         uint32_t kalman_mat_rows = conf.kalman_mat_rows;
         uint32_t constant_matrices_size = conf.constant_matrices_size;
 
-        uint32_t phi_base_address = conf.phi_base_address;
-        uint32_t Q_base_address = conf.Q_base_address;
-        uint32_t H_base_address = conf.H_base_address;
-        uint32_t R_base_address = conf.R_base_address;
-        uint32_t Pp_base_address = conf.Pp_base_address;
+        uint32_t vec_X_address = conf.vec_X_address;
+        uint32_t Mat_F_address = conf.Mat_F_address;
+        uint32_t Mat_Q_address = conf.Mat_Q_address;
+        uint32_t Mat_R_address = conf.Mat_R_address;
+        uint32_t Mat_H_address = conf.Mat_H_address;
+        uint32_t Mat_P_address = conf.Mat_P_address;
+
+
 
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             sync12b.sync_in();
             compute(iter, kalman_iters, kalman_mat_rows, 
-                    phi_base_address, Q_base_address, H_base_address, R_base_address, Pp_base_address, 
+                    vec_X_address, Mat_F_address, Mat_Q_address, Mat_R_address, Mat_H_address, Mat_P_address,
                     constant_matrices_size, ping_pong, out_ping_pong);
             sync2b3.sync_out();
             sync2b3b.sync_out();

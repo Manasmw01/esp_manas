@@ -10,7 +10,8 @@
 
 #define N const_mat_dim
 #define FPDATA_WL DATA_WIDTH
-#define FPDATA_IL DATA_WIDTH/2
+// #define FPDATA_IL DATA_WIDTH/2
+#define FPDATA_IL 4
 
 typedef ac_int<DMA_WIDTH> DMA_WORD;
 typedef ac_int<FPDATA_WL> FPDATA_WORD;

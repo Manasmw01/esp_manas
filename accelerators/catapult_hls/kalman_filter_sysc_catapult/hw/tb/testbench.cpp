@@ -8,7 +8,17 @@
 
 #include <ac_float.h>
 
-#include "data_init.h"
+#include "A_array.h"
+#include "H_array.h"
+#include "initial_state_array.h"
+#include "measurements_array.h"
+#include "P_array.h"
+#include "prediction_array.h"
+#include "Q_array.h"
+#include "real_array.h"
+#include "W_array.h"
+
+
 std::ofstream ofs;
 std::ifstream ifs;
 
@@ -16,7 +26,7 @@ std::ifstream ifs;
 int err=0;
 FPDATA data;
 float float_data;
-FPDATA Pp_Final[matrix_dim][matrix_dim];
+FPDATA Pp_Final[STATE_SIZE][STATE_SIZE];
 
 #ifdef GOLDEN_OP
 inline void print_matrix_golden(float matrixx[N][N], uint32_t kalman_mat_rows)
@@ -181,22 +191,24 @@ void testbench::proc()
     mac_vec = 100;
     mac_len = 64;
     kalman_iters = num_iterations; // Number of readings taken
-    kalman_mat_rows = matrix_dim; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
-    kalman_mat_cols = matrix_dim; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
+    kalman_mat_rows = STATE_SIZE; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
+    kalman_mat_cols = STATE_SIZE; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
 
-    phi_base_address = 0;
-    Q_base_address = phi_base_address + (matrix_dim*matrix_dim);
-    H_base_address = Q_base_address + (matrix_dim*matrix_dim);
-    R_base_address = H_base_address + (matrix_dim*matrix_dim);
-    Pp_base_address = R_base_address + (matrix_dim*matrix_dim);
-    constant_matrices_size = Pp_base_address + (matrix_dim*matrix_dim);
+    vec_X_address = 0;
+    Mat_F_address = vec_X_address + (STATE_SIZE);
+    Mat_Q_address = Mat_F_address + (STATE_SIZE * STATE_SIZE);
+    Mat_R_address = Mat_Q_address + (STATE_SIZE * STATE_SIZE);
+    Mat_H_address = Mat_R_address + (MEAS_SIZE * MEAS_SIZE);
+    // vec_Z_address = Mat_H_address + (MEAS_SIZE * STATE_SIZE);
+    Mat_P_address = Mat_H_address + (MEAS_SIZE * STATE_SIZE);
+    constant_matrices_size = Mat_P_address + (STATE_SIZE * STATE_SIZE);
 
     measurement_vecs_base_address = constant_matrices_size;
 
-    input_vecs_total_size = measurement_vecs_base_address + matrix_dim*num_iterations;
-    output_size_per_iter = matrix_dim + matrix_dim*matrix_dim;
-    output_total_size = output_size_per_iter*num_iterations;
+    input_vecs_total_size = measurement_vecs_base_address + MEAS_SIZE;
 
+    output_size_per_iter = STATE_SIZE + STATE_SIZE*STATE_SIZE; // xp and Pp
+    output_total_size = output_size_per_iter;
 
     wait();
 
@@ -208,8 +220,6 @@ void testbench::proc()
     in_words_adj = input_vecs_total_size;
     out_words_adj = output_total_size;
 #else
-    // in_words_adj = round_up(mac_len*mac_vec, DMA_WORD_PER_BEAT);
-    // out_words_adj = round_up(mac_vec, DMA_WORD_PER_BEAT);
     in_words_adj = round_up(input_vecs_total_size, DMA_WORD_PER_BEAT);
     out_words_adj = round_up(output_total_size, DMA_WORD_PER_BEAT);
 #endif
@@ -228,28 +238,41 @@ void testbench::proc()
     master_array = new float[in_size];
     golden_array = new float[out_size];
 
+
+    std::cout << "vec_X_address\t" << vec_X_address << std::endl;
+    std::cout << "Mat_F_address\t" << Mat_F_address << std::endl;
+    std::cout << "Mat_Q_address\t" << Mat_Q_address << std::endl;
+    std::cout << "Mat_R_address\t" << Mat_R_address << std::endl;
+    std::cout << "Mat_H_address\t" << Mat_H_address << std::endl;
+    std::cout << "Mat_P_address\t" << Mat_P_address << std::endl;
+
+    std::cout << "constant_matrices_size\t" << constant_matrices_size << std::endl << std::endl;
+    std::cout << "input_vecs_total_size\t" << input_vecs_total_size << std::endl;
+    std::cout << "output_size_per_iter\t" << output_size_per_iter << std::endl;
+    std::cout << "output_total_size\t" << output_total_size << std::endl;
+    std::cout << "in_size\t" << in_size << std::endl;
+    std::cout << "out_size\t" << out_size << std::endl;
+
     partition();
     std::cout << "Partition completed\n";
 
-    print_variables();
-    std::cout << "Print variables completed\n";
+    // print_variables();
+    // std::cout << "Print variables completed\n";
 
     single_input_array(); // Updates in_float by merging all the inputs
     std::cout << "Single input array completed\n";
 
+    std::cout << "load_data\t" << input_vecs_total_size << std::endl;
     load_data(in_float, input_vecs_total_size); // Writes data in mem[i]
     std::cout << "Load datafloat done\n";
 
-#ifdef GOLDEN_OP
-    compute_golden();
-#endif
     do_config();
     std::cout << "Do config done\n";
 
     dump_memory();
     std::cout << "Dump memory completed\n";
 
-    // validate();
+    validate();
 
     
     sc_stop();
@@ -265,15 +288,21 @@ void testbench::load_data(float *inn, uint32_t inn_size)
         for (int wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
         {
             // ac_ieee_float32 data = inn[i* DMA_WORD_PER_BEAT + wordd];
-            ac_float< 5, 3, 3, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
+            // ac_float< 5, 3, 3, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
+            // cout << "OUT 1" << endl; 
+            ac_float< DATA_WIDTH, FPDATA_IL, 8, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
+            // cout << "OUT 2" << endl; 
+
             // FPDATA fpdata=data.convert_to_ac_fixed<FPDATA_WL,FPDATA_IL,true,AC_TRN, AC_WRAP>();
             // FPDATA fpdata=static_cast<FPDATA>(data.to_double());
             FPDATA fpdata=data.to_ac_fixed();
+            // if(i < 20)
+            // cout << "ac_float[" <<  i << "]:" << std::setprecision(20) << fpdata << endl; 
 
-            // std::cout << "FPDATA:(" << i << ")" << fpdata << endl;
             
             FPDATA_WORD fpdata_word;
             fpdata_word.set_slc(0,fpdata.slc<FPDATA_WL>(0));
+
             data_bv.set_slc(wordd*FPDATA_WL,fpdata_word);
         }
         mem[i] = data_bv;
@@ -282,263 +311,63 @@ void testbench::load_data(float *inn, uint32_t inn_size)
 
 void testbench::partition()
 {
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            master_array[phi_base_address + (i*matrix_dim + j)] = phi[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            master_array[Q_base_address + (i*matrix_dim + j)] = Q[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            master_array[H_base_address + (i*matrix_dim + j)] = H[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            master_array[R_base_address + (i*matrix_dim + j)] = R[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            master_array[Pp_base_address + (i*matrix_dim + j)] = Pp[i][j]; 
-
-    for (int i = 0; i < num_iterations; i++)
+    for (int i = 0; i < STATE_SIZE; i++) 
     {
-        master_array[measurement_vecs_base_address + matrix_dim*i + 0] = x_acc[i]; 
-        master_array[measurement_vecs_base_address + matrix_dim*i + 1] = x_gps[i]; 
-        master_array[measurement_vecs_base_address + matrix_dim*i + 2] = y_acc[i]; 
-        master_array[measurement_vecs_base_address + matrix_dim*i + 3] = y_gps[i]; 
-
-#if(matrix_dim == 6)
-        master_array[measurement_vecs_base_address + matrix_dim*i + 4] = x_acc[i]; 
-        master_array[measurement_vecs_base_address + matrix_dim*i + 5] = x_gps[i];         
-#endif
+        master_array[vec_X_address + i] = initial[i];
+        // cout << "vecx[" << vec_X_address << "]:" << initial[i] << endl; 
     }
-}
 
-void testbench::print_variables()
-{
-        std::cout << "\nphi: [" << phi_base_address << "]\n";
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            std::cout << master_array[phi_base_address + (i*matrix_dim + j)] << ((j == matrix_dim - 1) ? "\n": "\t");
-
-    std::cout << "\nQ: [" << Q_base_address << "]\n";
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            std::cout << master_array[Q_base_address + (i*matrix_dim + j)] << ((j == matrix_dim - 1) ? "\n": "\t");
-
-    std::cout << "\nH: [" << H_base_address << "]\n";
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            std::cout << master_array[H_base_address + (i*matrix_dim + j)] << ((j == matrix_dim - 1) ? "\n": "\t");
-
-    std::cout << "\nR: [" << R_base_address << "]\n";
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            std::cout << master_array[R_base_address + (i*matrix_dim + j)] << ((j == matrix_dim - 1) ? "\n": "\t");
-
-    std::cout << "\nPp: [" << Pp_base_address << "]\n";
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            std::cout << master_array[Pp_base_address + (i*matrix_dim + j)] << ((j == matrix_dim - 1) ? "\n": "\t");
-
-    std::cout << "\nMeasurement vectors\n";
-    for (uint32_t i= 0; i< num_iterations ; i++)
-    {
-        std::cout << "[" << measurement_vecs_base_address + matrix_dim*i + 0 << "]: " << master_array[measurement_vecs_base_address + matrix_dim*i + 0] << "\t";
-        std::cout << "[" << measurement_vecs_base_address + matrix_dim*i + 1 << "]: " << master_array[measurement_vecs_base_address + matrix_dim*i + 1] << "\t";
-        std::cout << "[" << measurement_vecs_base_address + matrix_dim*i + 2 << "]: " << master_array[measurement_vecs_base_address + matrix_dim*i + 2] << "\t";
-        std::cout << "[" << measurement_vecs_base_address + matrix_dim*i + 3 << "]: " << master_array[measurement_vecs_base_address + matrix_dim*i + 3] << "\t";
-    #if(matrix_dim == 6)
-        std::cout << "[" << measurement_vecs_base_address + matrix_dim*i + 4 << "]: " << master_array[measurement_vecs_base_address + matrix_dim*i + 4] << "\t";
-        std::cout << "[" << measurement_vecs_base_address + matrix_dim*i + 5 << "]: " << master_array[measurement_vecs_base_address + matrix_dim*i + 5] << "\n";
-    #endif
-    }
-    std::cout << "\n";
-
-    std::cout << "\nconstant_matrices_size: "<< constant_matrices_size << "\n" ;
-    std::cout << "input_vecs_total_size: "<< input_vecs_total_size << "\n" ;
-    std::cout << "output_total_size: "<< output_total_size << "\n";
-
-    std::cout << "phi_base_address: "<< phi_base_address << "\n" ;
-    std::cout << "Q_base_address: "<< Q_base_address << "\n" ;
-    std::cout << "H_base_address: "<< H_base_address << "\n";
-    std::cout << "R_base_address: "<< R_base_address << "\n" ;
-    std::cout << "Pp_base_address: "<< Pp_base_address << "\n" ;
-    std::cout << "constant_matrices_size: "<< constant_matrices_size << "\n";
-
-    phi_base_address = 0;
-    Q_base_address = phi_base_address + (matrix_dim*matrix_dim);
-    H_base_address = Q_base_address + (matrix_dim*matrix_dim);
-    R_base_address = H_base_address + (matrix_dim*matrix_dim);
-    Pp_base_address = R_base_address + (matrix_dim*matrix_dim);
-    constant_matrices_size = Pp_base_address + (matrix_dim*matrix_dim);
-
-    measurement_vecs_base_address = constant_matrices_size;
-
-    input_vecs_total_size = measurement_vecs_base_address + matrix_dim*num_iterations;
-}
-
-
-#ifdef GOLDEN_OP
-void testbench::compute_golden()
-{
-    // //Compute golden output
-    float  phi_cpp[const_mat_dim][const_mat_dim];
-    float Q_cpp[const_mat_dim][const_mat_dim];
-    float  H_cpp[const_mat_dim][const_mat_dim];
-    float  R_cpp[const_mat_dim][const_mat_dim];
-    float  Pp_cpp[const_mat_dim][const_mat_dim];
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            phi_cpp[i][j] = phi[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            Q_cpp[i][j] = Q[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            H_cpp[i][j] = H[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            R_cpp[i][j] = R[i][j]; 
-
-    for (int i = 0; i < matrix_dim; i++)
-        for (int j = 0; j < matrix_dim; j++)
-            Pp_cpp[i][j] = Pp[i][j]; 
-
-  
-
-    float  X[const_mat_dim];
-    float  Xp[const_mat_dim];
-
-    float  Zk[const_mat_dim];
-    float K[const_mat_dim][const_mat_dim];
-    float tmp_mat1[const_mat_dim][const_mat_dim];
-    float tmp_mat2[const_mat_dim][const_mat_dim];
-    float tmp_mat3[const_mat_dim][const_mat_dim];
-    float tmp_trans[const_mat_dim][const_mat_dim];
-    float tmp_vec[const_mat_dim];
-    float tmp_vec2[const_mat_dim];
-    float L[const_mat_dim][const_mat_dim]; // Lower triangular matrix
-
-    float zk[const_mat_dim];
-
-
-    for (uint16_t iter = 0; iter < kalman_iters; iter++)
-    {
-        if(iter == 0)
-        {
-            X[0] = x_acc[iter];
-            X[1] = x_gps[iter];
-            X[2] = y_acc[iter];
-            X[3] = y_gps[iter];
-#if(matrix_dim == 6)
-            X[4] = x_acc[iter];
-            X[5] = x_gps[iter];
-#endif
+    for (int i = 0; i < STATE_SIZE; i++) {
+        for (int j = 0; j < STATE_SIZE; j++) {
+            master_array[Mat_F_address + i * STATE_SIZE + j] = A[i * STATE_SIZE + j];
+            // cout << "Mat_F[" <<  Mat_F_address + i * STATE_SIZE + j << "]:" << std::setprecision(20) << A[i * STATE_SIZE + j] << endl; 
         }
-
-        multiplyMatrixVector_golden(phi_cpp, X, Xp, matrix_dim); // Xp = phi * X0;
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "PP TEST\n";
-        // print_matrix_golden(Pp_cpp, matrix_dim);
-        // #endif
-
-        float phi_x_pp[const_mat_dim][const_mat_dim];
-        float phi_trans[const_mat_dim][const_mat_dim];
-        float temp_mat_x[const_mat_dim][const_mat_dim];
-
-        // Pp = phi * Pp * phi' + Q
-                    multiplyMatrices_golden(phi_cpp, Pp_cpp, phi_x_pp, matrix_dim); 
-                    transposeMatrix_golden(phi_cpp, phi_trans, matrix_dim);
-                    multiplyMatrices_golden(phi_x_pp, phi_trans, temp_mat_x, matrix_dim);
-                    addMatrices_golden(temp_mat_x, Q_cpp, Pp_cpp, matrix_dim);
-        // // End Pp = phi * Pp * phi' + Q
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "Pp Golden\n";
-        // print_matrix_golden(Pp_cpp, matrix_dim);
-        // #endif
-
-
-
-        float H_x_pp[const_mat_dim][const_mat_dim];
-        float H_trans[const_mat_dim][const_mat_dim];
-        float H_Pp_H_trans[const_mat_dim][const_mat_dim];
-        float before_invv[const_mat_dim][const_mat_dim];
-        float after_invv[const_mat_dim][const_mat_dim];
-        float Pp_x_H_trans[const_mat_dim][const_mat_dim];
-
-    // // Compute Kalman Gain
-    //     // K = Pp * H' * inv(H * Pp * H' + R);
-            multiplyMatrices_golden(H_cpp, Pp_cpp, H_x_pp, matrix_dim);  // H * Pp
-            transposeMatrix_golden(H_cpp, H_trans, matrix_dim);          // H'
-            multiplyMatrices_golden(H_x_pp, H_trans, H_Pp_H_trans, matrix_dim); // (H * Pp) * H'
-            addMatrices_golden(H_Pp_H_trans, R_cpp, before_invv, matrix_dim); // H * Pp * H' + R
-            gauss_inverse_golden(before_invv, after_invv, matrix_dim); // inv(H * Pp * H' + R)                    
-
-            multiplyMatrices_golden(Pp_cpp, H_trans, Pp_x_H_trans, matrix_dim); // Pp * H'
-            multiplyMatrices_golden(Pp_x_H_trans, after_invv, K, matrix_dim); // Pp * H' * inv(H * Pp * H' + R)
-    //     // END COMPUTE KALMAN GAIN
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "K Golden\n";
-        // print_matrix_golden(K, matrix_dim);
-        // #endif
-
-
-
-
-    //     //Update
-    //     // X(:,i+1) = Xp + K * (Zk - H * Xp);
-        
-            multiplyMatrixVector_golden(H_cpp, Xp, tmp_vec, matrix_dim); // H * Xp
-            subtractVectors_golden(zk, tmp_vec, tmp_vec2, matrix_dim); // Zk - H * Xp
-
-            multiplyMatrixVector_golden(K, tmp_vec2, tmp_vec, matrix_dim); // K * (Zk - H * Xp)
-            addVectors_golden(Xp, tmp_vec, X, matrix_dim);
-        // #ifdef PRINT_STATEMENTS
-        // std::cout << "X Golden\n";
-        // print_vector_golden(X, matrix_dim);
-        // #endif
-
-
-
-    //     //Update
-    //     // Pp = Pp - K*H*Pp;
-            multiplyMatrices_golden(K, H_cpp, tmp_mat1, matrix_dim); 
-            multiplyMatrices_golden(tmp_mat1, Pp_cpp, tmp_mat2, matrix_dim);  // K*H*Pp
-            subtractMatrices_golden(Pp_cpp, tmp_mat2, tmp_mat1, matrix_dim);
-            copymat_golden(tmp_mat1, Pp_cpp, matrix_dim);
-        // Update Pp done
-
-
-    // ofs.close();
-
     }
 
-        std::cout << "Pp Golden: \n";
-        print_matrix_golden(Pp_cpp, matrix_dim);
-        cout << "\n";
-
-
-    float golden_output_array[out_size];
-        for (uint32_t i = 0; i < matrix_dim; i++)
-            for (uint32_t j = 0; j < matrix_dim; j++)
-                golden_output_array[i*matrix_dim + j] = Pp_cpp[i][j]; 
-
-    uint32_t output_elements = (matrix_dim * matrix_dim);
-    ofs.open("golden_output.txt", std::ofstream::out);
-    for (uint32_t i = 0; i < output_elements; i++)
-    {
-            ofs << golden_output_array[i] << std::endl;
+    for (int i = 0; i < STATE_SIZE; i++) {
+        for (int j = 0; j < STATE_SIZE; j++) {
+            master_array[Mat_Q_address + i * STATE_SIZE + j] = W[i * STATE_SIZE + j];
+        }
     }
-    ofs.close();
 
+    for (int i = 0; i < MEAS_SIZE; i++) {
+        for (int j = 0; j < MEAS_SIZE; j++) {
+            master_array[Mat_R_address + i * MEAS_SIZE + j] = Q[i * MEAS_SIZE + j];
+        }
+    }
+
+    for (int i = 0; i < STATE_SIZE; i++) {
+        for (int j = 0; j < MEAS_SIZE; j++) {
+            master_array[Mat_H_address + i * MEAS_SIZE + j] = H[i * MEAS_SIZE + j];
+        }
+    }
+
+    for (int i = 0; i < STATE_SIZE; i++)
+        for (int j = 0; j < STATE_SIZE; j++)
+        {
+            master_array[Mat_P_address + (i*STATE_SIZE + j)] = 0; 
+            // std::cout << "Mat_P[" << Mat_P_address + (i*STATE_SIZE + j) << "]:\t" << master_array[Mat_P_address + (i*STATE_SIZE + j)] << std::endl;
+        }
+        int iter = 1;
+        // // std::cout << "MEAS START[" << measurement_vecs_base_address + MEAS_SIZE*iter << std::endl;
+        // // std::cout << "MEAS END [" << measurement_vecs_base_address + MEAS_SIZE*(iter+1) << std::endl;
+
+        std::cout << "MEAS ADD[" << measurement_vecs_base_address + MEAS_SIZE*iter-MEAS_SIZE*iter << std::endl;
+        std::cout << "MEAS ENDD[" << measurement_vecs_base_address + MEAS_SIZE*(iter+1) - 1 -MEAS_SIZE*iter << std::endl;
+
+        for(int i = MEAS_SIZE*iter; i < MEAS_SIZE*(iter+1); i++)
+        {
+            master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter] = measurements[i];    
+            // if(i == MEAS_SIZE*(iter+1) - 1)
+            if(i < (MEAS_SIZE*iter + 6))
+                std::cout << "TB ZK:\t" << measurements[i] << std::endl;
+                // std::cout << "TB ZK:\t" << measurement_vecs_base_address + i-MEAS_SIZE*iter << std::endl;
+
+        }
 }
-#endif
+
+
+
 
 
 void testbench::do_config()
@@ -553,13 +382,16 @@ void testbench::do_config()
         config.kalman_iters = kalman_iters;
         config.kalman_mat_rows = kalman_mat_rows;
 
-        config.phi_base_address = phi_base_address;
-        config.Q_base_address = Q_base_address;
-        config.H_base_address = H_base_address;
-        config.R_base_address = R_base_address;
-        config.Pp_base_address = Pp_base_address;
         config.constant_matrices_size = constant_matrices_size;
         config.measurement_vecs_base_address = measurement_vecs_base_address;
+
+        config.vec_X_address = vec_X_address;
+        config.Mat_F_address = Mat_F_address;
+        config.Mat_Q_address = Mat_Q_address;
+        config.Mat_R_address = Mat_R_address;
+        config.Mat_H_address = Mat_H_address;
+        // config.vec_Z_address = vec_Z_address;
+        config.Mat_P_address = Mat_P_address;
 
         config.input_vecs_total_size = input_vecs_total_size;
         config.output_total_size = output_total_size;
@@ -590,7 +422,7 @@ void testbench::dump_memory()
             out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
             FPDATA out_fixed = 0;
             int2fx(out[i * DMA_WORD_PER_BEAT + wordd],out_fixed);
-            if(i >= out_size - (matrix_dim*matrix_dim))
+            if(i >= out_size - (STATE_SIZE*STATE_SIZE))
             {
                 ofs << out_fixed << std::endl;
             }
@@ -610,8 +442,8 @@ void testbench::validate()
         for (uint32_t j = 0; j < output_size_per_iter*num_iterations; j++)
         {
 
-            FPDATA out_gold_fx = 0;
-            int2fx(gold[i * out_words_adj + j],out_gold_fx);
+            // FPDATA out_gold_fx = 0;
+            // int2fx(gold[i * out_words_adj + j],out_gold_fx);
 
             FPDATA out_res_fx = 0;
             int2fx(out[i * out_words_adj + j],out_res_fx);
@@ -623,97 +455,97 @@ void testbench::validate()
             {
                     if(j%output_size_per_iter == 0)
                         std::cout << "\nXp_design[" << j/output_size_per_iter << "]:\t";
-                    else if (j%output_size_per_iter == matrix_dim)
+                    else if (j%output_size_per_iter == STATE_SIZE)
                     {
                         std::cout << "\nPp_design[" << j/output_size_per_iter << "]:\t";                        
                     }
-                    if (j%matrix_dim == 0)
+                    if (j%STATE_SIZE == 0)
                     {
                         std::cout << "\n";                        
                     }
-                std::cout << std::setw(20) << out_res_fx << "\t";
+                std::cout << std::setprecision(20)  << out_res_fx << "\t";
             }
         }
-    float accelerator_validate_array[100];
-    float golden_validate_array[100];
+    // float accelerator_validate_array[100];
+    // float golden_validate_array[100];
 
-    FILE *file;
-    char line[100]; // Adjust the size as per your needs
-    // Open the file in read mode
-    file = fopen("golden_output.txt", "r");
-    if (file == NULL) {
-        printf("Error opening the file.\n");
-    }
+    // FILE *file;
+    // char line[100]; // Adjust the size as per your needs
+    // // Open the file in read mode
+    // file = fopen("golden_output.txt", "r");
+    // if (file == NULL) {
+    //     printf("Error opening the file.\n");
+    // }
 
-    // Read each line from the file
-    uint32_t ind = 0;
-    while (fgets(line, sizeof(line), file)) {
-        // Convert the line to a float
-        float value = strtof(line, NULL);
-        // Check if the conversion was successful
-        if (value != 0.0f || (value == 0.0f && line[0] == '0')) {
-            golden_validate_array[ind] = value;
-            // Print the float value
-            // printf("%f\n", value);
-        } 
-        ind++;
-    }
-    // Close the file
-    fclose(file);
+    // // Read each line from the file
+    // uint32_t ind = 0;
+    // while (fgets(line, sizeof(line), file)) {
+    //     // Convert the line to a float
+    //     float value = strtof(line, NULL);
+    //     // Check if the conversion was successful
+    //     if (value != 0.0f || (value == 0.0f && line[0] == '0')) {
+    //         golden_validate_array[ind] = value;
+    //         // Print the float value
+    //         // printf("%f\n", value);
+    //     } 
+    //     ind++;
+    // }
+    // // Close the file
+    // fclose(file);
 
 
-    // Open the file in read mode
-    file = fopen("accelerator_output.txt", "r");
-    if (file == NULL) {
-        printf("Error opening the file.\n");
-    }
+    // // Open the file in read mode
+    // file = fopen("accelerator_output.txt", "r");
+    // if (file == NULL) {
+    //     printf("Error opening the file.\n");
+    // }
 
-    // Read each line from the file
-    ind = 0;
-    while (fgets(line, sizeof(line), file)) {
-        // Convert the line to a float
-        float value = strtof(line, NULL);
-        // Check if the conversion was successful
-        if (value != 0.0f || (value == 0.0f && line[0] == '0')) {
-            accelerator_validate_array[ind] = value;
-            // Print the float value
-            // printf("%f\n", value);
-        } 
-        ind++;
-    }
-    // Close the file
-    fclose(file);
+    // // Read each line from the file
+    // ind = 0;
+    // while (fgets(line, sizeof(line), file)) {
+    //     // Convert the line to a float
+    //     float value = strtof(line, NULL);
+    //     // Check if the conversion was successful
+    //     if (value != 0.0f || (value == 0.0f && line[0] == '0')) {
+    //         accelerator_validate_array[ind] = value;
+    //         // Print the float value
+    //         // printf("%f\n", value);
+    //     } 
+    //     ind++;
+    // }
+    // // Close the file
+    // fclose(file);
 
-    for(int i = 0; i < matrix_dim*matrix_dim; i++)
-    {
-        // cout << accelerator_validate_array[i] << "\t" << golden_validate_array[i] << "\n";
-          if (accelerator_validate_array[i] != golden_validate_array[i])
-        {
-            float MSE = (accelerator_validate_array[i]-golden_validate_array[i])*(accelerator_validate_array[i]-golden_validate_array[i])
-                / golden_validate_array[i];
+    // for(int i = 0; i < STATE_SIZE*STATE_SIZE; i++)
+    // {
+    //     // cout << accelerator_validate_array[i] << "\t" << golden_validate_array[i] << "\n";
+    //       if (accelerator_validate_array[i] != golden_validate_array[i])
+    //     {
+    //         float MSE = (accelerator_validate_array[i]-golden_validate_array[i])*(accelerator_validate_array[i]-golden_validate_array[i])
+    //             / golden_validate_array[i];
 
-            if (MSE > ERROR_THRESHOLD)
-            {
-                printf("L2: output[%d] = %f (expected: %f)",
-                            i, accelerator_validate_array[i], golden_validate_array[i]);
-                tot_errors += 1;
-            }
+    //         if (MSE > ERROR_THRESHOLD)
+    //         {
+    //             printf("L2: output[%d] = %f (expected: %f)",
+    //                         i, accelerator_validate_array[i], golden_validate_array[i]);
+    //             tot_errors += 1;
+    //         }
 
        
-        }
-    }
-    if (tot_errors == 0)
-    {
-        printf("------------------------------------\n");
-        printf("  Validation succeeded!  \n");
-        printf("------------------------------------\n");
-    }
-    else
-    {
-        printf("------------------------------------\n");
-        printf("  Validation failed!  \n");
-        printf("------------------------------------\n");
-    }     
+    //     }
+    // }
+    // if (tot_errors == 0)
+    // {
+    //     printf("------------------------------------\n");
+    //     printf("  Validation succeeded!  \n");
+    //     printf("------------------------------------\n");
+    // }
+    // else
+    // {
+    //     printf("------------------------------------\n");
+    //     printf("  Validation failed!  \n");
+    //     printf("------------------------------------\n");
+    // }     
 }
 
 void testbench::single_input_array()

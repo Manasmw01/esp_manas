@@ -3,6 +3,7 @@
 
 #ifndef __TESTBENCH_HPP__
 #define __TESTBENCH_HPP__
+typedef float data_type;
 
 #pragma once
 
@@ -72,8 +73,8 @@ SC_MODULE(testbench)
     void load_data(float *inn, uint32_t load_size);
     void copy_array(float* a, float* b, int offset_b, int n);
     void partition(void);
-    void print_variables(void);
-    void compute_golden(void);
+    // void print_variables(void);
+    // void compute_golden(void);
     void do_config(void);
     void proc(void);
     void dump_memory(void);
@@ -89,12 +90,23 @@ SC_MODULE(testbench)
     uint32_t kalman_mat_rows; // Number of num_iterations (4: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
     uint32_t kalman_mat_cols; // Number of num_iterations (4: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
 
-    uint32_t phi_base_address;
-    uint32_t Q_base_address;
-    uint32_t H_base_address;
-    uint32_t R_base_address;
-    uint32_t Pp_base_address;
+    // uint32_t phi_base_address;
+    // uint32_t Q_base_address;
+    // uint32_t H_base_address;
+    // uint32_t R_base_address;
+    // uint32_t Pp_base_address;
     uint32_t constant_matrices_size;
+
+    uint32_t vec_X_address; // initial
+    uint32_t Mat_F_address; // A
+    uint32_t Mat_Q_address; // W
+    uint32_t Mat_R_address; // Q
+    uint32_t Mat_H_address; // H
+    uint32_t vec_Z_address; // measurements
+    uint32_t Mat_P_address; // TEMP
+
+    uint32_t Mat_K_address; // TEMP
+
 
     uint32_t measurement_vecs_base_address;
 
