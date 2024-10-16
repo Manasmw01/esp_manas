@@ -84,6 +84,7 @@ solution library add DUAL_PORT_RBW
 
 go libraries
 directive set -CLOCKS {clk {-CLOCK_PERIOD 5.0}}
+directive set SCHED_USE_MULTICYCLE true
 
 go assembly
 go architect

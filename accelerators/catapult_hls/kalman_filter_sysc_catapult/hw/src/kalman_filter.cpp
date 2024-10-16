@@ -82,7 +82,7 @@ void kalman_filter_sysc_catapult:: load() {
         uint32_t regs_base_address = 0;
         uint32_t regs_size = 5*kalman_mat_rows* kalman_mat_rows;
 
-        cout << "Load_b: " << regs_base_address << "\t" << constant_matrices_size << "\t" << constant_matrices_size << "\n";
+        // cout << "Load_b: " << regs_base_address << "\t" << constant_matrices_size << "\t" << constant_matrices_size << "\n";
         load_b(ping_pong, regs_base_address, constant_matrices_size);
         // load_b(ping_pong, regs_base_address, input_vecs_total_size);
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
@@ -95,7 +95,7 @@ void kalman_filter_sysc_catapult:: load() {
             #ifdef PRINT_STATEMENTS
             // cout << "Load_d: " << inputs_base_address << "\t" << kalman_mat_rows << "\t" << (inputs_base_address + kalman_mat_rows) << "\n";
             #endif
-            cout << "Load_d: " << inputs_base_address << "\t" << MEAS_SIZE << "\t" << (inputs_base_address + MEAS_SIZE) << "\n";
+            // cout << "Load_d: " << inputs_base_address << "\t" << MEAS_SIZE << "\t" << (inputs_base_address + MEAS_SIZE) << "\n";
             load_d(ping_pong, inputs_base_address, MEAS_SIZE);
             sync12.sync_out();
             sync12b.sync_out();
@@ -254,6 +254,7 @@ void kalman_filter_sysc_catapult:: store_dataReq() {
             out_index = input_vecs_total_size + out_len*b;
             sync23.sync_in();
             sync2b3.sync_in();
+            // cout << "store_data_req: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
             store_data_req(ping_pong, out_index, out_len);
         }
     }
@@ -302,8 +303,8 @@ void kalman_filter_sysc_catapult:: store() {
             sync2b3b.sync_in();
             out_index = input_vecs_total_size + out_len*b;
             #ifdef PRINT_STATEMENTS
-            // cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
             #endif
+            // cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
             store_data(ping_pong, out_index, out_len);
         }
 

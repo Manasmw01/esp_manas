@@ -118,13 +118,11 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             input_measurements_word=in_pong_rd.Pop().data[0];            
         int2fx(input_measurements_word,input_measurements_fx);
             vec_Z[k] = input_measurements_fx;
-            if(k < 2)
-                cout << "zk:(" << k << "):\t" << vec_Z[k] << endl; 
     }
 
     uint32_t rows = 0;
     uint32_t cols = 0;
-    cout << "functions compute:(" << constant_matrices_size<< "):\t" << endl; 
+    // cout << "functions compute:(" << constant_matrices_size<< "):\t" << endl; 
 
     for (uint32_t current_address = 0; current_address < constant_matrices_size;  current_address++)
     {
@@ -163,11 +161,12 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             Mat_H[current_address - Mat_H_address] = input_regs_fx;
             // cout << "Mat_H[" << current_address << "]\t" << std::setprecision(20) << Mat_H[current_address - Mat_H_address] << "\n";
         }
-        if(current_address >= Mat_P_address && current_address < constant_matrices_size)
-        {
-            Mat_P[current_address - Mat_P_address] = input_regs_fx;
-            // cout << "Mat_P[" << current_address << "]\t" << std::setprecision(20) << Mat_P[current_address - Mat_P_address] << "\n";
-        }   
+        if(iter == 0)
+            if(current_address >= Mat_P_address && current_address < constant_matrices_size)
+            {
+                Mat_P[current_address - Mat_P_address] = input_regs_fx;
+                // cout << "Mat_P[" << current_address << "]\t" << std::setprecision(20) << Mat_P[current_address - Mat_P_address] << "\n";
+            }   
     }
 
 
@@ -176,6 +175,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     
     if(iter > 0)
     {
+        int indexxxx = 0;
         int rows = 0;
         int cols = 0;
         uint32_t previous_states_elements = kalman_mat_dim + (kalman_mat_dim * kalman_mat_dim);    
@@ -190,32 +190,29 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
 
             if(k < kalman_mat_dim)
             {
-                X_cpp[k] = op_fx; //REMOVE PLUS ONE
+                vec_X[k] = op_fx; //REMOVE PLUS ONE
             }
 
             if(k >= kalman_mat_dim)
             {
-                Pp_cpp[rows][cols] = op_fx;
-                cols++;
-                if(cols >= kalman_mat_dim)
-                {
-                    rows++;
-                    cols = 0; 
-                }
-                if(rows >= kalman_mat_dim)
-                {
-                    rows = 0;
-                    cols = 0; 
-                }
+                Mat_P[indexxxx] = op_fx;
+                indexxxx++;
             }
         }
 
-        #ifdef PRINT_STATEMENTS
-        // std::cout << "Reading Pp_cpp: "<< iter << "\n";
-        // print_matrix(Pp_cpp, kalman_mat_dim);
-        #endif
+    // printf("(%d), NEW Mat_P\n", iter);
+    // print_matrix_new(Mat_P, STATE_SIZE, STATE_SIZE);
+
+    // printf("(%d), NEW vec_X\n", iter);
+    // print_matrix_new(vec_X, STATE_SIZE, 1);
+
     }
 
+    // printf("(%d), START Mat_P\n", iter);
+    // print_matrix_new(Mat_P, STATE_SIZE, STATE_SIZE);
+
+    // printf("(%d), START vec_X\n", iter);
+    // print_matrix_new(vec_X, STATE_SIZE, 1);
         // #ifdef PRINT_STATEMENTS
         // std::cout << "PHI: " << iter << "\n";
         // print_matrix(phi_cpp, kalman_mat_dim);
@@ -262,71 +259,80 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
 
     FPDATA H_times_F_P_FT_Q[MEAS_SIZE * STATE_SIZE];
     matrix_multiply(Mat_H, F_P_FT_Q, H_times_F_P_FT_Q, MEAS_SIZE,   STATE_SIZE, STATE_SIZE); 
-    printf("H_times_F_P_FT_Q\n");
-    print_matrix_new(H_times_F_P_FT_Q, MEAS_SIZE, STATE_SIZE);
+    // printf("H_times_F_P_FT_Q\n");
+    // print_matrix_new(H_times_F_P_FT_Q, MEAS_SIZE, STATE_SIZE);
 
-    // FPDATA H_times_F_P_FT_Q_times_HT[MEAS_SIZE * MEAS_SIZE];
-    // matrix_multiply(H_times_F_P_FT_Q, H_Transpose, H_times_F_P_FT_Q_times_HT, MEAS_SIZE,   STATE_SIZE, MEAS_SIZE); 
-    // matrix_add(H_times_F_P_FT_Q_times_HT, Mat_R, Mat_S, MEAS_SIZE, MEAS_SIZE); // Pp = (A * P2) * A^T + Q
+    FPDATA H_times_F_P_FT_Q_times_HT[MEAS_SIZE * MEAS_SIZE];
+    matrix_multiply(H_times_F_P_FT_Q, H_Transpose, H_times_F_P_FT_Q_times_HT, MEAS_SIZE,   STATE_SIZE, MEAS_SIZE); 
+    matrix_add(H_times_F_P_FT_Q_times_HT, Mat_R, Mat_S, MEAS_SIZE, MEAS_SIZE); // Pp = (A * P2) * A^T + Q
 
-    // FPDATA S_inv[MEAS_SIZE * MEAS_SIZE];
+    FPDATA S_inv[MEAS_SIZE * MEAS_SIZE];
     // FPDATA S_inv_2D[MEAS_SIZE][MEAS_SIZE]; // Replace FPDATA with the appropriate type (e.g., float)
     // gauss_inverse(Mat_S, S_inv, MEAS_SIZE); 
 
 
-    // FPDATA F_P_FT_Q_times_HT[STATE_SIZE*MEAS_SIZE];
-    // matrix_multiply(F_P_FT_Q, H_Transpose, F_P_FT_Q_times_HT, STATE_SIZE,   STATE_SIZE, MEAS_SIZE); 
+    FPDATA F_P_FT_Q_times_HT[STATE_SIZE*MEAS_SIZE];
+    matrix_multiply(F_P_FT_Q, H_Transpose, F_P_FT_Q_times_HT, STATE_SIZE,   STATE_SIZE, MEAS_SIZE); 
 
-    // matrix_multiply(F_P_FT_Q_times_HT, S_inv, Mat_K, STATE_SIZE,   MEAS_SIZE, MEAS_SIZE); 
+    matrix_multiply(F_P_FT_Q_times_HT, S_inv, Mat_K, STATE_SIZE,   MEAS_SIZE, MEAS_SIZE); 
  
-    // FPDATA FtX[STATE_SIZE];
-    // matrix_multiply(Mat_F, vec_X, FtX, STATE_SIZE,   STATE_SIZE, 1); 
+    FPDATA FtX[STATE_SIZE];
+    matrix_multiply(Mat_F, vec_X, FtX, STATE_SIZE,   STATE_SIZE, 1); 
 
-    // // FPDATA Mat_K[STATE_SIZE * MEAS_SIZE];
-    // // FPDATA Y[MEAS_SIZE];
-    // FPDATA KtY[STATE_SIZE];
-    // matrix_multiply(Mat_K, Y, KtY, STATE_SIZE,   MEAS_SIZE, 1); 
+    // FPDATA Mat_K[STATE_SIZE * MEAS_SIZE];
+    // FPDATA Y[MEAS_SIZE];
+    FPDATA KtH[STATE_SIZE * MEAS_SIZE]; // Added Oct 8
 
-    // matrix_add(FtX, KtY, vec_X, STATE_SIZE, 1); // Pp = (A * P2) * A^T + Q
+    FPDATA KtY[STATE_SIZE];
+    matrix_multiply(Mat_K, Y, KtY, STATE_SIZE,   MEAS_SIZE, 1); 
 
-    // matrix_multiply(Mat_K, Mat_H, KtH, STATE_SIZE,   MEAS_SIZE, STATE_SIZE); 
+    matrix_add(FtX, KtY, vec_X, STATE_SIZE, 1); // Pp = (A * P2) * A^T + Q
 
-    // FPDATA I_minus_KtH[STATE_SIZE * STATE_SIZE];
-    // matrix_subtract(Mat_I, KtH, I_minus_KtH, STATE_SIZE*STATE_SIZE); // P3 = Pp - (K * H * Pp)
+    matrix_multiply(Mat_K, Mat_H, KtH, STATE_SIZE,   MEAS_SIZE, STATE_SIZE); 
 
-
-    // matrix_multiply(I_minus_KtH, F_P_FT_Q, Mat_P, STATE_SIZE,   STATE_SIZE, STATE_SIZE);
-    // // printf("Mat_P\n");
-    // // print_matrix(Mat_P, STATE_SIZE, STATE_SIZE);
+    FPDATA I_minus_KtH[STATE_SIZE * STATE_SIZE];
+    matrix_subtract(Mat_I, KtH, I_minus_KtH, STATE_SIZE*STATE_SIZE); // P3 = Pp - (K * H * Pp)
 
 
+    matrix_multiply(I_minus_KtH, F_P_FT_Q, Mat_P, STATE_SIZE,   STATE_SIZE, STATE_SIZE);
 
 
 
-        FPDATA phi_x_pp[const_mat_dim][const_mat_dim];
-        FPDATA phi_trans[const_mat_dim][const_mat_dim];
-        FPDATA temp_mat_x[const_mat_dim][const_mat_dim];
-        FPDATA H_x_pp[const_mat_dim][const_mat_dim];
-        FPDATA H_trans[const_mat_dim][const_mat_dim];
-        FPDATA H_Pp_H_trans[const_mat_dim][const_mat_dim];
-        FPDATA before_invv[const_mat_dim][const_mat_dim];
-        FPDATA after_invv[const_mat_dim][const_mat_dim];
-        FPDATA Pp_x_H_trans[const_mat_dim][const_mat_dim];
 
-        FPDATA send_output_array[100];
+
+        FPDATA send_output_array[STATE_SIZE + (STATE_SIZE * STATE_SIZE)];
         
         uint32_t input_ptr;
         input_ptr = 0;
         uint32_t output_elements = kalman_mat_dim + (kalman_mat_dim * kalman_mat_dim);
 
+    // printf("(%d), Updating Mat_P\n", iter);
+    // print_matrix_new(Mat_P, STATE_SIZE, STATE_SIZE);
 
-        for (uint32_t k = 0; k < kalman_mat_dim; k++)
-            send_output_array[k] = output_to_send[k];
+    // printf("(%d), Updating vec_X\n", iter);
+    // print_matrix_new(vec_X, STATE_SIZE, 1);
+
+    // std::cout << "(" << iter << "): Predicted vec_X\t";
+    // for (int i = 0; i < STATE_SIZE; i++) 
+    // {
+    //     std::cout << std::setprecision(20) << vec_X[i] << "\t";
+    // }
+    // std::cout << "\n";
+
+        for (uint32_t k = 0; k < STATE_SIZE; k++)
+            send_output_array[k] = vec_X[k];
+            // send_output_array[k] = output_to_send[k];
             // send_output_array[k] = Xp[k];
 
-        for (uint32_t i = 0; i < kalman_mat_dim; i++)
-            for (uint32_t j = 0; j < kalman_mat_dim; j++)
-                send_output_array[kalman_mat_dim + (i*kalman_mat_dim + j)] = Pp_cpp[i][j]; 
+        for (int i = 0; i < STATE_SIZE; i++) {
+            for (int j = 0; j < STATE_SIZE; j++) {
+                send_output_array[STATE_SIZE + i * STATE_SIZE + j] = Mat_P[i * STATE_SIZE + j];
+            }
+        }
+
+        // for (uint32_t i = 0; i < kalman_mat_dim; i++)
+        //     for (uint32_t j = 0; j < kalman_mat_dim; j++)
+        //         send_output_array[kalman_mat_dim + (i*kalman_mat_dim + j)] = Pp_cpp[i][j]; 
 
         for (uint32_t k = 0; k < output_elements; k++)
         {
@@ -344,14 +350,20 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             input_ptr++;
         }
         input_ptr = 0;
-        FPDATA next_state_arr_fx[100];
+        FPDATA next_state_arr_fx[STATE_SIZE + (STATE_SIZE * STATE_SIZE)];
         for (uint32_t k = 0; k < kalman_mat_dim; k++)
-            next_state_arr_fx[k] = zk[k];
+            next_state_arr_fx[k] = vec_X[k];
             // next_state_arr_fx[k] = X_cpp[k];
             
-        for (uint32_t i = 0; i < kalman_mat_dim; i++)
-            for (uint32_t j = 0; j < kalman_mat_dim; j++)
-                next_state_arr_fx[kalman_mat_dim + (i*kalman_mat_dim + j)] = Pp_cpp[i][j]; 
+
+        for (int i = 0; i < STATE_SIZE; i++) {
+            for (int j = 0; j < STATE_SIZE; j++) {
+                next_state_arr_fx[STATE_SIZE + i * STATE_SIZE + j] = Mat_P[i * STATE_SIZE + j];
+            }
+        }
+        // for (uint32_t i = 0; i < kalman_mat_dim; i++)
+        //     for (uint32_t j = 0; j < kalman_mat_dim; j++)
+        //         next_state_arr_fx[kalman_mat_dim + (i*kalman_mat_dim + j)] = Pp_cpp[i][j]; 
 
         uint32_t next_state_size = kalman_mat_dim + (kalman_mat_dim * kalman_mat_dim);
         for (uint32_t k = 0; k < next_state_size; k++)

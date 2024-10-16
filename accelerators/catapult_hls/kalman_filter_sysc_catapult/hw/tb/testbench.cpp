@@ -8,16 +8,27 @@
 
 #include <ac_float.h>
 
-#include "A_array.h"
-#include "H_array.h"
-#include "initial_state_array.h"
-#include "measurements_array.h"
-#include "P_array.h"
-#include "prediction_array.h"
-#include "Q_array.h"
-#include "real_array.h"
-#include "W_array.h"
 
+// #include "A_array.h"
+// #include "H_array.h"
+// #include "initial_state_array.h"
+// #include "measurements_array.h"
+// #include "P_array.h"
+// #include "prediction_array.h"
+// #include "Q_array.h"
+// #include "real_array.h"
+// #include "W_array.h"
+
+
+#include "A_array_hc.h"
+#include "H_array_hc.h"
+#include "initial_state_array_hc.h"
+#include "measurements_array_hc.h"
+#include "P_array_hc.h"
+#include "prediction_array_hc.h"
+#include "Q_array_hc.h"
+#include "real_array_hc.h"
+#include "W_array_hc.h"
 
 std::ofstream ofs;
 std::ifstream ifs;
@@ -290,7 +301,7 @@ void testbench::load_data(float *inn, uint32_t inn_size)
             // ac_ieee_float32 data = inn[i* DMA_WORD_PER_BEAT + wordd];
             // ac_float< 5, 3, 3, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
             // cout << "OUT 1" << endl; 
-            ac_float< DATA_WIDTH, FPDATA_IL, 7, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
+            ac_float< DATA_WIDTH, FPDATA_IL, 5, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
             // cout << "OUT 2" << endl; 
 
             // FPDATA fpdata=data.convert_to_ac_fixed<FPDATA_WL,FPDATA_IL,true,AC_TRN, AC_WRAP>();
@@ -403,6 +414,8 @@ void testbench::do_config()
 
 void testbench::dump_memory()
 {
+    FPDATA output_xp[STATE_SIZE];
+
     std::cout << "Entered Dump Memory\n";
     do 
     {
@@ -416,21 +429,62 @@ void testbench::dump_memory()
 
     offset = offset / DMA_WORD_PER_BEAT;
     ofs.open("accelerator_output.txt", std::ofstream::out);
-    for (uint32_t i = 0; i < out_size / DMA_WORD_PER_BEAT; i++)
+    std::cout << "\nOUT_SIZE[" << out_size << "]:\n";
+    std::cout << "\noffset[" << offset << "]:\n";
+    uint32_t tot_size = STATE_SIZE + STATE_SIZE*STATE_SIZE;
+    for (uint32_t iters = 0; iters < SAMPLES; iters++)
     {
-        for (uint32_t wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
+        for (uint32_t i = 0; i < out_size / DMA_WORD_PER_BEAT; i++)
         {
-            out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
-            FPDATA out_fixed = 0;
-            int2fx(out[i * DMA_WORD_PER_BEAT + wordd],out_fixed);
-            if(i >= out_size - (STATE_SIZE*STATE_SIZE))
+            for (uint32_t wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
             {
-                ofs << out_fixed << std::endl;
+                out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + tot_size*iters +  i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
+                FPDATA out_fixed = 0;
+                int2fx(out[i * DMA_WORD_PER_BEAT + wordd],out_fixed);
+                if(i >= out_size - (STATE_SIZE*STATE_SIZE))
+                {
+                    ofs << out_fixed << std::endl;
+                }
+                if(i < STATE_SIZE)
+                {
+                    // std::cout << "\nOUTPUT[" << offset + tot_size*iters +  i << "]:\t" << out_fixed;
+                    output_xp[i] = out_fixed;
+                }
+                // std::cout << "\titers:" << iters << "\tOUTPUT[" << i << "]:\t" << out_fixed;
             }
-
-            ofs << i << ": " << out[i * DMA_WORD_PER_BEAT + wordd] << std::endl;
         }
+        std::cout << "\n(" << iters << "): RF_vecX:\t";
+        for (int i = 0; i < STATE_SIZE; i++) 
+        {
+            // std::cout << std::setprecision(20) << output_xp[STATE_SIZE*iters + i] << "\t";
+            // std::cout << std::setprecision(20) << prediction[STATE_SIZE*iter + i] << "\t";
+            ac_float< DATA_WIDTH, FPDATA_IL, 5, AC_RND> ref = prediction[STATE_SIZE*(iters+1) + i];
+            FPDATA fpdata;
+            fpdata = ref.to_ac_fixed();     
+            std::cout << std::setprecision(20) << fpdata << "\t";            
+
+        }
+
+        std::cout << "\n(" << iters << "): vecX:\t";
+        // std::cout << "\nvec_X\t";
+        for (uint32_t i = 0; i < STATE_SIZE; i++)
+        {
+            std::cout << output_xp[i] << "\t";
+        }
+                std::cout << "\n"; 
     }
+
+
+    // for (int iter = 1; iter <= SAMPLES; iter++) 
+    // {
+    //     std::cout << "\n(" << iter << "): Reference vec_X\t";
+    //     // std::cout << "\nReference Prediction\t" << iter << "\n";
+    //     for (int i = 0; i < STATE_SIZE; i++) 
+    //     {
+    //         std::cout << std::setprecision(20) << prediction[STATE_SIZE*iter + i] << "\t";
+    //     }
+
+    // }
     ofs.close();
 }
 
@@ -448,24 +502,25 @@ void testbench::validate()
 
             FPDATA out_res_fx = 0;
             int2fx(out[i * out_words_adj + j],out_res_fx);
+            // std::cout << "\nOUTPUT[" << i << "]:\t" << out_res_fx;
 
 // cout << "\nTESTTT\n";
 // cout << output_size_per_iter*num_iterations << "\n";
 // cout << output_size_per_iter*num_iterations - output_size_per_iter << "\n";
-            if(j >= output_size_per_iter*num_iterations - output_size_per_iter)
-            {
-                    if(j%output_size_per_iter == 0)
-                        std::cout << "\nXp_design[" << j/output_size_per_iter << "]:\t";
-                    else if (j%output_size_per_iter == STATE_SIZE)
-                    {
-                        std::cout << "\nPp_design[" << j/output_size_per_iter << "]:\t";                        
-                    }
-                    if (j%STATE_SIZE == 0)
-                    {
-                        std::cout << "\n";                        
-                    }
-                std::cout << std::setprecision(20)  << out_res_fx << "\t";
-            }
+            // if(j >= output_size_per_iter*num_iterations - output_size_per_iter)
+            // {
+            //         if(j%output_size_per_iter == 0)
+            //             std::cout << "\nXp_design[" << j/output_size_per_iter << "]:\t";
+            //         else if (j%output_size_per_iter == STATE_SIZE)
+            //         {
+            //             std::cout << "\nPp_design[" << j/output_size_per_iter << "]:\t";                        
+            //         }
+            //         if (j%STATE_SIZE == 0)
+            //         {
+            //             std::cout << "\n";                        
+            //         }
+            //     std::cout << std::setprecision(20)  << out_res_fx << "\t";
+            // }
         }
     // float accelerator_validate_array[100];
     // float golden_validate_array[100];

@@ -3,7 +3,7 @@
 
 #include "mac.hpp"
 #include <mc_scverify.h>
-
+#include <ac_float.h>
 void mac_sysc_catapult:: config() {
     conf_info.Reset();
     conf1.ResetWrite();
@@ -263,6 +263,9 @@ void mac_sysc_catapult:: compute() {
                 // Compute Kernel
 
                 FPDATA acc_fx=0;
+                ac_float<32, 5, 8> my_float;
+
+                my_float = 1.11;
                 uint32_t vec_indx=0;
                 uint32_t vec_num=0;
 

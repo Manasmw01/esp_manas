@@ -11,7 +11,7 @@
 #define N const_mat_dim
 #define FPDATA_WL DATA_WIDTH
 // #define FPDATA_IL DATA_WIDTH/2
-#define FPDATA_IL 6
+#define FPDATA_IL 10
 
 typedef ac_int<DMA_WIDTH> DMA_WORD;
 typedef ac_int<FPDATA_WL> FPDATA_WORD;
@@ -29,30 +29,30 @@ inline void fx2int(const FPDATA& in, FPDATA_WORD& out)
 #ifdef PRINT_STATEMENTS
 inline void print_matrix(FPDATA matrixx[N][N], uint32_t kalman_mat_dim)
 {
-    for (int i = 0; i < kalman_mat_dim; i++)
-        for (int j = 0; j < kalman_mat_dim; j++)
-            std::cout << std::setw(20) << matrixx[i][j] << ((j == kalman_mat_dim - 1) ? "\n": "\t");
-    std::cout << "\n";
+    // for (int i = 0; i < kalman_mat_dim; i++)
+    //     for (int j = 0; j < kalman_mat_dim; j++)
+    //         std::cout << std::setw(20) << matrixx[i][j] << ((j == kalman_mat_dim - 1) ? "\n": "\t");
+    // std::cout << "\n";
 }
 
 
 
 inline void print_vector(FPDATA vec[N] , uint32_t kalman_mat_dim)
 {
-    for (int i = 0; i < kalman_mat_dim; i++)
-            std::cout << std::setw(20) << vec[i] << "\t";
-    std::cout << "\n";
+    // for (int i = 0; i < kalman_mat_dim; i++)
+    //         std::cout << std::setw(20) << vec[i] << "\t";
+    // std::cout << "\n";
 }
 // Functions to print matrices and vectors
 inline void print_matrix_new(FPDATA* matrix, int rows, int cols) {
     // printf("Matrix (%d x %d):\n", rows, cols);
-    for (int i = 0; i < rows; i++) {
-        // printf("(Row %d)\t:", i);
-        for (int j = 0; j < cols; j++) {
-              cout << matrix[i * cols + j] << "\t"; 
-        }
-        cout << std::endl;
-    }
+    // for (int i = 0; i < rows; i++) {
+    //     // printf("(Row %d)\t:", i);
+    //     for (int j = 0; j < cols; j++) {
+    //           cout << matrix[i * cols + j] << "\t"; 
+    //     }
+    //     cout << std::endl;
+    // }
 }
 #endif
 
@@ -81,13 +81,13 @@ inline void matrix_multiply(FPDATA* A, FPDATA* B, FPDATA* C, uint32_t n, uint32_
 // Utility function implementations
 inline void gauss_inverse(FPDATA* A, FPDATA* A_inv, int n) {
     // Augmenting the matrix A with identity matrix of same dimensions
-    FPDATA augmented[n * 2 * n];
+    FPDATA augmented[N * 2 * N];
 
     // Create the augmented matrix
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             augmented[i * 2 * n + j] = A[i * n + j];  // A portion
-            augmented[i * 2 * n + (j + n)] = (i == j) ? 1.0 : 0.0;  // Identity portion
+            augmented[i * 2 * n + (j + n)] = (i == j) ? 1 : 0;  // Identity portion
         }
     }
 
