@@ -11,6 +11,7 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
     uint32_t index = 0;
     uint32_t mem_index = 0;
     uint32_t mem_off = base_addr;
+    std::cout << "Load_d: " << base_addr << "-" << size << "\n";
 
     for (index = size; index > 0; )
     {
@@ -18,6 +19,7 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
         uint32_t j = 0;
         uint32_t beats = (index < 16) ? index : 16;
         uint32_t len=beats;
+        // std::cout << "\tBeats: " << beats << "\n";
 
         dma_info_t dma_info(mem_off, len, DMA_SIZE);
         dma_read_ctrl.Push(dma_info);
@@ -26,6 +28,7 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
 
         for (; j < beats; ++j)
         {
+            // std::cout << "\t\tj: " << j << "\n";
 
             DMA_WORD r=dma_read_chnl.Pop();
 

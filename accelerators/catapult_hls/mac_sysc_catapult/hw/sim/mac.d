@@ -278,4 +278,5 @@ mac.o: ../src/mac.cpp ../inc/mac.hpp ../inc/mem_wrap.hpp \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_int.h \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_types.h \
  ../inc/mac_data_types.hpp \
- ../../../common/matchlib_toolkit/examples/ac_simutils/include/mc_scverify.h
+ ../../../common/matchlib_toolkit/examples/ac_simutils/include/mc_scverify.h \
+ ../../../common/matchlib_toolkit/examples/ac_math/include/ac_math/ac_random.h

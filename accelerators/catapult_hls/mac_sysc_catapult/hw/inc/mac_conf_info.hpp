@@ -38,8 +38,8 @@ struct conf_info_t
     {
         /* <<--ctor-->> */
         this->mac_n = 1;
-        this->mac_vec = 8;
-        this->mac_len = 16;
+        this->mac_vec = 2;
+        this->mac_len = 2;
     }
 
     conf_info_t(

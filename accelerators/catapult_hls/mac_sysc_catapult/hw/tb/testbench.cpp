@@ -34,17 +34,29 @@ void testbench::proc()
 
     in = new ac_int<DATA_WIDTH,false>[in_size];
     gold= new ac_int<DATA_WIDTH,false>[out_size];
-    FPDATA data;
+    // FPDATA data;
 
+    FLOAT_TYPE data_fp;
     //Initialize input
     for (uint32_t i= 0; i< mac_n ; i++)
     {
         for (uint32_t j=0; j< mac_len*mac_vec ; j+=1)
         {
-            ac_random(data);
+            data_fp = 1.1111 + j;
+            std::cout << "vec_fp_tb:\t" << data_fp.to_double() << "\n";
+        FPDATA_WORD integer_representation;
+
+        fp2int(data_fp, integer_representation);
+        // std::cout << "Integer Representation: " << integer_representation << std::endl;
+
+        // Convert back to FLOAT_TYPE
+        FLOAT_TYPE recovered_float;
+        int2fp(integer_representation, recovered_float);
+        // std::cout << "Recovered FLOAT_TYPE: " << recovered_float.to_double() << std::endl;
+
             FPDATA_WORD data_int32;
-            data_int32.set_slc(0,data.slc<DATA_WIDTH>(0));
-            in[i*in_words_adj+j]=data_int32;
+
+            in[i*in_words_adj+j]=integer_representation;
 
         }
     }

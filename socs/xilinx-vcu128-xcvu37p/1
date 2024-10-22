@@ -1,0 +1,1827 @@
+    RUN mac_sysc_catapult-exe
+make[1]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/sim'
+    CXX testbench.o
+In file included from ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:21:0,
+                 from ../inc/mac_specs.hpp:8,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections_utils.h:23:0: warning: "CONNECTIONS_ASSERT_MSG" redefined [enabled by default]
+ #define CONNECTIONS_ASSERT_MSG(X,MSG) NVHLS_ASSERT_MSG(X,MSG)
+ ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:42:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections_utils.h:50:0: note: this is the location of the previous definition
+ #define CONNECTIONS_ASSERT_MSG(X,MSG)           \
+ ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:21:0,
+                 from ../inc/mac_specs.hpp:8,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections_utils.h:24:0: warning: "CONNECTIONS_SIM_ONLY_ASSERT_MSG" redefined [enabled by default]
+ #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) CMOD_ASSERT_MSG(X,MSG)
+ ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:42:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections_utils.h:75:0: note: this is the location of the previous definition
+ #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) \
+ ^
+In file included from ../inc/mac_specs.hpp:8:0,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:34:0: warning: "CONNECTIONS_NAMING_ORIGINAL" redefined [enabled by default]
+ #define CONNECTIONS_NAMING_ORIGINAL
+ ^
+<command-line>:0:0: note: this is the location of the previous definition
+../tb/testbench.cpp: In member function ‘void testbench::proc()’:
+../tb/testbench.cpp:53:41: error: no match for ‘operator&’ (operand types are ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ and ‘int’)
+                 data_bin |= (data >> i  & 1) << i;
+                                         ^
+../tb/testbench.cpp:53:41: note: candidates are:
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<1, false>::rt<W2, S2>::logic operator&(bool, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2934:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(bool, 1, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2934:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(bool, 1, false)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘bool’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<1, false>::logic operator&(const ac_int<W, S>&, bool)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2934:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(bool, 1, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2934:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(bool, 1, false)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<8, true>::rt<W2, S2>::logic operator&(char, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2935:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(char, 8, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2935:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(char, 8, true)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘char’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<8, true>::logic operator&(const ac_int<W, S>&, char)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2935:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(char, 8, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2935:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(char, 8, true)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<8, true>::rt<W2, S2>::logic operator&(signed char, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2936:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(signed char, 8, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2936:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(signed char, 8, true)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘signed char’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<8, true>::logic operator&(const ac_int<W, S>&, signed char)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2936:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(signed char, 8, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2936:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(signed char, 8, true)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<8, false>::rt<W2, S2>::logic operator&(unsigned char, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2937:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned char, 8, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2937:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned char, 8, false)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘unsigned char’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<8, false>::logic operator&(const ac_int<W, S>&, unsigned char)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2937:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned char, 8, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2937:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned char, 8, false)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<16, true>::rt<W2, S2>::logic operator&(short int, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2938:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(short, 16, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2938:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(short, 16, true)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘short int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<16, true>::logic operator&(const ac_int<W, S>&, short int)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2938:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(short, 16, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2938:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(short, 16, true)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<16, false>::rt<W2, S2>::logic operator&(short unsigned int, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2939:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned short, 16, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2939:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned short, 16, false)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘short unsigned int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<16, false>::logic operator&(const ac_int<W, S>&, short unsigned int)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2939:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned short, 16, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2939:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned short, 16, false)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<32, true>::rt<W2, S2>::logic operator&(int, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2940:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(int, 32, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2940:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(int, 32, true)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<32, true>::logic operator&(const ac_int<W, S>&, int)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2940:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(int, 32, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2940:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(int, 32, true)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<32, false>::rt<W2, S2>::logic operator&(unsigned int, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2941:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned int, 32, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2941:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned int, 32, false)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘unsigned int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<32, false>::logic operator&(const ac_int<W, S>&, unsigned int)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2941:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned int, 32, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2941:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned int, 32, false)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<64, true>::rt<W2, S2>::logic operator&(long int, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2942:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(long, ac_private::long_w, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2942:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(long, ac_private::long_w, true)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘long int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<long_w, true>::logic operator&(const ac_int<W, S>&, long int)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2942:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(long, ac_private::long_w, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2942:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(long, ac_private::long_w, true)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<64, false>::rt<W2, S2>::logic operator&(long unsigned int, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2943:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2943:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘long unsigned int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<long_w, false>::logic operator&(const ac_int<W, S>&, long unsigned int)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2943:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2943:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<64, true>::rt<W2, S2>::logic operator&(Slong, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2944:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Slong, 64, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2944:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Slong, 64, true)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘Slong {aka long long int}’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<64, true>::logic operator&(const ac_int<W, S>&, Slong)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2944:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Slong, 64, true)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2944:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Slong, 64, true)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note: template<int W, bool S> typename ac_int<64, false>::rt<W2, S2>::logic operator&(Ulong, const ac_int<W, S>&)
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2945:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Ulong, 64, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2872:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<WI,SI>::template rt<W,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_int<W,S> &op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2945:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Ulong, 64, false)
+ ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘Ulong {aka long long unsigned int}’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:10:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note: template<int W, bool S> typename ac_int<W, S>::rt<64, false>::logic operator&(const ac_int<W, S>&, Ulong)
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2945:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Ulong, 64, false)
+ ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2876:58: note:   template argument deduction/substitution failed:
+   inline typename ac_int<W,S>::template rt<WI,SI>::RTYPE operator BIN_OP ( const ac_int<W,S> &op, C_TYPE i_op) {  \
+                                                          ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2904:3: note: in expansion of macro ‘BIN_OP_WITH_INT’
+   BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_int.h:2945:1: note: in expansion of macro ‘OPS_WITH_INT’
+ OPS_WITH_INT(Ulong, 64, false)
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<W, S>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<1, 1, false, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(bool, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1302:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(bool, 1, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1302:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(bool, 1, false)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘bool’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<1, 1, false>::logic operator&(const ac_fixed<W, I, S, Q, O>&, bool)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1302:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(bool, 1, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1302:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(bool, 1, false)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<8, 8, true, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(char, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1303:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(char, 8, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1303:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(char, 8, true)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘char’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<8, 8, true>::logic operator&(const ac_fixed<W, I, S, Q, O>&, char)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1303:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(char, 8, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1303:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(char, 8, true)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<8, 8, true, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(signed char, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1304:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(signed char, 8, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1304:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(signed char, 8, true)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘signed char’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<8, 8, true>::logic operator&(const ac_fixed<W, I, S, Q, O>&, signed char)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1304:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(signed char, 8, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1304:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(signed char, 8, true)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<8, 8, false, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(unsigned char, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1305:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned char, 8, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1305:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned char, 8, false)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘unsigned char’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<8, 8, false>::logic operator&(const ac_fixed<W, I, S, Q, O>&, unsigned char)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1305:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned char, 8, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1305:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned char, 8, false)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<16, 16, true, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(short int, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1306:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(short, 16, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1306:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(short, 16, true)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘short int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<16, 16, true>::logic operator&(const ac_fixed<W, I, S, Q, O>&, short int)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1306:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(short, 16, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1306:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(short, 16, true)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<16, 16, false, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(short unsigned int, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1307:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned short, 16, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1307:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned short, 16, false)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘short unsigned int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<16, 16, false>::logic operator&(const ac_fixed<W, I, S, Q, O>&, short unsigned int)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1307:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned short, 16, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1307:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned short, 16, false)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<32, 32, true, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(int, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1308:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(int, 32, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1308:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(int, 32, true)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<32, 32, true>::logic operator&(const ac_fixed<W, I, S, Q, O>&, int)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1308:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(int, 32, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1308:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(int, 32, true)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<32, 32, false, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(unsigned int, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1309:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned int, 32, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1309:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned int, 32, false)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘unsigned int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<32, 32, false>::logic operator&(const ac_fixed<W, I, S, Q, O>&, unsigned int)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1309:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned int, 32, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1309:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned int, 32, false)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<64, 64, true, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(long int, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1310:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(long, ac_private::long_w, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1310:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(long, ac_private::long_w, true)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘long int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<long_w, long_w, true>::logic operator&(const ac_fixed<W, I, S, Q, O>&, long int)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1310:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(long, ac_private::long_w, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1310:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(long, ac_private::long_w, true)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<64, 64, false, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(long unsigned int, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1311:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1311:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘long unsigned int’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<long_w, long_w, false>::logic operator&(const ac_fixed<W, I, S, Q, O>&, long unsigned int)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1311:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1311:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(unsigned long, ac_private::long_w, false)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<64, 64, true, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(Slong, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1312:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Slong, 64, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1312:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Slong, 64, true)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘Slong {aka long long int}’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<64, 64, true>::logic operator&(const ac_fixed<W, I, S, Q, O>&, Slong)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1312:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Slong, 64, true)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1312:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Slong, 64, true)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<64, 64, false, (ac_q_mode)0u, (ac_o_mode)0u>::rt<W2, I2, S2>::logic operator&(Ulong, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1313:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Ulong, 64, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1237:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( C_TYPE i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1313:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Ulong, 64, false)
+     ^
+../tb/testbench.cpp:53:43: note:   cannot convert ‘operator>>(const ac_float<W2, I2, E2, Q2>&, int) [with int W = 31; int I = 16; int E = 8; ac_q_mode Q = (ac_q_mode)0u; typename ac_float<W, I, E, Q>::rt_i<W, S>::rshift = ac_float<31, 16, 24, (ac_q_mode)0u>](i)’ (type ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’) to type ‘Ulong {aka long long unsigned int}’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O> typename ac_fixed<W, I, S>::rt<64, 64, false>::logic operator&(const ac_fixed<W, I, S, Q, O>&, Ulong)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1313:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Ulong, 64, false)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1241:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, C_TYPE i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1274:3: note: in expansion of macro ‘FX_BIN_OP_WITH_INT’
+   FX_BIN_OP_WITH_INT(&, C_TYPE, WI, SI, logic) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1313:5: note: in expansion of macro ‘FX_OPS_WITH_INT’
+     FX_OPS_WITH_INT(Ulong, 64, false)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1325:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O, int WI, bool SI> typename ac_fixed<WI, WI, SI>::rt<W, I, S>::logic operator&(const ac_int<WI, SI>&, const ac_fixed<W, I, S, Q, O>&)
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( const ac_int<WI,SI> &i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1336:3: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT_1’
+   FX_BIN_OP_WITH_AC_INT_1(BIN_OP, RTYPE) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1370:5: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT’
+     FX_BIN_OP_WITH_AC_INT(&, logic)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1325:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<WI,WI,SI>::template rt<W,I,S>::RTYPE operator BIN_OP ( const ac_int<WI,SI> &i_op, const ac_fixed<W,I,S,Q,O> &op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1336:3: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT_1’
+   FX_BIN_OP_WITH_AC_INT_1(BIN_OP, RTYPE) \
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1370:5: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT’
+     FX_BIN_OP_WITH_AC_INT(&, logic)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_int<WI, SI>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../inc/mac_conf_info.hpp:11:0,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1331:65: note: template<int W, int I, bool S, ac_q_mode Q, ac_o_mode O, int WI, bool SI> typename ac_fixed<W, I, S>::rt<WI, WI, SI>::logic operator&(const ac_fixed<W, I, S, Q, O>&, const ac_int<WI, SI>&)
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, const ac_int<WI,SI> &i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1337:3: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT_2’
+   FX_BIN_OP_WITH_AC_INT_2(BIN_OP, RTYPE)
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1370:5: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT’
+     FX_BIN_OP_WITH_AC_INT(&, logic)
+     ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1331:65: note:   template argument deduction/substitution failed:
+   inline typename ac_fixed<W,I,S>::template rt<WI,WI,SI>::RTYPE operator BIN_OP ( const ac_fixed<W,I,S,Q,O> &op, const ac_int<WI,SI> &i_op) {  \
+                                                                 ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1337:3: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT_2’
+   FX_BIN_OP_WITH_AC_INT_2(BIN_OP, RTYPE)
+   ^
+../../../common/matchlib_toolkit/examples/ac_types/include/ac_fixed.h:1370:5: note: in expansion of macro ‘FX_BIN_OP_WITH_AC_INT’
+     FX_BIN_OP_WITH_AC_INT(&, logic)
+     ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘const ac_fixed<W, I, S, Q, O>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:195:19: note: template<unsigned int Size, class T> Marshaller<Size>& operator&(Marshaller<Size>&, T&)
+ Marshaller<Size> &operator&(Marshaller<Size> &m, T &rhs) {
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:195:19: note:   template argument deduction/substitution failed:
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:218:19: note: template<unsigned int Size, int K> Marshaller<Size>& operator&(Marshaller<Size>&, sc_dt::sc_lv<Twidth>&)
+ Marshaller<Size> &operator&(Marshaller<Size> &m, sc_lv<K> &rhs)
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:218:19: note:   template argument deduction/substitution failed:
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, bool&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:244:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(bool,0,1);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:244:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(bool,0,1);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, char&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:245:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(char,1,8);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:245:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(char,1,8);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, unsigned char&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:246:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned char,0,8);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:246:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned char,0,8);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, short int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:247:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(short,1,16);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:247:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(short,1,16);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, short unsigned int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:248:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned short,0,16);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:248:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned short,0,16);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:249:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(int,1,32);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:249:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(int,1,32);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, unsigned int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:250:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned int,0, 32);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:250:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned int,0, 32);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, long int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:251:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(long,1,sizeof(long)*8);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:251:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(long,1,sizeof(long)*8);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, long unsigned int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:252:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned long,0,sizeof(unsigned long)*8);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:252:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned long,0,sizeof(unsigned long)*8);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, long long int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:253:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(long long,1,64);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:253:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(long long,1,64);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note: template<unsigned int Size> Marshaller<Size>& operator&(Marshaller<Size>&, long long unsigned int&)
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:254:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned long long,0,64);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:240:19: note:   template argument deduction/substitution failed:
+ Marshaller<Size>& operator&(Marshaller<Size>& m, Type& rhs) { \
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:254:1: note: in expansion of macro ‘MarshallBasicTypes’
+ MarshallBasicTypes(unsigned long long,0,64);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:336:21: note: template<unsigned int Size, int K, bool Sign> Marshaller<Size>& operator&(Marshaller<Size>&, ac_int<WX, SX>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K, Sign> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:384:1: note: in expansion of macro ‘SpecialWrapper2’
+ SpecialWrapper2(ac_int);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:336:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K, Sign> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:384:1: note: in expansion of macro ‘SpecialWrapper2’
+ SpecialWrapper2(ac_int);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:357:23: note: template<unsigned int Size, int K, int J, bool Sign, ac_q_mode Q, ac_o_mode O> Marshaller<Size>& operator&(Marshaller<Size>&, ac_fixed<W, I, S, Q, O>&)
+     Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K,J,Sign,Q,O> & rhs) { \
+                       ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:385:1: note: in expansion of macro ‘SpecialWrapper3’
+ SpecialWrapper3(ac_fixed);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:357:23: note:   template argument deduction/substitution failed:
+     Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K,J,Sign,Q,O> & rhs) { \
+                       ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:385:1: note: in expansion of macro ‘SpecialWrapper3’
+ SpecialWrapper3(ac_fixed);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:294:21: note: template<unsigned int Size, int K> Marshaller<Size>& operator&(Marshaller<Size>&, sc_dt::sc_bv<K>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:386:1: note: in expansion of macro ‘SpecialUnsignedWrapper’
+ SpecialUnsignedWrapper(sc_bv);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:294:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:386:1: note: in expansion of macro ‘SpecialUnsignedWrapper’
+ SpecialUnsignedWrapper(sc_bv);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:294:21: note: template<unsigned int Size, int K> Marshaller<Size>& operator&(Marshaller<Size>&, sc_dt::sc_uint<W>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:387:1: note: in expansion of macro ‘SpecialUnsignedWrapper’
+ SpecialUnsignedWrapper(sc_uint);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:294:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:387:1: note: in expansion of macro ‘SpecialUnsignedWrapper’
+ SpecialUnsignedWrapper(sc_uint);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:315:21: note: template<unsigned int Size, int K> Marshaller<Size>& operator&(Marshaller<Size>&, sc_dt::sc_int<W>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:388:1: note: in expansion of macro ‘SpecialSignedWrapper’
+ SpecialSignedWrapper(sc_int);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:315:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:388:1: note: in expansion of macro ‘SpecialSignedWrapper’
+ SpecialSignedWrapper(sc_int);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:294:21: note: template<unsigned int Size, int K> Marshaller<Size>& operator&(Marshaller<Size>&, sc_dt::sc_biguint<W>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:389:1: note: in expansion of macro ‘SpecialUnsignedWrapper’
+ SpecialUnsignedWrapper(sc_biguint);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:294:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:389:1: note: in expansion of macro ‘SpecialUnsignedWrapper’
+ SpecialUnsignedWrapper(sc_biguint);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:315:21: note: template<unsigned int Size, int K> Marshaller<Size>& operator&(Marshaller<Size>&, sc_dt::sc_bigint<W>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:390:1: note: in expansion of macro ‘SpecialSignedWrapper’
+ SpecialSignedWrapper(sc_bigint);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:315:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<K> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:390:1: note: in expansion of macro ‘SpecialSignedWrapper’
+ SpecialSignedWrapper(sc_bigint);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note: template<unsigned int Size, class Message> Marshaller<Size>& operator&(Marshaller<Size>&, sc_core::sc_in<Message>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:391:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(sc_in);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:391:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(sc_in);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note: template<unsigned int Size, class Message> Marshaller<Size>& operator&(Marshaller<Size>&, sc_core::sc_out<Message>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:392:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(sc_out);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:392:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(sc_out);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note: template<unsigned int Size, class Message> Marshaller<Size>& operator&(Marshaller<Size>&, sc_core::sc_signal<Message>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:393:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(sc_signal);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:393:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(sc_signal);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:517:19: note: template<unsigned int Size, int W, int I, int E, ac_q_mode Q> Marshaller<Size>& operator&(Marshaller<Size>&, ac_float<W, I, E, Q>&)
+ Marshaller<Size>& operator&(Marshaller<Size> &m, ac_float<W,I,E,Q> &rhs)
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:517:19: note:   template argument deduction/substitution failed:
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:546:19: note: template<unsigned int Size, class T> Marshaller<Size>& operator&(Marshaller<Size>&, ac_complex<T2>&)
+ Marshaller<Size> &operator&(Marshaller<Size> &m, ac_complex<T> &rhs)
+                   ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:546:19: note:   template argument deduction/substitution failed:
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note: template<unsigned int Size, class Message> Marshaller<Size>& operator&(Marshaller<Size>&, Connections::In<Message>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:276:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(Connections::In);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:276:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(Connections::In);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82:0,
+                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
+                 from ../inc/mac_specs.hpp:7,
+                 from ../inc/mac_conf_info.hpp:12,
+                 from ../tb/testbench.hpp:10,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note: template<unsigned int Size, class Message> Marshaller<Size>& operator&(Marshaller<Size>&, Connections::Out<Message>&)
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:277:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(Connections::Out);
+ ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:379:21: note:   template argument deduction/substitution failed:
+   Marshaller<Size>& operator&(Marshaller<Size> & m, Type<Message> & rhs) { \
+                     ^
+../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:277:1: note: in expansion of macro ‘SpecialWrapperIfc’
+ SpecialWrapperIfc(Connections::Out);
+ ^
+../tb/testbench.cpp:53:43: note:   ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ is not derived from ‘Marshaller<Size>’
+                 data_bin |= (data >> i  & 1) << i;
+                                           ^
+In file included from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/communication/sc_port.h:35:0,
+                 from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/communication/sc_signal.h:32,
+                 from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/communication/sc_buffer.h:34,
+                 from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/systemc:79,
+                 from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/systemc.h:219,
+                 from ../tb/testbench.hpp:9,
+                 from ../tb/testbench.cpp:4:
+../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/kernel/sc_event.h:825:1: note: sc_core::sc_event_and_expr sc_core::operator&(sc_core::sc_event_and_expr, const sc_core::sc_event_and_list&)
+ operator & ( sc_event_and_expr expr, sc_event_and_list const & el )
+ ^
+../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/kernel/sc_event.h:825:1: note:   no known conversion for argument 1 from ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ to ‘sc_core::sc_event_and_expr {aka sc_core::sc_event_expr<sc_core::sc_event_and_list>}’
+../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/kernel/sc_event.h:817:1: note: sc_core::sc_event_and_expr sc_core::operator&(sc_core::sc_event_and_expr, const sc_core::sc_event&)
+ operator & ( sc_event_and_expr expr, sc_event const & e )
+ ^
+../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/kernel/sc_event.h:817:1: note:   no known conversion for argument 1 from ‘ac_float<31, 16, 8>::rt_i<32, true>::rshift {aka ac_float<31, 16, 24, (ac_q_mode)0u>}’ to ‘sc_core::sc_event_and_expr {aka sc_core::sc_event_expr<sc_core::sc_event_and_list>}’
+../tb/testbench.cpp:75:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (int i = 0; i < mac_n; i++)
+                         ^
+../tb/testbench.cpp:76:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for (int j = 0; j < mac_vec; j++) {
+                             ^
+../tb/testbench.cpp:79:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for (int k = 0; k < mac_len; k += 2) {
+                                 ^
+In file included from ../tb/testbench.hpp:14:0,
+                 from ../tb/testbench.cpp:4:
+../../../common/inc/core/systems/esp_dma_controller.hpp: In instantiation of ‘esp_dma_controller<_DMA_WIDTH_, _MEM_SIZE_>::esp_dma_controller(sc_core::sc_module_name, ac_int<32, true>*) [with int _DMA_WIDTH_ = 32; int _MEM_SIZE_ = 16842752]’:
+../tb/testbench.hpp:44:81:   required from here
+../../../common/inc/core/systems/esp_dma_controller.hpp:41:50: warning: ‘esp_dma_controller<32, 16842752>::dma_read_chnl’ will be initialized after [-Wreorder]
+         Connections::Out<ac_int<DMA_WIDTH,true>> dma_read_chnl;
+                                                  ^
+../../../common/inc/core/systems/esp_dma_controller.hpp:36:21: warning:   ‘sc_core::sc_in<bool> esp_dma_controller<32, 16842752>::acc_done’ [-Wreorder]
+         sc_in<bool> acc_done;
+                     ^
+../../../common/inc/core/systems/esp_dma_controller.hpp:48:9: warning:   when initialized here [-Wreorder]
+         esp_dma_controller(sc_module_name name, ac_int<DMA_WIDTH,true> *ptr)
+         ^
+make[1]: *** [testbench.o] Error 1
+make[1]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/sim'
+make: *** [mac_sysc_catapult-exe] Error 2

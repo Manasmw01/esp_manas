@@ -4,6 +4,8 @@
 #include "mac.hpp"
 #include <mc_scverify.h>
 #include <ac_float.h>
+#include "ac_math/ac_random.h"
+
 void mac_sysc_catapult:: config() {
     conf_info.Reset();
     conf1.ResetWrite();
@@ -68,6 +70,9 @@ void mac_sysc_catapult:: load() {
         uint32_t mac_n = conf.mac_n;
         uint32_t mac_vec = conf.mac_vec;
         uint32_t mac_len = conf.mac_len;
+        // std::cout << "mac_n: " << mac_n << "\n";
+        // std::cout << "mac_vec: " << mac_vec << "\n";
+        // std::cout << "mac_len: " << mac_len << "\n";
 
         // Batching
         for (uint16_t b = 0; b < mac_n; b++)
@@ -82,6 +87,7 @@ void mac_sysc_catapult:: load() {
             // Chunking
             for (int rem = len; rem > 0; rem -= PLM_IN_WORD)
             {
+                // std::cout << "rem: " << rem << "\n";
                 uint32_t len1 = rem > PLM_IN_WORD ? PLM_IN_WORD : rem;
 
 #if (DMA_WORD_PER_BEAT == 0)
@@ -99,6 +105,7 @@ void mac_sysc_catapult:: load() {
                 #pragma pipeline_stallt_mode flush
                 for (uint32_t i =0; i < len1; i++)
                 {
+                    // std::cout << "\ti: " << i << "\n";
                     ac_int<DATA_WIDTH> dataBv;
 
                     #pragma hls_pipeline_init_interval 1
@@ -122,6 +129,7 @@ void mac_sysc_catapult:: load() {
                 #pragma hls_pipeline_init_interval 1
                 #pragma pipeline_stallt_mode flush
                 for (uint32_t i=0; i < len1; i+= DMA_WORD_PER_BEAT) {
+                    // std::cout << "\ti: " << i << "\n";
                     DMA_WORD data_dma=dma_read_chnl.Pop();
 
                     plm_WR<in_as,inwp> wreq;
@@ -263,9 +271,7 @@ void mac_sysc_catapult:: compute() {
                 // Compute Kernel
 
                 FPDATA acc_fx=0;
-                ac_float<32, 5, 8> my_float;
 
-                my_float = 1.11;
                 uint32_t vec_indx=0;
                 uint32_t vec_num=0;
 
@@ -288,6 +294,15 @@ void mac_sysc_catapult:: compute() {
 
                     int2fx(op[0],op0_fx);
                     int2fx(op[1],op1_fx);
+
+
+                    // Convert back to FLOAT_TYPE
+                    FLOAT_TYPE recovered_float1;
+                    FLOAT_TYPE recovered_float2;
+                    int2fp(op[0], recovered_float1);
+                    int2fp(op[1], recovered_float2);
+                    std::cout << "Recovered FLOAT_TYPE: " << recovered_float1.to_double() << std::endl;
+                    std::cout << "Recovered FLOAT_TYPE: " << recovered_float2.to_double() << std::endl;
 
                     // Multiply and accumulate
                     acc_fx+=op0_fx * op1_fx;

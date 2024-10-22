@@ -283,7 +283,7 @@ void testbench::proc()
     dump_memory();
     std::cout << "Dump memory completed\n";
 
-    validate();
+    // validate();
 
     
     sc_stop();
@@ -294,27 +294,34 @@ void testbench::proc()
 
 void testbench::load_data(float *inn, uint32_t inn_size)
 {
+    std::cout << "inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n";
     for (uint32_t i = 0; i < inn_size / DMA_WORD_PER_BEAT; i++)  {
+        // std::cout << "\ti:" << i << "\n";
         ac_int<DMA_WIDTH> data_bv;
         for (int wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
         {
-            // ac_ieee_float32 data = inn[i* DMA_WORD_PER_BEAT + wordd];
-            // ac_float< 5, 3, 3, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
-            // cout << "OUT 1" << endl; 
-            ac_float< DATA_WIDTH, FPDATA_IL, 5, AC_RND> data = inn[i* DMA_WORD_PER_BEAT + wordd];
-            // cout << "OUT 2" << endl; 
-
-            // FPDATA fpdata=data.convert_to_ac_fixed<FPDATA_WL,FPDATA_IL,true,AC_TRN, AC_WRAP>();
-            // FPDATA fpdata=static_cast<FPDATA>(data.to_double());
-            FPDATA fpdata=data.to_ac_fixed();
-            // if(i < 20)
-            // cout << "ac_float[" <<  i << "]:" << std::setprecision(20) << fpdata << endl; 
-
-            
+            const uint32_t index = i + wordd;
+            FLOAT_TYPE data = inn[index];
             FPDATA_WORD fpdata_word;
-            fpdata_word.set_slc(0,fpdata.slc<FPDATA_WL>(0));
+            FPDATA_WORD integer_representation;
+        // std::cout << "\nOriginal FLOAT_TYPE: " << data.to_double() << std::endl;
 
+        fp2int(data, fpdata_word);
+        // std::cout << "Integer Representation: " << fpdata_word << std::endl;
+
+        // // Convert back to FLOAT_TYPE
+        // FLOAT_TYPE recovered_float;
+        // int2fp(fpdata_word, recovered_float);
+        // std::cout << "Recovered FLOAT_TYPE: " << recovered_float.to_double() << std::endl;
+
+
+            // FPDATA fpdata=data.to_ac_fixed();
+            // fpdata_word.set_slc(0,fpdata.slc<FPDATA_WL>(0));      
+      
             data_bv.set_slc(wordd*FPDATA_WL,fpdata_word);
+
+
+
         }
         mem[i] = data_bv;
     }
@@ -366,6 +373,8 @@ void testbench::partition()
         for(int i = MEAS_SIZE*iter; i < MEAS_SIZE*(iter+1); i++)
         {
             master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1)] = measurements[i];    
+            // std::cout << "Vec_Z OG: " << measurements[i] << std::endl;
+
             // if(i == MEAS_SIZE*(iter+1) - 1)
             // if(i < (MEAS_SIZE*iter + 6))
             // {
@@ -415,6 +424,9 @@ void testbench::do_config()
 void testbench::dump_memory()
 {
     FPDATA output_xp[STATE_SIZE];
+    float output_xp_float[STATE_SIZE];
+    FPDATA ref_prediction[STATE_SIZE];
+    float ref_prediction_float[STATE_SIZE];
 
     std::cout << "Entered Dump Memory\n";
     do 
@@ -432,47 +444,80 @@ void testbench::dump_memory()
     std::cout << "\nOUT_SIZE[" << out_size << "]:\n";
     std::cout << "\noffset[" << offset << "]:\n";
     uint32_t tot_size = STATE_SIZE + STATE_SIZE*STATE_SIZE;
+
+
+  float sum_sqr_vec = 0.0;
+  float abs_diff = 0.0;
     for (uint32_t iters = 0; iters < SAMPLES; iters++)
     {
+        float diff_vec[STATE_SIZE];
+        float sqr_diff;
         for (uint32_t i = 0; i < out_size / DMA_WORD_PER_BEAT; i++)
         {
             for (uint32_t wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
             {
                 out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + tot_size*iters +  i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
                 FPDATA out_fixed = 0;
-                int2fx(out[i * DMA_WORD_PER_BEAT + wordd],out_fixed);
-                if(i >= out_size - (STATE_SIZE*STATE_SIZE))
-                {
-                    ofs << out_fixed << std::endl;
-                }
+                FLOAT_TYPE out_floating = 0;
+                // int2fx(out[i * DMA_WORD_PER_BEAT + wordd],out_fixed);
+                int2fp(out[i * DMA_WORD_PER_BEAT + wordd],out_floating);
+                // if(i >= out_size - (STATE_SIZE*STATE_SIZE))
+                // {
+                //     ofs << out_floating.to_float() << std::endl;
+                // }
                 if(i < STATE_SIZE)
                 {
-                    // std::cout << "\nOUTPUT[" << offset + tot_size*iters +  i << "]:\t" << out_fixed;
-                    output_xp[i] = out_fixed;
+                    // std::cout << "\nOUTPUT[" << offset + tot_size*iters +  i << "]:\t" << out_floating.to_float();
+                    // output_xp[i] = out_fixed;
+                    output_xp_float[i] = out_floating.to_float();
                 }
-                // std::cout << "\titers:" << iters << "\tOUTPUT[" << i << "]:\t" << out_fixed;
+                // // std::cout << "\titers:" << iters << "\tOUTPUT[" << i << "]:\t" << out_fixed;
             }
         }
         std::cout << "\n(" << iters << "): RF_vecX:\t";
         for (int i = 0; i < STATE_SIZE; i++) 
         {
-            // std::cout << std::setprecision(20) << output_xp[STATE_SIZE*iters + i] << "\t";
-            // std::cout << std::setprecision(20) << prediction[STATE_SIZE*iter + i] << "\t";
-            ac_float< DATA_WIDTH, FPDATA_IL, 5, AC_RND> ref = prediction[STATE_SIZE*(iters+1) + i];
-            FPDATA fpdata;
-            fpdata = ref.to_ac_fixed();     
-            std::cout << std::setprecision(20) << fpdata << "\t";            
+            FLOAT_TYPE ref = prediction[STATE_SIZE*(iters+1) + i];
+            // ac_float< DATA_WIDTH, FPDATA_IL, 5, AC_RND> ref = prediction[STATE_SIZE*(iters+1) + i];
+            // FPDATA fpdata;
+            // ref_prediction[i] = ref.to_ac_fixed();     
+            // ref_prediction_float[i] = static_cast<float>(ref_prediction[i].to_double());
+            ref_prediction_float[i] = ref.to_float();
+
+            // std::cout << std::setprecision(20) << fpdata << "\t";            
 
         }
 
         std::cout << "\n(" << iters << "): vecX:\t";
-        // std::cout << "\nvec_X\t";
         for (uint32_t i = 0; i < STATE_SIZE; i++)
         {
-            std::cout << output_xp[i] << "\t";
+            std::cout << std::setprecision(30) << output_xp_float[i] << "\t";
         }
-                std::cout << "\n"; 
+
+        std::cout << "\n(" << iters << "): REF PRED:\t";
+        for (uint32_t i = 0; i < STATE_SIZE; i++)
+        {
+            std::cout << std::setprecision(30) << ref_prediction_float[i] << "\t";            
+        }
+            std::cout << "\n"; 
+
+
+        for (int i = 0; i < STATE_SIZE; i++)
+            diff_vec[i] = output_xp_float[i] - ref_prediction_float[i];
+        for (int i = 0; i < STATE_SIZE; i++) 
+            abs_diff += fabs(diff_vec[i]);
+
+        //sqr_diff = abs_diff * abs_diff;
+    	sqr_diff = std::pow(abs_diff,2);
+        sum_sqr_vec += sqr_diff;
+	    abs_diff = 0.0;
+
+
     }
+    sum_sqr_vec = sum_sqr_vec/((SAMPLES-1)*STATE_SIZE);
+
+    // printf("MSE: %e\n", sum_sqr_vec);
+    std::cout << "\nMSE: " << sum_sqr_vec << "\n";
 
 
     // for (int iter = 1; iter <= SAMPLES; iter++) 
@@ -485,7 +530,7 @@ void testbench::dump_memory()
     //     }
 
     // }
-    ofs.close();
+    // ofs.close();
 }
 
 

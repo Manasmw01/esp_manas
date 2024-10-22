@@ -19,9 +19,9 @@
 #define PRINT_STATEMENTS
 
 #define STATE_SIZE 6  // Number of states n
+// #define MEAS_SIZE 46  // Number of measurements m
 #define MEAS_SIZE 46  // Number of measurements m
-// #define MEAS_SIZE 164  // Number of measurements m
-#define SAMPLES 5  // Number of measurements m
+#define SAMPLES 10  // Number of measurements m
 
 #define iterations SAMPLES
 #define dimensions STATE_SIZE
@@ -30,12 +30,13 @@
 
 /* <<--defines-->> */
 #define DATA_WIDTH 32
+// #define DATA_WIDTH 64
 #define DMA_SIZE SIZE_WORD
 // #define PLM_OUT_WORD 100
 // #define PLM_IN_WORD 6400
 #define PLM_IN_WORD 40000
 #define PLM_OUT_WORD 500
-#define MEM_SIZE 416000/(DMA_WIDTH/8)
+#define MEM_SIZE 67371008/(DMA_WIDTH/8)
 
 #if (DMA_WIDTH == 32)
 /* <<--defines_32-->> */
@@ -45,10 +46,14 @@
 #define PLM_OUT_RP 1
 #elif (DMA_WIDTH == 64)
 /* <<--defines_64-->> */
+// #define DMA_BEAT_PER_WORD 1
+// #define DMA_WORD_PER_BEAT 2
+// #define PLM_IN_WP 2
+// #define PLM_OUT_RP 2
 #define DMA_BEAT_PER_WORD 1
-#define DMA_WORD_PER_BEAT 2
-#define PLM_IN_WP 2
-#define PLM_OUT_RP 2
+#define DMA_WORD_PER_BEAT 1
+#define PLM_IN_WP 1
+#define PLM_OUT_RP 1
 #endif
 
 #define PLM_IN_RP 1

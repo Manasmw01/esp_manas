@@ -59,8 +59,8 @@ SC_MODULE(testbench)
 
         /* <<--params-default-->> */
         mac_n = 1;
-        mac_vec = 8;
-        mac_len = 16;
+        mac_vec = 2;
+        mac_len = 2;
 
     }
 

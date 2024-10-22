@@ -80,16 +80,12 @@ void kalman_filter_sysc_catapult:: load() {
         
         uint32_t inputs_base_address;
         uint32_t regs_base_address = 0;
-        uint32_t regs_size = 5*kalman_mat_rows* kalman_mat_rows;
 
         // cout << "Load_b: " << regs_base_address << "\t" << constant_matrices_size << "\t" << constant_matrices_size << "\n";
         load_b(ping_pong, regs_base_address, constant_matrices_size);
         // load_b(ping_pong, regs_base_address, input_vecs_total_size);
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
-            // load_d(ping_pong, regs_base_address, regs_size);
-
-            // inputs_base_address = input_vecs_total_size + (iter * MEAS_SIZE);
             inputs_base_address = constant_matrices_size + (iter * MEAS_SIZE);
 
             #ifdef PRINT_STATEMENTS
@@ -97,7 +93,11 @@ void kalman_filter_sysc_catapult:: load() {
             #endif
             // cout << "Load_d: " << inputs_base_address << "\t" << MEAS_SIZE << "\t" << (inputs_base_address + MEAS_SIZE) << "\n";
             load_d(ping_pong, inputs_base_address, MEAS_SIZE);
+
+
             sync12.sync_out();
+
+
             sync12b.sync_out();
             // ping_pong = !ping_pong;
         }
@@ -302,15 +302,15 @@ void kalman_filter_sysc_catapult:: store() {
             sync23b.sync_in();
             sync2b3b.sync_in();
             out_index = input_vecs_total_size + out_len*b;
-            #ifdef PRINT_STATEMENTS
-            #endif
-            // cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
+            cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
             store_data(ping_pong, out_index, out_len);
         }
 
         acc_done.write(true); wait();
         acc_done.write(false);
     }
+
+
 }
 
 
