@@ -19,7 +19,7 @@
 #define PRINT_STATEMENTS
 
 #define STATE_SIZE 6  // Number of states n
-// #define MEAS_SIZE 46  // Number of measurements m
+// #define MEAS_SIZE 164  // Number of measurements m
 #define MEAS_SIZE 46  // Number of measurements m
 #define SAMPLES 10  // Number of measurements m
 
@@ -34,7 +34,7 @@
 #define DMA_SIZE SIZE_WORD
 // #define PLM_OUT_WORD 100
 // #define PLM_IN_WORD 6400
-#define PLM_IN_WORD 40000
+#define PLM_IN_WORD 400000
 #define PLM_OUT_WORD 500
 #define MEM_SIZE 67371008/(DMA_WIDTH/8)
 

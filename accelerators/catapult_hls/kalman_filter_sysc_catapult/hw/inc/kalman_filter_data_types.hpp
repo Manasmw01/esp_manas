@@ -20,8 +20,8 @@ typedef ac_int<DMA_WIDTH> DMA_WORD;
 typedef ac_int<FPDATA_WL> FPDATA_WORD;
 typedef ac_fixed<FPDATA_WL, FPDATA_IL> FPDATA;
 
-
-typedef ac_float<23, 0, 8> FLOAT_TYPE;
+#define __AC_FLOAT_ENABLE_ALPHA
+typedef ac_float<23, 1, 8> FLOAT_TYPE;
 
 typedef FLOAT_TYPE FN_DATATYPE;
 
@@ -86,10 +86,10 @@ inline void copymat(FN_DATATYPE A[N][N], FN_DATATYPE result[N][N], uint32_t kalm
 
 // inline void matrix_multiply(FPDATA A[MEAS_SIZE], FPDATA B[MEAS_SIZE], FPDATA C[MEAS_SIZE], uint32_t n, uint32_t m, uint32_t p) {
 inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint32_t n, uint32_t m, uint32_t p) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < p; j++) {
+    for (uint32_t i = 0; i < n; i++) {
+        for (uint32_t j = 0; j < p; j++) {
             C[i * p + j] = 0;
-            for (int k = 0; k < m; k++) {
+            for (uint32_t k = 0; k < m; k++) {
                 C[i * p + j] += A[i * m + k] * B[k * p + j];
             }
         }
@@ -110,6 +110,12 @@ inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE
 			 FN_DATATYPE d = new_mat[1][1];
 
 			 FN_DATATYPE det = FN_DATATYPE((a.to_float() * d.to_float()) - (b.to_float() * c.to_float()));
+			//  FN_DATATYPE det = (a * d) - (b * c);
+
+			//  FN_DATATYPE a_times_d = (a * d);
+			//  FN_DATATYPE b_times_c = (b * c);
+			// //  FN_DATATYPE det = sub(a_times_d, b_times_c);
+			//  FN_DATATYPE det = a_times_d - b_times_c;
 
 			 if (det == 0) {
 			    //  printf("The matrix is not invertible.\n");
@@ -198,7 +204,7 @@ inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE
 inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
     // Augmenting the matrix A with identity matrix of same dimensions
     std::cout << "In Gauss Inverse\n";
-    FN_DATATYPE augmented[N * 2 * N];
+    FN_DATATYPE augmented[MEAS_SIZE * 2 * MEAS_SIZE];
 
     // Create the augmented matrix
     for (int i = 0; i < n; i++) {

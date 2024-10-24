@@ -195,8 +195,8 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // printf("(%d), NEW Mat_P\n", iter);
     // print_matrix_new(Mat_P, STATE_SIZE, STATE_SIZE);
 
-    printf("(%d), NEW vec_X\n", iter);
-    print_matrix_new(vec_X, STATE_SIZE, 1);
+    // printf("(%d), NEW vec_X\n", iter);
+    // print_matrix_new(vec_X, STATE_SIZE, 1);
 
     }
 
@@ -241,7 +241,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // printf("H_F_X\n");
     // print_matrix_new(H_F_X, MEAS_SIZE, 1);
 
-    std::cout << "LINE 231" << std::endl;
+    // std::cout << "LINE 231" << std::endl;
 
     matrix_subtract(vec_Z, H_F_X, Y, MEAS_SIZE); // P3 = Pp - (K * H * Pp)
     // printf("Y\n");
@@ -335,7 +335,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     matrix_multiply(Mat_K, Mat_H, KtH, STATE_SIZE,   MEAS_SIZE, STATE_SIZE); 
     // printf("KtH\n");
     // print_matrix_new(KtH, STATE_SIZE, STATE_SIZE);
-    std::cout << "WORKING TILL HERE" << std::endl;
+    // std::cout << "WORKING TILL HERE" << std::endl;
 
     FLOAT_TYPE I_minus_KtH[STATE_SIZE * STATE_SIZE];
     matrix_subtract(Mat_I, KtH, I_minus_KtH, STATE_SIZE*STATE_SIZE); // P3 = Pp - (K * H * Pp)
@@ -415,7 +415,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         uint32_t next_state_size = kalman_mat_dim + (kalman_mat_dim * kalman_mat_dim);
         for (uint32_t k = 0; k < next_state_size; k++)
         {
-    // std::cout << "k:" << k << "\n";
+            // std::cout << "k:" << k << "\n";
             FPDATA_WORD xp_word;
             fp2int(next_state_arr_fx[k], xp_word);
 

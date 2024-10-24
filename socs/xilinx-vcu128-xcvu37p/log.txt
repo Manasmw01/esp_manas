@@ -1,3 +1,7 @@
+    MKDIR socgen/esp/.esp_config
+    CP socgen/esp/.esp_config
+    MKDIR socgen/grlib/.grlib_config
+    CP socgen/grlib/.grlib_config
     RUN kalman_filter_sysc_catapult-exe
 make[1]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/sim'
     CXX kalman_filter.o
@@ -80,7 +84,7 @@ In file included from ../../../common/matchlib_toolkit/examples/matchlib_connect
 ../inc/kalman_filter.hpp:212:28: note: in expansion of macro ‘CCS_INIT_S1’
             plm_RRs<outrp>> CCS_INIT_S1(plm_out_pong);
                             ^
-../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning:   ‘mem_wrap<1u, 1u, 1u, 40000u, ac_int<32, false>, ac_int<16, false>, plm_WR<16u, 1u>, plm_RRq<16u, 1u>, plm_RRs<1u> > kalman_filter_sysc_catapult::plm_in_b_ping’ [-Wreorder]
+../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning:   ‘mem_wrap<1u, 1u, 1u, 400000u, ac_int<32, false>, ac_int<19, false>, plm_WR<19u, 1u>, plm_RRq<19u, 1u>, plm_RRs<1u> > kalman_filter_sysc_catapult::plm_in_b_ping’ [-Wreorder]
  #define CCS_INIT_S1(n)              n{#n}
                                          ^
 ../inc/kalman_filter.hpp:177:27: note: in expansion of macro ‘CCS_INIT_S1’
@@ -198,7 +202,7 @@ In file included from ../../../common/matchlib_toolkit/examples/matchlib_connect
 ../inc/kalman_filter.hpp:212:28: note: in expansion of macro ‘CCS_INIT_S1’
             plm_RRs<outrp>> CCS_INIT_S1(plm_out_pong);
                             ^
-../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning:   ‘mem_wrap<1u, 1u, 1u, 40000u, ac_int<32, false>, ac_int<16, false>, plm_WR<16u, 1u>, plm_RRq<16u, 1u>, plm_RRs<1u> > kalman_filter_sysc_catapult::plm_in_b_ping’ [-Wreorder]
+../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning:   ‘mem_wrap<1u, 1u, 1u, 400000u, ac_int<32, false>, ac_int<19, false>, plm_WR<19u, 1u>, plm_RRq<19u, 1u>, plm_RRs<1u> > kalman_filter_sysc_catapult::plm_in_b_ping’ [-Wreorder]
  #define CCS_INIT_S1(n)              n{#n}
                                          ^
 ../inc/kalman_filter.hpp:177:27: note: in expansion of macro ‘CCS_INIT_S1’
@@ -367,106 +371,23 @@ Do config done
 Entered Dump Memory
 Load_d: 2506-46
 Load_d: 2552-46
-LINE 231
-WORKING TILL HERE
 store_data: (2966 42)	3008
 Load_d: 2598-46
-(1), NEW vec_X
-5.404762268066406250000000000000 
-107.325927734375000000000000000000 
--0.280189275741577148437500000000 
--0.351083397865295410156250000000 
-0.232763946056365966796875000000 
--0.188413977622985839843750000000 
-LINE 231
-WORKING TILL HERE
 store_data: (3008 42)	3050
 Load_d: 2644-46
-(2), NEW vec_X
-5.124570846557617187500000000000 
-106.974761962890625000000000000000 
--0.063016504049301147460937500000 
--0.544091701507568359375000000000 
-0.227847039699554443359375000000 
--0.080955207347869873046875000000 
-LINE 231
-WORKING TILL HERE
 store_data: (3050 42)	3092
 Load_d: 2690-46
-(3), NEW vec_X
-4.876518249511718750000000000000 
-106.409393310546875000000000000000 
--0.232157588005065917968750000000 
--0.744307518005371093750000000000 
-0.316100716590881347656250000000 
--0.095553070306777954101562500000 
-LINE 231
-WORKING TILL HERE
 store_data: (3092 42)	3134
 Load_d: 2736-46
-(4), NEW vec_X
-4.590988159179687500000000000000 
-105.614959716796875000000000000000 
-0.036002457141876220703125000000 
--0.861282110214233398437500000000 
-0.226935625076293945312500000000 
-0.055953681468963623046875000000 
-LINE 231
-WORKING TILL HERE
 store_data: (3134 42)	3176
 Load_d: 2782-46
-(5), NEW vec_X
-4.551704406738281250000000000000 
-104.648895263671875000000000000000 
-0.215558409690856933593750000000 
--0.834262132644653320312500000000 
-0.152503728866577148437500000000 
-0.060737535357475280761718750000 
-LINE 231
-WORKING TILL HERE
 store_data: (3176 42)	3218
 Load_d: 2828-46
-(6), NEW vec_X
-4.692073822021484375000000000000 
-103.652435302734375000000000000000 
-0.327393054962158203125000000000 
--0.807641744613647460937500000000 
-0.104492098093032836914062500000 
-0.046105414628982543945312500000 
-LINE 231
-WORKING TILL HERE
 store_data: (3218 42)	3260
 Load_d: 2874-46
-(7), NEW vec_X
-4.892623901367187500000000000000 
-102.622344970703125000000000000000 
-0.367175459861755371093750000000 
--0.788679122924804687500000000000 
-0.076967298984527587890625000000 
-0.054606273770332336425781250000 
-LINE 231
-WORKING TILL HERE
 store_data: (3260 42)	3302
 Load_d: 2920-46
-(8), NEW vec_X
-5.120384216308593750000000000000 
-101.460327148437500000000000000000 
-0.398077011108398437500000000000 
--0.798025608062744140625000000000 
-0.062194377183914184570312500000 
-0.048239618539810180664062500000 
-LINE 231
-WORKING TILL HERE
 store_data: (3302 42)	3344
-(9), NEW vec_X
-5.325407028198242187500000000000 
-100.187316894531250000000000000000 
-0.416407585144042968750000000000 
--0.819926738739013671875000000000 
-0.054181948304176330566406250000 
-0.065448433160781860351562500000 
-LINE 231
-WORKING TILL HERE
 store_data: (3344 42)	3386
 Dump memory offset address: 2966
 
