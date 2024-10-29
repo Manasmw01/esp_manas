@@ -20,19 +20,20 @@ typedef ac_fixed<FPDATA_WL, FPDATA_IL> FPDATA;
 typedef ac_float<23, 0, 8> FLOAT_TYPE;
 
 
-// Function to convert FPDATA_WORD to FLOAT_TYPE
-inline void int2fp(const FPDATA_WORD& in, FLOAT_TYPE& out) {
-    // Create a float from the binary representation of FPDATA_WORD
-    float temp = *reinterpret_cast<const float*>(&in);  // reinterpret cast
-    out = FLOAT_TYPE(temp);  // Assign float to FLOAT_TYPE
-}
+// // Function to convert FPDATA_WORD to FLOAT_TYPE
+// inline void int2fp(const FPDATA_WORD& in, FLOAT_TYPE& out) {
+//     // Create a float from the binary representation of FPDATA_WORD
+//     float temp = *reinterpret_cast<const float*>(&in);  // reinterpret cast
+//     out = FLOAT_TYPE(temp);  // Assign float to FLOAT_TYPE
+// }
 
-// Function to convert FLOAT_TYPE to FPDATA_WORD
-inline void fp2int(const FLOAT_TYPE& in, FPDATA_WORD& out) {
-    // Convert FLOAT_TYPE to float and then reinterpret to FPDATA_WORD
-    float temp = in.to_float();  // Convert FLOAT_TYPE to float
-    out = *reinterpret_cast<FPDATA_WORD*>(&temp);  // reinterpret cast to FPDATA_WORD
-}
+// // Function to convert FLOAT_TYPE to FPDATA_WORD
+// inline void fp2int(const FLOAT_TYPE& in, FPDATA_WORD& out) {
+//     // Convert FLOAT_TYPE to float and then reinterpret to FPDATA_WORD
+//     float temp = in.to_float();  // Convert FLOAT_TYPE to float
+//     out = *reinterpret_cast<FPDATA_WORD*>(&temp);  // reinterpret cast to FPDATA_WORD
+// }
+
 
 inline void int2fx(const FPDATA_WORD& in, FPDATA& out)
 { out.set_slc(0,in.slc<FPDATA_WL>(0)); }

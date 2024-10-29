@@ -96,6 +96,18 @@ inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint
     }
 }
 
+// inline void printBinaryFLOAT_TYPE(FLOAT_TYPE f) {
+//     // Extract components
+//     ac_int<1> sign = f.get_sign();  // Use get_sign() to retrieve the sign
+//     ac_int<8> exponent = f.exp();   // 8-bit exponent
+//     ac_int<23> mantissa = f.mantissa();  // 23-bit mantissa
+
+//     // Print binary representation of each part
+//     std::cout << "Sign: " << sign << std::endl;
+//     std::cout << "Exponent (binary): " << std::bitset<8>(exponent.to_int()) << std::endl;
+//     std::cout << "Mantissa (binary): " << std::bitset<23>(mantissa.to_int()) << std::endl;
+// }
+
 
 inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE out[MEAS_SIZE][MEAS_SIZE])
 {

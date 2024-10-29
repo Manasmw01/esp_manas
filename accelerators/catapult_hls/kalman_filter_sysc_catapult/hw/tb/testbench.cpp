@@ -470,11 +470,15 @@ void testbench::dump_memory()
                     // std::cout << "\nOUTPUT[" << offset + tot_size*iters +  i << "]:\t" << out_floating.to_float();
                     // output_xp[i] = out_fixed;
                     output_xp_float[i] = out_floating.to_float();
+                    // printBinaryFLOAT_TYPE(out_floating);
+                    ac_int<11,true> exp;
+                    ac_fixed<23,1,true> mant = ac::frexp_d(output_xp_float[i], exp);                    
+                    std::cout << "Exp: " << mant << std::endl;
                 }
                 // // std::cout << "\titers:" << iters << "\tOUTPUT[" << i << "]:\t" << out_fixed;
             }
         }
-        std::cout << "\n(" << iters << "): RF_vecX:\t";
+        // std::cout << "\n(" << iters << "): RF_vecX:\t";
         for (int i = 0; i < STATE_SIZE; i++) 
         {
             FLOAT_TYPE ref = prediction[STATE_SIZE*(iters+1) + i];

@@ -5,6 +5,9 @@
 #include <mc_scverify.h>
 #include <ac_float.h>
 #include "ac_math/ac_random.h"
+// #define AC_STD_FLOAT_ADD_OVERRIDE
+// #define __AC_FLOAT_ENABLE_ALPHA__
+#include <ac_std_float.h>
 
 void mac_sysc_catapult:: config() {
     conf_info.Reset();
@@ -295,14 +298,36 @@ void mac_sysc_catapult:: compute() {
                     int2fx(op[0],op0_fx);
                     int2fx(op[1],op1_fx);
 
+//TEST
+                    float a = 1.1;
+                    ac_ieee_float32 float_aa = a;
+                    ac_ieee_float32 float_dd = a;
+                    // ac_std_float<32, 8> float_b(1.1);
+			        // ac_std_float<32, 8> det = (float_a * float_b) ;
+			        ac_ieee_float32 det = (float_aa * float_aa);
+
+
+                    FLOAT_TYPE float_a = 1.1;
+                    FLOAT_TYPE float_b = 1.1;
+                    FLOAT_TYPE float_c = 0.1;
+                    FLOAT_TYPE float_d = 1.1;
+                    // FLOAT_TYPE det;
+			        // FLOAT_TYPE det = (float_a * float_d);
+
+			        // FLOAT_TYPE det = (float_a * float_d) - (float_b * float_c);
+			        // FLOAT_TYPE det = FLOAT_TYPE((float_a.to_float() * float_d.to_float()) - (float_b.to_float() * float_c.to_float()));
+
+                    // std::cout << "Recovered FLOAT_TYPE_a: " << float_a.to_double() << std::endl;
+                    // std::cout << "Recovered det " << det << std::endl;
+//ENDTEST
 
                     // Convert back to FLOAT_TYPE
                     FLOAT_TYPE recovered_float1;
                     FLOAT_TYPE recovered_float2;
-                    int2fp(op[0], recovered_float1);
-                    int2fp(op[1], recovered_float2);
-                    std::cout << "Recovered FLOAT_TYPE: " << recovered_float1.to_double() << std::endl;
-                    std::cout << "Recovered FLOAT_TYPE: " << recovered_float2.to_double() << std::endl;
+                    // int2fp(op[0], recovered_float1);
+                    // int2fp(op[1], recovered_float2);
+                    // std::cout << "Recovered FLOAT_TYPE: " << recovered_float1.to_double() << std::endl;
+                    // std::cout << "Recovered FLOAT_TYPE: " << recovered_float2.to_double() << std::endl;
 
                     // Multiply and accumulate
                     acc_fx+=op0_fx * op1_fx;
