@@ -3,6 +3,8 @@
 
 #include "testbench.hpp"
 #include "ac_math/ac_random.h"
+#include <ac_std_float.h>
+
 #include <mc_connections.h>
 #include <mc_scverify.h>
 
@@ -304,15 +306,25 @@ void testbench::load_data(float *inn, uint32_t inn_size)
             FLOAT_TYPE data = inn[index];
             FPDATA_WORD fpdata_word;
             FPDATA_WORD integer_representation;
-        // std::cout << "\nOriginal FLOAT_TYPE: " << data.to_double() << std::endl;
 
         fp2int(data, fpdata_word);
         // std::cout << "Integer Representation: " << fpdata_word << std::endl;
 
         // // Convert back to FLOAT_TYPE
         // FLOAT_TYPE recovered_float;
-        // int2fp(fpdata_word, recovered_float);
-        // std::cout << "Recovered FLOAT_TYPE: " << recovered_float.to_double() << std::endl;
+        // float temp = *reinterpret_cast<const float*>(&fpdata_word);  // Reinterpret cast
+        // recovered_float = FLOAT_TYPE(temp);  // Assign float to FLOAT_TYPE
+
+        // // int2fp(fpdata_word, recovered_float);
+        // float recovered_float_1 = recovered_float.to_float();
+
+        
+
+
+
+        // std::cout << recovered_float_1 << "\t";
+
+        // std::cout << "Recovered FLOAT_TYPE: " << recovered_float << std::endl;
 
 
             // FPDATA fpdata=data.to_ac_fixed();
@@ -325,6 +337,7 @@ void testbench::load_data(float *inn, uint32_t inn_size)
         }
         mem[i] = data_bv;
     }
+    // std::cout << "\n";
 }
 
 void testbench::partition()
@@ -458,7 +471,7 @@ void testbench::dump_memory()
             {
                 out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + tot_size*iters +  i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
                 FPDATA out_fixed = 0;
-                FLOAT_TYPE out_floating = 0;
+                FLOAT_TYPE out_floating = FLOAT_TYPE(0);
                 // int2fx(out[i * DMA_WORD_PER_BEAT + wordd],out_fixed);
                 int2fp(out[i * DMA_WORD_PER_BEAT + wordd],out_floating);
                 // if(i >= out_size - (STATE_SIZE*STATE_SIZE))
@@ -471,9 +484,6 @@ void testbench::dump_memory()
                     // output_xp[i] = out_fixed;
                     output_xp_float[i] = out_floating.to_float();
                     // printBinaryFLOAT_TYPE(out_floating);
-                    ac_int<11,true> exp;
-                    ac_fixed<23,1,true> mant = ac::frexp_d(output_xp_float[i], exp);                    
-                    std::cout << "Exp: " << mant << std::endl;
                 }
                 // // std::cout << "\titers:" << iters << "\tOUTPUT[" << i << "]:\t" << out_fixed;
             }

@@ -7,6 +7,8 @@
 #include "ac_int.h"
 #include "ac_fixed.h"
 #include "mac_specs.hpp"
+#include "ac_float.h"
+#include <ac_std_float.h>
 
 #define FPDATA_WL DATA_WIDTH
 #define FPDATA_IL DATA_WIDTH/2
@@ -17,7 +19,8 @@ typedef ac_int<FPDATA_WL> FPDATA_WORD;
 typedef ac_fixed<FPDATA_WL, FPDATA_IL> FPDATA;
 
 
-typedef ac_float<23, 0, 8> FLOAT_TYPE;
+// typedef ac_float<23, 0, 8> FLOAT_TYPE;
+typedef ac_std_float<32, 8> FLOAT_TYPE;
 
 
 // // Function to convert FPDATA_WORD to FLOAT_TYPE
@@ -35,15 +38,26 @@ typedef ac_float<23, 0, 8> FLOAT_TYPE;
 // }
 
 
+// Function to convert FPDATA_WORD to FLOAT_TYPE
+inline void int2fp(const FPDATA_WORD& in, FLOAT_TYPE& out) {
+    out.set_data(in);
+}
+
+// Function to convert FLOAT_TYPE to FPDATA_WORD
+inline void fp2int(const FLOAT_TYPE& in, FPDATA_WORD& out) {
+    out = in.data(); // Fetch binary representation.
+}
+
+
 inline void int2fx(const FPDATA_WORD& in, FPDATA& out)
 { out.set_slc(0,in.slc<FPDATA_WL>(0)); }
 
 inline void fx2int(const FPDATA& in, FPDATA_WORD& out)
 { out.set_slc(0,in.slc<FPDATA_WL>(0)); }
 
-// Convert ac_float to ac_int
-inline void float2int(const FLOAT_TYPE& in, FPDATA_WORD& out) {
-    // Use the raw bit representation of the FLOAT_TYPE
-    out = in.to_ac_int();  // Convert to ac_int directly
-}
+// // Convert ac_float to ac_int
+// inline void float2int(const FLOAT_TYPE& in, FPDATA_WORD& out) {
+//     // Use the raw bit representation of the FLOAT_TYPE
+//     out = in.to_ac_int();  // Convert to ac_int directly
+// }
 #endif

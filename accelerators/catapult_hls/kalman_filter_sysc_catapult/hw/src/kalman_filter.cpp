@@ -302,7 +302,7 @@ void kalman_filter_sysc_catapult:: store() {
             sync23b.sync_in();
             sync2b3b.sync_in();
             out_index = input_vecs_total_size + out_len*b;
-            cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
+            // cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
             store_data(ping_pong, out_index, out_len);
         }
 

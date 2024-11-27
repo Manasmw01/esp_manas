@@ -37,6 +37,8 @@ solution file add "../tb/testbench.hpp" -exclude true
 solution file add "../tb/sc_main.cpp" -exclude true
 solution file add "../tb/system.hpp" -exclude true
 solution file add "../inc/kalman_filter_data_types.hpp"
+solution file add "../inc/kalman_filter_functions.hpp"
+solution file add "../inc/kalman_filter_utils.hpp"
 solution file add "../../../common/inc/esp_dma_info_sysc.hpp"
 solution file add "../inc/kalman_filter_conf_info.hpp"
 solution file add "../inc/kalman_filter.hpp"

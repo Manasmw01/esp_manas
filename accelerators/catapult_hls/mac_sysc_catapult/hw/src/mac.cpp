@@ -274,6 +274,7 @@ void mac_sysc_catapult:: compute() {
                 // Compute Kernel
 
                 FPDATA acc_fx=0;
+                FLOAT_TYPE acc_fp = (FLOAT_TYPE)0;
 
                 uint32_t vec_indx=0;
                 uint32_t vec_num=0;
@@ -294,50 +295,36 @@ void mac_sysc_catapult:: compute() {
 
                     FPDATA op0_fx=0;
                     FPDATA op1_fx=0;
+                    // std::cout << "Binary Representation_tb: " << op[0].to_string(AC_BIN, false) << std::endl;
+                    // std::cout << "Binary Representation_tb: " << op[1].to_string(AC_BIN, false) << std::endl;
 
+                    FLOAT_TYPE op1_float, op2_float; 
+                    int2fp(op[0], op1_float);
+                    int2fp(op[1], op2_float);
+
+                    // std::cout << "Float op1: " << op1_float << std::endl;
+                    // std::cout << "Float op2: " << op2_float << std::endl;
+
+                    FLOAT_TYPE op3_float = op1_float * op2_float;
+                    // std::cout << "Float op3: " << op3_float << std::endl;
                     int2fx(op[0],op0_fx);
                     int2fx(op[1],op1_fx);
 
-//TEST
-                    float a = 1.1;
-                    ac_ieee_float32 float_aa = a;
-                    ac_ieee_float32 float_dd = a;
-                    // ac_std_float<32, 8> float_b(1.1);
-			        // ac_std_float<32, 8> det = (float_a * float_b) ;
-			        ac_ieee_float32 det = (float_aa * float_aa);
 
-
-                    FLOAT_TYPE float_a = 1.1;
-                    FLOAT_TYPE float_b = 1.1;
-                    FLOAT_TYPE float_c = 0.1;
-                    FLOAT_TYPE float_d = 1.1;
-                    // FLOAT_TYPE det;
-			        // FLOAT_TYPE det = (float_a * float_d);
-
-			        // FLOAT_TYPE det = (float_a * float_d) - (float_b * float_c);
-			        // FLOAT_TYPE det = FLOAT_TYPE((float_a.to_float() * float_d.to_float()) - (float_b.to_float() * float_c.to_float()));
-
-                    // std::cout << "Recovered FLOAT_TYPE_a: " << float_a.to_double() << std::endl;
-                    // std::cout << "Recovered det " << det << std::endl;
-//ENDTEST
-
-                    // Convert back to FLOAT_TYPE
-                    FLOAT_TYPE recovered_float1;
-                    FLOAT_TYPE recovered_float2;
-                    // int2fp(op[0], recovered_float1);
-                    // int2fp(op[1], recovered_float2);
-                    // std::cout << "Recovered FLOAT_TYPE: " << recovered_float1.to_double() << std::endl;
-                    // std::cout << "Recovered FLOAT_TYPE: " << recovered_float2.to_double() << std::endl;
 
                     // Multiply and accumulate
                     acc_fx+=op0_fx * op1_fx;
+                    acc_fp = op1_float * op2_float;
 
                     vec_indx+=2;
 
                     // Write accumulated result
                     if (vec_indx == mac_len) {
                         FPDATA_WORD acc=0;
-                        fx2int(acc_fx,acc);
+                        std::cout << "acc_fp: " << acc_fp << std::endl;
+
+                        // fx2int(acc_fx,acc);
+                        fp2int(acc_fp, acc);
                         plm_WR<out_as, outwp> wreq;
 
                         wreq.indx[0]=vec_num;
@@ -351,6 +338,7 @@ void mac_sysc_catapult:: compute() {
                         vec_num++;
                         vec_indx=0;
                         acc_fx=0;
+                        acc_fp = (FLOAT_TYPE)0;
                     }
                 }
 

@@ -10,6 +10,8 @@
 #include <ac_int.h>
 #include <ac_fixed.h>
 #include "kalman_filter_specs.hpp"
+// #include "auto_gen_fields.h"
+// #include "auto_gen_port_info.h"
 
 //
 // Configuration parameters for the accelerator.
@@ -42,9 +44,31 @@ struct conf_info_t
         int32_t output_total_size;
 
 
+/*
+  AUTO_GEN_FIELD_METHODS(conf_info_t, ( \
+                                mac_n \
+                                , mac_vec \
+                                , mac_len \
+                                , kalman_iters \
+                                , kalman_mat_rows \
+                                , kalman_mat_cols \
+                                , vec_X_address \
+                                , Mat_F_address \
+                                , Mat_Q_address \
+                                , Mat_R_address \
+                                , Mat_H_address \
+                                , Mat_P_address \
+                                , constant_matrices_size \
+                                , measurement_vecs_base_address \
+                                , input_vecs_total_size \
+                                , output_total_size \
+				      ) )
+
+*/
+
+
     static const unsigned int width = 32*16;
     template <unsigned int Size> void Marshall(Marshaller <Size> &m) {
-        /* <<--marsh-->> */
         m &mac_n;
         m &mac_vec;
         m &mac_len;
@@ -71,7 +95,6 @@ struct conf_info_t
     //
     conf_info_t()
     {
-        /* <<--ctor-->> */
         this->mac_n = 1;
         this->mac_vec = 100;
         this->mac_len = 64;
@@ -95,7 +118,6 @@ struct conf_info_t
     }
 
     conf_info_t(
-        /* <<--ctor-args-->> */
         int32_t mac_n, 
         int32_t mac_vec, 
         int32_t mac_len,
@@ -119,7 +141,6 @@ struct conf_info_t
         int32_t output_total_size  
         )
     {
-        /* <<--ctor-custom-->> */
         this->mac_n = mac_n;
         this->mac_vec = mac_vec;
         this->mac_len = mac_len;
@@ -149,7 +170,6 @@ struct conf_info_t
     // VCD dumping function
    inline friend void sc_trace(sc_trace_file *tf, const conf_info_t &v, const std::string &NAME)
     {
-        /* <<--sctrc-->> */
         sc_trace(tf,v.mac_n, NAME + ".mac_n");
         sc_trace(tf,v.mac_vec, NAME + ".mac_vec");
         sc_trace(tf,v.mac_len, NAME + ".mac_len");
@@ -176,7 +196,6 @@ struct conf_info_t
     friend ostream& operator << (ostream& os, conf_info_t const &conf_info)
     {
         os << "{";
-        /* <<--print-->> */
         os << "mac_n = " << conf_info.mac_n << ", ";
         os << "mac_vec = " << conf_info.mac_vec << ", ";
         os << "mac_len = " << conf_info.mac_len << "";
@@ -201,7 +220,6 @@ struct conf_info_t
         os << "}";
         return os;
     }
-
 };
 
 #endif // __MAC_CONF_INFO_HPP__

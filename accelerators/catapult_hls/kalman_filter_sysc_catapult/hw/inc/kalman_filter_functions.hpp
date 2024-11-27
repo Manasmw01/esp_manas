@@ -57,6 +57,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     FLOAT_TYPE Mat_F[STATE_SIZE * STATE_SIZE];
     FLOAT_TYPE Mat_Q[STATE_SIZE * STATE_SIZE];
     FLOAT_TYPE Mat_R[MEAS_SIZE * MEAS_SIZE];
+
     FLOAT_TYPE Mat_H[MEAS_SIZE * STATE_SIZE];
     FLOAT_TYPE vec_Z[MEAS_SIZE];
 
@@ -204,7 +205,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     {
         for (int j = 0; j < STATE_SIZE; j++) 
         {
-            Mat_I[i * STATE_SIZE + j] = (i == j) ? 1.0 : 0.0;
+            Mat_I[i * STATE_SIZE + j] = (i == j) ? FN_DATATYPE(1.0) : FN_DATATYPE(0.0);
         }
     }
     // printf("(%d), START vec_Z\n", iter);
@@ -434,8 +435,5 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     sync_comp.sync_in();
 }
 
-void plusone(FPDATA& regg) 
-{
-    regg = regg + 1;
-}
+
 #endif // __FUNCTIONS_HPP__

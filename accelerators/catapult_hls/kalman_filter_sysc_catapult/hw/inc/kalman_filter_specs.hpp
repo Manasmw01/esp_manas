@@ -32,10 +32,10 @@
 #define DATA_WIDTH 32
 // #define DATA_WIDTH 64
 #define DMA_SIZE SIZE_WORD
-// #define PLM_OUT_WORD 100
-// #define PLM_IN_WORD 6400
-#define PLM_IN_WORD 400000
-#define PLM_OUT_WORD 500
+#define PLM_IN_WORD 800000
+#define PLM_OUT_WORD 1000
+// #define PLM_IN_WORD 400000
+// #define PLM_OUT_WORD 500
 #define MEM_SIZE 67371008/(DMA_WIDTH/8)
 
 #if (DMA_WIDTH == 32)

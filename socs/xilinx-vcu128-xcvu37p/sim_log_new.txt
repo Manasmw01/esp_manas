@@ -1,0 +1,46 @@
+    MKDIR kalman_filter_sysc_catapult-wdir
+    INFO Running RTL simulation for available implementations of kalman_filter_sysc_catapult-sim
+    RUN kalman_filter_sysc_catapult-sim
+make[1]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup'
+catapult -product ultra -shell -f ./rtl_sim.tcl &
+make[1]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup'
+//  Catapult Ultra Synthesis 2021.1/950854 (Production Release) Mon Aug  2 21:36:02 PDT 2021
+//  
+//          Copyright (c) Siemens EDA, 1996-2021, All Rights Reserved.
+//                        UNPUBLISHED, LICENSED SOFTWARE.
+//             CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
+//                   PROPERTY OF SIEMENS EDA OR ITS LICENSORS.
+//  
+//  Running on Linux manas@bologna.cs.columbia.edu 3.10.0-1062.el7.x86_64 x86_64 aol
+//  
+//  Package information: SIFLIBS v23.7_0.0, HLS_PKGS v23.7_0.0, 
+//                       SIF_TOOLKITS v23.7_0.0, SIF_XILINX v23.7_0.0, 
+//                       SIF_ALTERA v23.7_0.0, CCS_LIBS v23.7_0.0, 
+//                       CDS_PPRO v10.5a, CDS_DesigChecker v2021.1, 
+//                       CDS_OASYS v20.1_3.6, CDS_PSR v20.2_1.8, 
+//                       DesignPad v2.78_1.0
+//  
+# Connected to license server 1720@bioeelincad.ee.columbia.edu (LIC-13)
+# Catapult product license successfully checked out, elapsed time 00:03 (LIC-14)
+dofile ./rtl_sim.tcl
+# > source ../../../common/hls/common.tcl
+# -2
+# > project load ${ACCELERATOR}_dma${DMA_WIDTH}.ccs
+# Moving session transcript to file "/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/catapult.log"
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_in_432629b074d69d55aa613e9c95c6761158b5_0/.sif/solIndex_2_f657e019-de93-41f7-8234-22c83de8d31a.xml' ... (LIB-129)
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_out_100ca8f7fee7f42379cc042491357ebd585b_0/.sif/solIndex_2_f1a70ca8-968d-486a-96d1-0caaf1f990a9.xml' ... (LIB-129)
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/ac__fx_div_24__f0b8fd96935e62721323e8dc89eb63af18639_0/.sif/solIndex_2_6deea81f-bffb-40ef-acc4-c2d3955a266e.xml' ... (LIB-129)
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/leading_sign_28_1_1_0_cb8720a6c714d5cfa2119ef9b05eb86e7550_0/.sif/solIndex_2_226e57be-c0bb-432d-a721-174f16a71357.xml' ... (LIB-129)
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/leading_sign_24_0_9efab5db0cf65a65bb36b4d22b43683e6b05_0/.sif/solIndex_2_ff1d86ff-7aec-458f-b093-e8476525cbc7.xml' ... (LIB-129)
+# > flow run /SCVerify/launch_make ./scverify/Verify_concat_sim_${ACCELERATOR}_v_msim.mk {} SIMTOOL=msim sim
+# Making './scverify/Verify_concat_sim_kalman_filter_sysc_catapult_v_msim.mk {} SIMTOOL=msim sim'
+# Make utility invoked from '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1'
+#     /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/bin/make -f ./scverify/Verify_concat_sim_kalman_filter_sysc_catapult_v_msim.mk SIMTOOL=msim build < "/dev/null" (BASIC-15)
+# make[2]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1'
+# ============================================
+# Compiling C++ file: ../../../tb/testbench.cpp
+# /opt/cad/modelsim/bin/sccom -g -x c++ -Wall -Wno-unused-label -Wno-unknown-pragmas -scpoptions "--c++11" -DCCS_DUT_RTL -DCCS_DUT_VERILOG -DCONNECTIONS_ACCURATE_SIM -DCONNECTIONS_NAMING_ORIGINAL -DHLS_CATAPULT -DSC_INCLUDE_DYNAMIC_PROCESSES -DCCS_SYSC -DSC_USE_STD_STRING -DTOP_HDL_ENTITY=kalman_filter_sysc_catapult -DDMA_WIDTH=32 -DDEADLOCK_DETECTION -std=gnu++11 -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/src -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/siflibs -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/mgc_comps_src -DUSE_STD_STRING -DSC_INCLUDE_MTI_AC  -c ../../../tb/testbench.cpp
+# Start time: 14:54:08 on Nov 26,2024
+# 
+# Model Technology ModelSim SE-64 sccom 2019.2 compiler 2019.04 Apr 16 2019

@@ -11,7 +11,7 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
     uint32_t index = 0;
     uint32_t mem_index = 0;
     uint32_t mem_off = base_addr;
-    std::cout << "Load_d: " << base_addr << "-" << size << "\n";
+    // std::cout << "Load_d: " << base_addr << "-" << size << "\n";
 
     for (index = size; index > 0; )
     {

@@ -279,6 +279,7 @@ testbench.o: ../tb/testbench.cpp ../tb/testbench.hpp \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_int.h \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_types.h \
  ../inc/mac_specs.hpp ../inc/mac_data_types.hpp \
+ ../../../common/matchlib_toolkit/examples/ac_types/include/ac_std_float.h \
  ../../../common/inc/core/systems/esp_dma_controller.hpp \
  ../../../common/inc/core/systems/esp_dma_controller.i.hpp \
  ../../../common/matchlib_toolkit/examples/ac_math/include/ac_math/ac_random.h \

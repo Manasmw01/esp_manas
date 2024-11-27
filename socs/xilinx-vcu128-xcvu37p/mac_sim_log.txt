@@ -1,0 +1,41 @@
+    MKDIR mac_sysc_catapult-wdir
+    INFO Running RTL simulation for available implementations of mac_sysc_catapult-sim
+    RUN mac_sysc_catapult-sim
+make[1]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup'
+catapult -product ultra -shell -f ./rtl_sim.tcl &
+make[1]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup'
+//  Catapult Ultra Synthesis 2021.1/950854 (Production Release) Mon Aug  2 21:36:02 PDT 2021
+//  
+//          Copyright (c) Siemens EDA, 1996-2021, All Rights Reserved.
+//                        UNPUBLISHED, LICENSED SOFTWARE.
+//             CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
+//                   PROPERTY OF SIEMENS EDA OR ITS LICENSORS.
+//  
+//  Running on Linux manas@bologna.cs.columbia.edu 3.10.0-1062.el7.x86_64 x86_64 aol
+//  
+//  Package information: SIFLIBS v23.7_0.0, HLS_PKGS v23.7_0.0, 
+//                       SIF_TOOLKITS v23.7_0.0, SIF_XILINX v23.7_0.0, 
+//                       SIF_ALTERA v23.7_0.0, CCS_LIBS v23.7_0.0, 
+//                       CDS_PPRO v10.5a, CDS_DesigChecker v2021.1, 
+//                       CDS_OASYS v20.1_3.6, CDS_PSR v20.2_1.8, 
+//                       DesignPad v2.78_1.0
+//  
+# Connected to license server 1720@bioeelincad.ee.columbia.edu (LIC-13)
+# Catapult product license successfully checked out, elapsed time 00:03 (LIC-14)
+dofile ./rtl_sim.tcl
+# > source ../../../common/hls/common.tcl
+# -2
+# > project load ${ACCELERATOR}_dma${DMA_WIDTH}.ccs
+# Moving session transcript to file "/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/catapult.log"
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_in_bc80f085e864e7923c9bd9ab2337004157ed_0/.sif/solIndex_2_def3a596-7592-4266-996b-45e9f1e9348e.xml' ... (LIB-129)
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_out_23831bc38d580e4d9f4d6fe90398514a57f7_0/.sif/solIndex_2_a75bedb2-aa1f-4504-9e98-536b4f662b1a.xml' ... (LIB-129)
+# > flow run /SCVerify/launch_make ./scverify/Verify_concat_sim_${ACCELERATOR}_v_osci.mk {} SIMTOOL=osci sim
+# Warning: Could not locate Makefile './scverify/Verify_concat_sim_mac_sysc_catapult_v_osci.mk' in Output Files folder
+# Making './scverify/Verify_concat_sim_mac_sysc_catapult_v_osci.mk {} SIMTOOL=osci sim'
+# Make utility invoked from '/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'
+#     /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/bin/make -f ./scverify/Verify_concat_sim_mac_sysc_catapult_v_osci.mk SIMTOOL=osci build < "/dev/null" (BASIC-15)
+# make[2]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'
+# make[2]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'
+# make[2]: ./scverify/Verify_concat_sim_mac_sysc_catapult_v_osci.mk: No such file or directory
+# make[2]: *** No rule to make target `./scverify/Verify_concat_sim_mac_sysc_catapult_v_osci.mk'.  Stop.
+# > end dofile ./rtl_sim.tcl

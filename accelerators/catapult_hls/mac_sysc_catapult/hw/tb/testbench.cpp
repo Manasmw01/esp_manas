@@ -37,13 +37,16 @@ void testbench::proc()
     // FPDATA data;
 
     FLOAT_TYPE data_fp;
+
+    FLOAT_TYPE data_array[5] = {(FLOAT_TYPE)1.1, (FLOAT_TYPE)2.2, (FLOAT_TYPE)3.3, (FLOAT_TYPE)4.4, (FLOAT_TYPE)5.5};
+
     //Initialize input
     for (uint32_t i= 0; i< mac_n ; i++)
     {
         for (uint32_t j=0; j< mac_len*mac_vec ; j+=1)
         {
-            data_fp = 1.1111 + j;
-            std::cout << "vec_fp_tb:\t" << data_fp.to_double() << "\n";
+            data_fp = (FLOAT_TYPE)1.1111;
+            // std::cout << "vec_fp_tb:\t" << data_fp.to_double() << "\n";
         FPDATA_WORD integer_representation;
 
         // fp2int(data_fp, integer_representation);
@@ -56,7 +59,15 @@ void testbench::proc()
 
             FPDATA_WORD data_int32;
 
-            in[i*in_words_adj+j]=integer_representation;
+
+            FLOAT_TYPE input_data_fp = data_array[j%5];
+            FPDATA_WORD input_data_word;
+            fp2int(input_data_fp, input_data_word);
+            // ac_int<DATA_WIDTH, false> binary_representation = float_bin.data(); // Fetch binary representation.
+            // std::cout << "Binary Representation_tb: " << binary_representation.to_string(AC_BIN, false) << std::endl;
+
+            // in[i*in_words_adj+j]=integer_representation;
+            in[i*in_words_adj+j]=input_data_word;
 
         }
     }
@@ -66,17 +77,26 @@ void testbench::proc()
         for (int j = 0; j < mac_vec; j++) {
             gold[i * out_words_adj + j] = 0;
             FPDATA acc=0;
+            FLOAT_TYPE acc_float = (FLOAT_TYPE)0;
             for (int k = 0; k < mac_len; k += 2) {
                 FPDATA data1;
                 FPDATA data2;
 
+                FLOAT_TYPE data1_float;
+                FLOAT_TYPE data2_float;
+
                 int2fx(in[i * in_words_adj + j * mac_len + k],data1);
                 int2fx(in[i * in_words_adj + j * mac_len + k + 1],data2);
-                acc+=data1*data2;
+
+                int2fp(in[i * in_words_adj + j * mac_len + k],data1_float);
+                int2fp(in[i * in_words_adj + j * mac_len + k + 1],data2_float);
+                acc_float += data1_float*data2_float;
             }
             FPDATA_WORD acc_int;
+            std::cout << "acc_float: " << acc_float << std::endl;
 
-            fx2int(acc,acc_int);
+            // fx2int(acc,acc_int);
+            fp2int(acc_float,acc_int);
             gold[i * out_words_adj + j] =acc_int;
         }
 
