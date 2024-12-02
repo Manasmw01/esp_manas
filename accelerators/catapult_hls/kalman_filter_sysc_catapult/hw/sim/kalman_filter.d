@@ -280,5 +280,6 @@ kalman_filter.o: ../src/kalman_filter.cpp ../inc/kalman_filter.hpp \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_int.h \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_types.h \
  ../inc/kalman_filter_data_types.hpp \
+ ../../../common/matchlib_toolkit/examples/ac_types/include/ac_std_float.h \
  ../../../common/matchlib_toolkit/examples/ac_simutils/include/mc_scverify.h \
  ../inc/kalman_filter_utils.hpp ../inc/kalman_filter_functions.hpp

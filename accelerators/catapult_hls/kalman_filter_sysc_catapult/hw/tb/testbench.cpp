@@ -21,16 +21,26 @@
 // #include "real_array.h"
 // #include "W_array.h"
 
+#include "A_array_soma.h"
+#include "H_array_soma.h"
+#include "initial_state_array_soma.h"
+#include "measurements_array_soma.h"
+#include "P_array_soma.h"
+#include "prediction_array_soma.h"
+#include "Q_array_soma.h"
+#include "real_array_soma.h"
+#include "W_array_soma.h"
 
-#include "A_array_hc.h"
-#include "H_array_hc.h"
-#include "initial_state_array_hc.h"
-#include "measurements_array_hc.h"
-#include "P_array_hc.h"
-#include "prediction_array_hc.h"
-#include "Q_array_hc.h"
-#include "real_array_hc.h"
-#include "W_array_hc.h"
+
+// #include "A_array_hc.h"
+// #include "H_array_hc.h"
+// #include "initial_state_array_hc.h"
+// #include "measurements_array_hc.h"
+// #include "P_array_hc.h"
+// #include "prediction_array_hc.h"
+// #include "Q_array_hc.h"
+// #include "real_array_hc.h"
+// #include "W_array_hc.h"
 
 std::ofstream ofs;
 std::ifstream ifs;
@@ -269,8 +279,6 @@ void testbench::proc()
     partition();
     std::cout << "Partition completed\n";
 
-    // print_variables();
-    // std::cout << "Print variables completed\n";
 
     single_input_array(); // Updates in_float by merging all the inputs
     std::cout << "Single input array completed\n";
@@ -298,7 +306,6 @@ void testbench::load_data(float *inn, uint32_t inn_size)
 {
     std::cout << "inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n";
     for (uint32_t i = 0; i < inn_size / DMA_WORD_PER_BEAT; i++)  {
-        // std::cout << "\ti:" << i << "\n";
         ac_int<DMA_WIDTH> data_bv;
         for (int wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
         {
@@ -308,36 +315,11 @@ void testbench::load_data(float *inn, uint32_t inn_size)
             FPDATA_WORD integer_representation;
 
         fp2int(data, fpdata_word);
-        // std::cout << "Integer Representation: " << fpdata_word << std::endl;
 
-        // // Convert back to FLOAT_TYPE
-        // FLOAT_TYPE recovered_float;
-        // float temp = *reinterpret_cast<const float*>(&fpdata_word);  // Reinterpret cast
-        // recovered_float = FLOAT_TYPE(temp);  // Assign float to FLOAT_TYPE
-
-        // // int2fp(fpdata_word, recovered_float);
-        // float recovered_float_1 = recovered_float.to_float();
-
-        
-
-
-
-        // std::cout << recovered_float_1 << "\t";
-
-        // std::cout << "Recovered FLOAT_TYPE: " << recovered_float << std::endl;
-
-
-            // FPDATA fpdata=data.to_ac_fixed();
-            // fpdata_word.set_slc(0,fpdata.slc<FPDATA_WL>(0));      
-      
-            data_bv.set_slc(wordd*FPDATA_WL,fpdata_word);
-
-
-
+        data_bv.set_slc(wordd*FPDATA_WL,fpdata_word);
         }
         mem[i] = data_bv;
     }
-    // std::cout << "\n";
 }
 
 void testbench::partition()
@@ -345,13 +327,11 @@ void testbench::partition()
     for (int i = 0; i < STATE_SIZE; i++) 
     {
         master_array[vec_X_address + i] = initial[i];
-        // cout << "vecx[" << vec_X_address << "]:" << initial[i] << endl; 
     }
 
     for (int i = 0; i < STATE_SIZE; i++) {
         for (int j = 0; j < STATE_SIZE; j++) {
             master_array[Mat_F_address + i * STATE_SIZE + j] = A[i * STATE_SIZE + j];
-            // cout << "Mat_F[" <<  Mat_F_address + i * STATE_SIZE + j << "]:" << std::setprecision(20) << A[i * STATE_SIZE + j] << endl; 
         }
     }
 
@@ -378,7 +358,6 @@ void testbench::partition()
         for (int j = 0; j < STATE_SIZE; j++)
         {
             master_array[Mat_P_address + (i*STATE_SIZE + j)] = 0; 
-            // std::cout << "Mat_P[" << Mat_P_address + (i*STATE_SIZE + j) << "]:\t" << master_array[Mat_P_address + (i*STATE_SIZE + j)] << std::endl;
         }
     }
     for(int iter = 1; iter <= SAMPLES; iter++)
@@ -386,23 +365,11 @@ void testbench::partition()
         for(int i = MEAS_SIZE*iter; i < MEAS_SIZE*(iter+1); i++)
         {
             master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1)] = measurements[i];    
-            // std::cout << "Vec_Z OG: " << measurements[i] << std::endl;
-
-            // if(i == MEAS_SIZE*(iter+1) - 1)
-            // if(i < (MEAS_SIZE*iter + 6))
-            // {
-            //     std::cout << "iter: " << iter << "\ti:" << i << "\tMEAS_SIZE*iter: " << MEAS_SIZE*iter << "\tTB ZK[" << measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1) << "]:" << master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1)] << "\t" << measurements[i] << std::endl;
-            // }
-                // std::cout << "TB ZK:\t" << measurement_vecs_base_address + i-MEAS_SIZE*iter << std::endl;
 
         }
         std::cout << std::endl;
     }
 }
-
-
-
-
 
 void testbench::do_config()
 {
@@ -472,33 +439,26 @@ void testbench::dump_memory()
                 out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + tot_size*iters +  i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
                 FPDATA out_fixed = 0;
                 FLOAT_TYPE out_floating = FLOAT_TYPE(0);
-                // int2fx(out[i * DMA_WORD_PER_BEAT + wordd],out_fixed);
                 int2fp(out[i * DMA_WORD_PER_BEAT + wordd],out_floating);
-                // if(i >= out_size - (STATE_SIZE*STATE_SIZE))
-                // {
-                //     ofs << out_floating.to_float() << std::endl;
-                // }
                 if(i < STATE_SIZE)
                 {
-                    // std::cout << "\nOUTPUT[" << offset + tot_size*iters +  i << "]:\t" << out_floating.to_float();
-                    // output_xp[i] = out_fixed;
+#ifdef FL_POINT
+                    output_xp_float[i] = out_floating;
+#else
                     output_xp_float[i] = out_floating.to_float();
-                    // printBinaryFLOAT_TYPE(out_floating);
+#endif
                 }
-                // // std::cout << "\titers:" << iters << "\tOUTPUT[" << i << "]:\t" << out_fixed;
             }
         }
-        // std::cout << "\n(" << iters << "): RF_vecX:\t";
         for (int i = 0; i < STATE_SIZE; i++) 
         {
             FLOAT_TYPE ref = prediction[STATE_SIZE*(iters+1) + i];
-            // ac_float< DATA_WIDTH, FPDATA_IL, 5, AC_RND> ref = prediction[STATE_SIZE*(iters+1) + i];
-            // FPDATA fpdata;
-            // ref_prediction[i] = ref.to_ac_fixed();     
-            // ref_prediction_float[i] = static_cast<float>(ref_prediction[i].to_double());
+#ifdef FL_POINT
+            ref_prediction_float[i] = ref;
+#else
             ref_prediction_float[i] = ref.to_float();
+#endif
 
-            // std::cout << std::setprecision(20) << fpdata << "\t";            
 
         }
 
@@ -521,7 +481,6 @@ void testbench::dump_memory()
         for (int i = 0; i < STATE_SIZE; i++) 
             abs_diff += fabs(diff_vec[i]);
 
-        //sqr_diff = abs_diff * abs_diff;
     	sqr_diff = std::pow(abs_diff,2);
         sum_sqr_vec += sqr_diff;
 	    abs_diff = 0.0;
@@ -530,20 +489,10 @@ void testbench::dump_memory()
     }
     sum_sqr_vec = sum_sqr_vec/((SAMPLES-1)*STATE_SIZE);
 
-    // printf("MSE: %e\n", sum_sqr_vec);
     std::cout << "\nMSE: " << sum_sqr_vec << "\n";
+    CCS_LOG("SIMULATION PASSED "<< sum_sqr_vec);
 
 
-    // for (int iter = 1; iter <= SAMPLES; iter++) 
-    // {
-    //     std::cout << "\n(" << iter << "): Reference vec_X\t";
-    //     // std::cout << "\nReference Prediction\t" << iter << "\n";
-    //     for (int i = 0; i < STATE_SIZE; i++) 
-    //     {
-    //         std::cout << std::setprecision(20) << prediction[STATE_SIZE*iter + i] << "\t";
-    //     }
-
-    // }
     // ofs.close();
 }
 
@@ -563,104 +512,7 @@ void testbench::validate()
             int2fx(out[i * out_words_adj + j],out_res_fx);
             // std::cout << "\nOUTPUT[" << i << "]:\t" << out_res_fx;
 
-// cout << "\nTESTTT\n";
-// cout << output_size_per_iter*num_iterations << "\n";
-// cout << output_size_per_iter*num_iterations - output_size_per_iter << "\n";
-            // if(j >= output_size_per_iter*num_iterations - output_size_per_iter)
-            // {
-            //         if(j%output_size_per_iter == 0)
-            //             std::cout << "\nXp_design[" << j/output_size_per_iter << "]:\t";
-            //         else if (j%output_size_per_iter == STATE_SIZE)
-            //         {
-            //             std::cout << "\nPp_design[" << j/output_size_per_iter << "]:\t";                        
-            //         }
-            //         if (j%STATE_SIZE == 0)
-            //         {
-            //             std::cout << "\n";                        
-            //         }
-            //     std::cout << std::setprecision(20)  << out_res_fx << "\t";
-            // }
         }
-    // float accelerator_validate_array[100];
-    // float golden_validate_array[100];
-
-    // FILE *file;
-    // char line[100]; // Adjust the size as per your needs
-    // // Open the file in read mode
-    // file = fopen("golden_output.txt", "r");
-    // if (file == NULL) {
-    //     printf("Error opening the file.\n");
-    // }
-
-    // // Read each line from the file
-    // uint32_t ind = 0;
-    // while (fgets(line, sizeof(line), file)) {
-    //     // Convert the line to a float
-    //     float value = strtof(line, NULL);
-    //     // Check if the conversion was successful
-    //     if (value != 0.0f || (value == 0.0f && line[0] == '0')) {
-    //         golden_validate_array[ind] = value;
-    //         // Print the float value
-    //         // printf("%f\n", value);
-    //     } 
-    //     ind++;
-    // }
-    // // Close the file
-    // fclose(file);
-
-
-    // // Open the file in read mode
-    // file = fopen("accelerator_output.txt", "r");
-    // if (file == NULL) {
-    //     printf("Error opening the file.\n");
-    // }
-
-    // // Read each line from the file
-    // ind = 0;
-    // while (fgets(line, sizeof(line), file)) {
-    //     // Convert the line to a float
-    //     float value = strtof(line, NULL);
-    //     // Check if the conversion was successful
-    //     if (value != 0.0f || (value == 0.0f && line[0] == '0')) {
-    //         accelerator_validate_array[ind] = value;
-    //         // Print the float value
-    //         // printf("%f\n", value);
-    //     } 
-    //     ind++;
-    // }
-    // // Close the file
-    // fclose(file);
-
-    // for(int i = 0; i < STATE_SIZE*STATE_SIZE; i++)
-    // {
-    //     // cout << accelerator_validate_array[i] << "\t" << golden_validate_array[i] << "\n";
-    //       if (accelerator_validate_array[i] != golden_validate_array[i])
-    //     {
-    //         float MSE = (accelerator_validate_array[i]-golden_validate_array[i])*(accelerator_validate_array[i]-golden_validate_array[i])
-    //             / golden_validate_array[i];
-
-    //         if (MSE > ERROR_THRESHOLD)
-    //         {
-    //             printf("L2: output[%d] = %f (expected: %f)",
-    //                         i, accelerator_validate_array[i], golden_validate_array[i]);
-    //             tot_errors += 1;
-    //         }
-
-       
-    //     }
-    // }
-    // if (tot_errors == 0)
-    // {
-    //     printf("------------------------------------\n");
-    //     printf("  Validation succeeded!  \n");
-    //     printf("------------------------------------\n");
-    // }
-    // else
-    // {
-    //     printf("------------------------------------\n");
-    //     printf("  Validation failed!  \n");
-    //     printf("------------------------------------\n");
-    // }     
 }
 
 void testbench::single_input_array()

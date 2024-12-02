@@ -279,11 +279,12 @@ testbench.o: ../tb/testbench.cpp ../tb/testbench.hpp \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_int.h \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_types.h \
  ../inc/kalman_filter_specs.hpp ../inc/kalman_filter_data_types.hpp \
+ ../../../common/matchlib_toolkit/examples/ac_types/include/ac_std_float.h \
  ../../../common/inc/core/systems/esp_dma_controller.hpp \
  ../../../common/inc/core/systems/esp_dma_controller.i.hpp \
  ../../../common/matchlib_toolkit/examples/ac_math/include/ac_math/ac_random.h \
  ../../../common/matchlib_toolkit/examples/ac_simutils/include/mc_scverify.h \
- ../tb/A_array_hc.h ../tb/H_array_hc.h ../tb/initial_state_array_hc.h \
- ../tb/measurements_array_hc.h ../tb/P_array_hc.h \
- ../tb/prediction_array_hc.h ../tb/Q_array_hc.h ../tb/real_array_hc.h \
- ../tb/W_array_hc.h
+ ../tb/A_array_soma.h ../tb/H_array_soma.h \
+ ../tb/initial_state_array_soma.h ../tb/measurements_array_soma.h \
+ ../tb/P_array_soma.h ../tb/prediction_array_soma.h ../tb/Q_array_soma.h \
+ ../tb/real_array_soma.h ../tb/W_array_soma.h

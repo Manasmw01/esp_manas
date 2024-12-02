@@ -9,10 +9,10 @@
 #include "kalman_filter_specs.hpp"
 #include "ac_float.h"
 #include <ac_std_float.h>
+// #define FL_POINT
 
 #define N const_mat_dim
 #define FPDATA_WL DATA_WIDTH
-
 #define FPDATA_WL DATA_WIDTH
 #define FPDATA_IL DATA_WIDTH/2
 
@@ -23,9 +23,14 @@ typedef ac_fixed<FPDATA_WL, FPDATA_IL> FPDATA;
 
 #define __AC_FLOAT_ENABLE_ALPHA
 // typedef ac_float<23, 1, 8> FLOAT_TYPE;
-typedef ac_ieee_float32 FLOAT_TYPE;
 
+#ifdef FL_POINT
+typedef float FLOAT_TYPE;
 typedef FLOAT_TYPE FN_DATATYPE;
+#else
+typedef ac_ieee_float32 FLOAT_TYPE;
+typedef FLOAT_TYPE FN_DATATYPE;
+#endif
 
 // inline void int2fp(const FPDATA_WORD& in, FLOAT_TYPE& out) {
 //     float temp = *reinterpret_cast<const float*>(&in);  // reinterpret cast
@@ -37,6 +42,15 @@ typedef FLOAT_TYPE FN_DATATYPE;
 //     out = *reinterpret_cast<FPDATA_WORD*>(&temp);  // reinterpret cast to FPDATA_WORD
 // }
 
+#ifdef FL_POINT
+inline void int2fp(const FPDATA_WORD& in, FLOAT_TYPE& out) 
+{ uint32_t data = in.to_uint(); float *ptr = (float *) &data; out = *ptr;\
+}
+
+inline void fp2int(const FLOAT_TYPE& in, FPDATA_WORD& out)
+{ uint32_t *ptr = (uint32_t *) &in; out = *ptr; }
+
+#else
 
 // Function to convert FPDATA_WORD to FLOAT_TYPE
 inline void int2fp(const FPDATA_WORD& in, FLOAT_TYPE& out) {
@@ -48,7 +62,7 @@ inline void fp2int(const FLOAT_TYPE& in, FPDATA_WORD& out) {
     out = in.data(); // Fetch binary representation.
 }
 
-
+#endif
 inline void int2fx(const FPDATA_WORD& in, FPDATA& out)
 { out.set_slc(0,in.slc<FPDATA_WL>(0)); }
 
@@ -81,7 +95,11 @@ inline void print_matrix_new(FN_DATATYPE* matrix, int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         // printf("(Row %d)\t:", i);
         for (int j = 0; j < cols; j++) {
+#ifdef FL_POINT
+            printf("%.30f ", matrix[i * cols + j]);
+#else
             printf("%.30f ", matrix[i * cols + j].to_float());
+#endif
         }
         cout << std::endl;
     }
@@ -96,7 +114,6 @@ inline void copymat(FN_DATATYPE A[N][N], FN_DATATYPE result[N][N], uint32_t kalm
     }
 }
 
-// inline void matrix_multiply(FPDATA A[MEAS_SIZE], FPDATA B[MEAS_SIZE], FPDATA C[MEAS_SIZE], uint32_t n, uint32_t m, uint32_t p) {
 inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint32_t n, uint32_t m, uint32_t p) {
     for (uint32_t i = 0; i < n; i++) {
         for (uint32_t j = 0; j < p; j++) {
@@ -110,20 +127,9 @@ inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint
     }
 }
 
-// inline void printBinaryFLOAT_TYPE(FLOAT_TYPE f) {
-//     // Extract components
-//     ac_int<1> sign = f.get_sign();  // Use get_sign() to retrieve the sign
-//     ac_int<8> exponent = f.exp();   // 8-bit exponent
-//     ac_int<23> mantissa = f.mantissa();  // 23-bit mantissa
-
-//     // Print binary representation of each part
-//     std::cout << "Sign: " << sign << std::endl;
-//     std::cout << "Exponent (binary): " << std::bitset<8>(exponent.to_int()) << std::endl;
-//     std::cout << "Mantissa (binary): " << std::bitset<23>(mantissa.to_int()) << std::endl;
-// }
 
 
-inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE out[MEAS_SIZE][MEAS_SIZE])
+inline void inverse_clean(FN_DATATYPE new_mat[MAX_MEAS_SIZE][MAX_MEAS_SIZE], FN_DATATYPE out[MAX_MEAS_SIZE][MAX_MEAS_SIZE])
 {
 
 		 FN_DATATYPE ratio;
@@ -135,17 +141,10 @@ inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE
 			 FN_DATATYPE c = new_mat[1][0];
 			 FN_DATATYPE d = new_mat[1][1];
 
-			//  FN_DATATYPE det = FN_DATATYPE((a.to_float() * d.to_float()) - (b.to_float() * c.to_float()));
 			 FN_DATATYPE det = FN_DATATYPE((a * d) - (b * c));
-			//  FN_DATATYPE det = (a * d) - (b * c);
 
-			//  FN_DATATYPE a_times_d = (a * d);
-			//  FN_DATATYPE b_times_c = (b * c);
-			// //  FN_DATATYPE det = sub(a_times_d, b_times_c);
-			//  FN_DATATYPE det = a_times_d - b_times_c;
 
 			 if (det == FN_DATATYPE(0.0)) {
-			    //  printf("The matrix is not invertible.\n");
 			     return;
 			 }
 
@@ -170,32 +169,22 @@ inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE
 
 					    	if(i == MEAS_SIZE-1){
 					    		if(k == 0){//Calc the diagonal element first
-					    			// new_mat[j][j] = FN_DATATYPE(new_mat[j][j].to_float() - ratio.to_float()*new_mat[i][j].to_float());
 					    			new_mat[j][j] = FN_DATATYPE(new_mat[j][j] - ratio*new_mat[i][j]);
-					    			//out[j][j] = (out[j][j] - ratio*out[i][j]) / new_mat[j][j];
 					    		}
 					    		else if(k == j){
-					    			// new_mat[j][0] = FN_DATATYPE(new_mat[j][0].to_float() - ratio.to_float()*new_mat[i][0].to_float());
 					    			new_mat[j][0] = FN_DATATYPE(new_mat[j][0] - ratio*new_mat[i][0]);
-					    			//out[j][0] = (out[j][0] - ratio*out[i][0]) / new_mat[j][j];
 					    		}
 					    		else{
-					    			// new_mat[j][k] = FN_DATATYPE(new_mat[j][k].to_float() - ratio.to_float()*new_mat[i][k].to_float());
 					    			new_mat[j][k] = FN_DATATYPE(new_mat[j][k] - ratio*new_mat[i][k]);
-					    			//out[j][k] = (out[j][k] - ratio*out[i][k]) / new_mat[j][j];
 					    		}
 
-					    		// out[j][k] = FN_DATATYPE((out[j][k].to_float() - ratio.to_float()*out[i][k].to_float()) / new_mat[j][j].to_float());
 					    		out[j][k] = FN_DATATYPE((out[j][k] - ratio*out[i][k]) / new_mat[j][j]);
-					    		//out[j][j] = out[j][j] / new_mat[j][j];
 					    	}
 					    	else{
 
-								// new_mat[j][k] = FN_DATATYPE(new_mat[j][k].to_float() - ratio.to_float()*new_mat[i][k].to_float());
 								new_mat[j][k] = FN_DATATYPE(new_mat[j][k] - ratio*new_mat[i][k]);
 
 								if(i > 0)
-									// out[j][k] = FN_DATATYPE(out[j][k].to_float() - ratio.to_float()*out[i][k].to_float());
 									out[j][k] = FN_DATATYPE(out[j][k] - ratio*out[i][k]);
 								else{ //(i == 0)
 									if(i == k)
@@ -208,14 +197,12 @@ inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE
 											// out[j][k] = FN_DATATYPE(1 - ratio.to_float());
 										else
 											out[j][k] = FN_DATATYPE(1);
-										//out[j][k] = 1 - ratio*out[i][k];
 									}
 									else{
 										if(i == k)
 											out[j][k] = -ratio;
 										else
 											out[j][k] = FN_DATATYPE(0);
-										//out[j][k] = 0 - ratio*out[i][k];
 									}
 								}
 					    	}
@@ -237,10 +224,8 @@ inline void inverse_clean(FN_DATATYPE new_mat[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE
 
 inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
     // Augmenting the matrix A with identity matrix of same dimensions
-    // std::cout << "In Gauss Inverse\n";
-    FN_DATATYPE augmented[MEAS_SIZE * 2 * MEAS_SIZE];
+    FN_DATATYPE augmented[MAX_MEAS_SIZE * 2 * MAX_MEAS_SIZE];
 
-    // Create the augmented matrix
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             augmented[i * 2 * n + j] = A[i * n + j];  // A portion
@@ -248,9 +233,7 @@ inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
         }
     }
 
-    // Applying Gauss-Jordan elimination
     for (int i = 0; i < n; i++) {
-        // Find the pivot row
         int pivot_row = i;
         for (int j = i + 1; j < n; j++) {
             if (augmented[j * 2 * n + i] > augmented[pivot_row * 2 * n + i]) {
@@ -258,7 +241,6 @@ inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
             }
         }
 
-        // Swap rows i and pivot_row
         if (pivot_row != i) {
             for (int k = 0; k < 2 * n; k++) {
                 FN_DATATYPE temp = augmented[i * 2 * n + k];
@@ -267,13 +249,11 @@ inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
             }
         }
 
-        // Make the diagonal elements 1
         FN_DATATYPE pivot = augmented[i * 2 * n + i];
         for (int k = 0; k < 2 * n; k++) {
             augmented[i * 2 * n + k] /= pivot;
         }
 
-        // Make other elements in the column 0
         for (int j = 0; j < n; j++) {
             if (j != i) {
                 FN_DATATYPE factor = augmented[j * 2 * n + i];
@@ -284,7 +264,6 @@ inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
         }
     }
 
-    // Copy the inverse from the augmented matrix
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             A_inv[i * n + j] = augmented[i * 2 * n + (j + n)];
@@ -294,26 +273,13 @@ inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
 
 
 inline void matrix_add(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, int n, int m) {
-// inline void matrix_add(FN_DATATYPE A[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE B[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE C[MEAS_SIZE][MEAS_SIZE], int n, int m) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            // C[i * m + j] = A[i * m + j] + B[i * m + j];
-            // C[i * m + j] = FLOAT_TYPE(A[i * m + j].to_float() + B[i * m + j].to_float());
             C[i * m + j] = FLOAT_TYPE(A[i * m + j] + B[i * m + j]);
         }
     }
 }
 
-
-// inline void matrix_add_vec(const std::vector<FN_DATATYPE>& A, const std::vector<FN_DATATYPE>& B, std::vector<FN_DATATYPE>& C, int n, int m) {
-// // inline void matrix_add(FN_DATATYPE A[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE B[MEAS_SIZE][MEAS_SIZE], FN_DATATYPE C[MEAS_SIZE][MEAS_SIZE], int n, int m) {
-//     for (int i = 0; i < n; i++) {
-//         for (int j = 0; j < m; j++) {
-//             // C[i * m + j] = A[i * m + j] + B[i * m + j];
-//             C[i * m + j] = FLOAT_TYPE(A[i * m + j].to_float() + B[i * m + j].to_float());
-//         }
-//     }
-// }
 
 inline void matrix_transpose(FN_DATATYPE* A, FN_DATATYPE* AT, int n, int m) {
     for (int i = 0; i < n; i++) {
@@ -325,7 +291,6 @@ inline void matrix_transpose(FN_DATATYPE* A, FN_DATATYPE* AT, int n, int m) {
 
 inline void matrix_subtract(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, int n) {
     for (int i = 0; i < n; i++) {
-        // C[i] = FLOAT_TYPE(A[i].to_float() - B[i].to_float());
         C[i] = FLOAT_TYPE(A[i] - B[i]);
     }
 }

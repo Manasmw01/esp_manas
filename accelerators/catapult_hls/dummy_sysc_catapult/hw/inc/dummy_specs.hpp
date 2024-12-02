@@ -9,39 +9,15 @@
 #include <nvhls_int.h>
 #include <nvhls_types.h>
 #include <nvhls_vector.h>
-#include "kalman_filter_conf_info.hpp"
+#include "dummy_conf_info.hpp"
 #include "esp_dma_info_sysc.hpp"
 #include <ArbitratedScratchpadDP.h>
 
-
-// #define iterations 7
-// #define dimensions 6
-#define PRINT_STATEMENTS
-
-#define STATE_SIZE 6  // Number of states n
-// #define MEAS_SIZE 164  // Number of measurements m
-// #define MEAS_SIZE 46  // Number of measurements m
-#define MEAS_SIZE 52  // Number of measurements m
-
-#define MAX_MEAS_SIZE 52  // Number of measurements m
-
-#define SAMPLES 10  // Number of measurements m
-
-#define iterations SAMPLES
-#define dimensions STATE_SIZE
-#define const_mat_dim STATE_SIZE
-
-
 /* <<--defines-->> */
 #define DATA_WIDTH 32
-// #define DATA_WIDTH 64
 #define DMA_SIZE SIZE_WORD
-// #define PLM_IN_WORD 800000
-// #define PLM_OUT_WORD 1000
-
-#define PLM_IN_WORD 3650
-#define PLM_OUT_WORD 1000
-
+#define PLM_OUT_WORD 100
+#define PLM_IN_WORD 6400
 #define MEM_SIZE 416000/(DMA_WIDTH/8)
 
 #if (DMA_WIDTH == 32)
@@ -52,14 +28,10 @@
 #define PLM_OUT_RP 1
 #elif (DMA_WIDTH == 64)
 /* <<--defines_64-->> */
-// #define DMA_BEAT_PER_WORD 1
-// #define DMA_WORD_PER_BEAT 2
-// #define PLM_IN_WP 2
-// #define PLM_OUT_RP 2
 #define DMA_BEAT_PER_WORD 1
-#define DMA_WORD_PER_BEAT 1
-#define PLM_IN_WP 1
-#define PLM_OUT_RP 1
+#define DMA_WORD_PER_BEAT 2
+#define PLM_IN_WP 2
+#define PLM_OUT_RP 2
 #endif
 
 #define PLM_IN_RP 1

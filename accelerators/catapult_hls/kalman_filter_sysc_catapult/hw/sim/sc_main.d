@@ -279,6 +279,7 @@ sc_main.o: ../tb/sc_main.cpp ../tb/system.hpp \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/crossbar.h \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_int.h \
  ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_types.h \
+ ../../../common/matchlib_toolkit/examples/ac_types/include/ac_std_float.h \
  ../inc/kalman_filter_specs.hpp \
  ../../../common/inc/core/systems/esp_dma_controller.hpp \
  ../../../common/inc/core/systems/esp_dma_controller.i.hpp \

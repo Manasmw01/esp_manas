@@ -56,16 +56,16 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     FLOAT_TYPE Mat_P[STATE_SIZE * STATE_SIZE];
     FLOAT_TYPE Mat_F[STATE_SIZE * STATE_SIZE];
     FLOAT_TYPE Mat_Q[STATE_SIZE * STATE_SIZE];
-    FLOAT_TYPE Mat_R[MEAS_SIZE * MEAS_SIZE];
+    FLOAT_TYPE Mat_R[MAX_MEAS_SIZE * MAX_MEAS_SIZE];
 
-    FLOAT_TYPE Mat_H[MEAS_SIZE * STATE_SIZE];
-    FLOAT_TYPE vec_Z[MEAS_SIZE];
+    FLOAT_TYPE Mat_H[MAX_MEAS_SIZE * STATE_SIZE];
+    FLOAT_TYPE vec_Z[MAX_MEAS_SIZE];
 
-    FLOAT_TYPE Mat_K[STATE_SIZE * MEAS_SIZE];
+    FLOAT_TYPE Mat_K[STATE_SIZE * MAX_MEAS_SIZE];
     FLOAT_TYPE Mat_I[STATE_SIZE*STATE_SIZE];
     
     
-    FLOAT_TYPE vec_Z_fp[MEAS_SIZE];  // Floating-point version of vec_Z
+    FLOAT_TYPE vec_Z_fp[MAX_MEAS_SIZE];  // Floating-point version of vec_Z
     FLOAT_TYPE  Pp_cpp[const_mat_dim][const_mat_dim];
     FLOAT_TYPE  X_cpp[const_mat_dim];
     FLOAT_TYPE  output_to_send[const_mat_dim];
@@ -225,19 +225,19 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         // std::cout << "X_Cpp: " << iter << "\n";
         // print_vector(X_cpp, kalman_mat_dim);
     // #endif
-        FLOAT_TYPE Y[MEAS_SIZE];
-        FLOAT_TYPE Mat_S[MEAS_SIZE*MEAS_SIZE];
-        FLOAT_TYPE Mat_S_2D[MEAS_SIZE][MEAS_SIZE];
+        FLOAT_TYPE Y[MAX_MEAS_SIZE];
+        FLOAT_TYPE Mat_S[MAX_MEAS_SIZE*MAX_MEAS_SIZE];
+        FLOAT_TYPE Mat_S_2D[MAX_MEAS_SIZE][MAX_MEAS_SIZE];
 
 
     // FPDATA HtF[MEAS_SIZE * STATE_SIZE];
-    FLOAT_TYPE HtF[MEAS_SIZE * MEAS_SIZE];
+    FLOAT_TYPE HtF[MAX_MEAS_SIZE * MAX_MEAS_SIZE];
     matrix_multiply(Mat_H, Mat_F, HtF, MEAS_SIZE,   STATE_SIZE, STATE_SIZE); // xp = A*x2
 
     // printf("HtF\n");
     // print_matrix_new(HtF, MEAS_SIZE, STATE_SIZE);
 
-    FLOAT_TYPE H_F_X[MEAS_SIZE];
+    FLOAT_TYPE H_F_X[MAX_MEAS_SIZE];
     matrix_multiply(HtF, vec_X, H_F_X, MEAS_SIZE,   STATE_SIZE, 1); // xp = A*x2
     // printf("H_F_X\n");
     // print_matrix_new(H_F_X, MEAS_SIZE, 1);
@@ -253,7 +253,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // printf("F_Transpose\n");
     // print_matrix_new(F_Transpose, STATE_SIZE, STATE_SIZE);
 
-    FLOAT_TYPE H_Transpose[STATE_SIZE * MEAS_SIZE];
+    FLOAT_TYPE H_Transpose[STATE_SIZE * MAX_MEAS_SIZE];
     matrix_transpose(Mat_H, H_Transpose, MEAS_SIZE, STATE_SIZE); // A^T
     // printf("H_Transpose\n");
     // print_matrix_new(H_Transpose, STATE_SIZE, MEAS_SIZE);
@@ -274,12 +274,12 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // print_matrix_new(F_P_FT_Q, STATE_SIZE, STATE_SIZE);
 
 
-    FLOAT_TYPE F_P_FT_Q_times_HT[STATE_SIZE*MEAS_SIZE];
+    FLOAT_TYPE F_P_FT_Q_times_HT[STATE_SIZE*MAX_MEAS_SIZE];
     matrix_multiply(F_P_FT_Q, H_Transpose, F_P_FT_Q_times_HT, STATE_SIZE,   STATE_SIZE, MEAS_SIZE); 
     // printf("F_P_FT_Q_times_HT\n");
     // print_matrix_new(F_P_FT_Q_times_HT, STATE_SIZE, MEAS_SIZE);
 
-    FLOAT_TYPE H_times_F_P_FT_Q_times_HT[MEAS_SIZE * MEAS_SIZE];
+    FLOAT_TYPE H_times_F_P_FT_Q_times_HT[MAX_MEAS_SIZE * MAX_MEAS_SIZE];
     matrix_multiply(Mat_H, F_P_FT_Q_times_HT, H_times_F_P_FT_Q_times_HT, MEAS_SIZE,   STATE_SIZE, MEAS_SIZE); 
     // printf("H_times_F_P_FT_Q_times_HT\n");
     // print_matrix_new(H_times_F_P_FT_Q_times_HT, MEAS_SIZE, MEAS_SIZE);
@@ -287,8 +287,8 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // printf("Mat_S\n");
     // print_matrix_new(Mat_S, MEAS_SIZE, MEAS_SIZE);
 
-    FLOAT_TYPE S_inv[MEAS_SIZE * MEAS_SIZE];
-    FLOAT_TYPE S_inv_2D[MEAS_SIZE][MEAS_SIZE];
+    FLOAT_TYPE S_inv[MAX_MEAS_SIZE * MAX_MEAS_SIZE];
+    FLOAT_TYPE S_inv_2D[MAX_MEAS_SIZE][MAX_MEAS_SIZE];
     // gauss_inverse(Mat_S, S_inv, MEAS_SIZE); 
 
     // // INVERSE CLEAN IMPLEMENTATION STARTS
@@ -322,7 +322,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
 
     // FPDATA Mat_K[STATE_SIZE * MEAS_SIZE];
     // FPDATA Y[MEAS_SIZE];
-    FLOAT_TYPE KtH[STATE_SIZE * MEAS_SIZE]; // Added Oct 8
+    FLOAT_TYPE KtH[STATE_SIZE * MAX_MEAS_SIZE]; // Added Oct 8
 
     FLOAT_TYPE KtY[STATE_SIZE];
     matrix_multiply(Mat_K, Y, KtY, STATE_SIZE,   MEAS_SIZE, 1); 
