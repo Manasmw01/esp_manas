@@ -10,17 +10,20 @@
 
 #include <ac_float.h>
 
+#if (MEAS_SIZE == 164)
+#include "A_array.h"
+#include "H_array.h"
+#include "initial_state_array.h"
+#include "measurements_array.h"
+#include "P_array.h"
+#include "prediction_array.h"
+#include "Q_array.h"
+#include "real_array.h"
+#include "W_array.h"
+#endif
 
-// #include "A_array.h"
-// #include "H_array.h"
-// #include "initial_state_array.h"
-// #include "measurements_array.h"
-// #include "P_array.h"
-// #include "prediction_array.h"
-// #include "Q_array.h"
-// #include "real_array.h"
-// #include "W_array.h"
 
+#if (MEAS_SIZE == 52)
 #include "A_array_soma.h"
 #include "H_array_soma.h"
 #include "initial_state_array_soma.h"
@@ -30,17 +33,19 @@
 #include "Q_array_soma.h"
 #include "real_array_soma.h"
 #include "W_array_soma.h"
+#endif
 
-
-// #include "A_array_hc.h"
-// #include "H_array_hc.h"
-// #include "initial_state_array_hc.h"
-// #include "measurements_array_hc.h"
-// #include "P_array_hc.h"
-// #include "prediction_array_hc.h"
-// #include "Q_array_hc.h"
-// #include "real_array_hc.h"
-// #include "W_array_hc.h"
+#if (MEAS_SIZE == 46)
+#include "A_array_hc.h"
+#include "H_array_hc.h"
+#include "initial_state_array_hc.h"
+#include "measurements_array_hc.h"
+#include "P_array_hc.h"
+#include "prediction_array_hc.h"
+#include "Q_array_hc.h"
+#include "real_array_hc.h"
+#include "W_array_hc.h"
+#endif
 
 std::ofstream ofs;
 std::ifstream ifs;

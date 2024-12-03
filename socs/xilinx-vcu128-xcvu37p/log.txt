@@ -1,217 +1,5 @@
-    MKDIR socgen/esp/.esp_config
-    CP socgen/esp/.esp_config
-    MKDIR socgen/grlib/.grlib_config
-    CP socgen/grlib/.grlib_config
     RUN kalman_filter_sysc_catapult-exe
 make[1]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/sim'
-    CXX kalman_filter.o
-In file included from ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:21:0,
-                 from ../inc/kalman_filter_specs.hpp:8,
-                 from ../inc/mem_wrap.hpp:10,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections_utils.h:23:0: warning: "CONNECTIONS_ASSERT_MSG" redefined [enabled by default]
- #define CONNECTIONS_ASSERT_MSG(X,MSG) NVHLS_ASSERT_MSG(X,MSG)
- ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:42:0,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/mem_wrap.hpp:10,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections_utils.h:50:0: note: this is the location of the previous definition
- #define CONNECTIONS_ASSERT_MSG(X,MSG)           \
- ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:21:0,
-                 from ../inc/kalman_filter_specs.hpp:8,
-                 from ../inc/mem_wrap.hpp:10,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections_utils.h:24:0: warning: "CONNECTIONS_SIM_ONLY_ASSERT_MSG" redefined [enabled by default]
- #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) CMOD_ASSERT_MSG(X,MSG)
- ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:42:0,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/mem_wrap.hpp:10,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections_utils.h:75:0: note: this is the location of the previous definition
- #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) \
- ^
-In file included from ../inc/kalman_filter_specs.hpp:8:0,
-                 from ../inc/mem_wrap.hpp:10,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:34:0: warning: "CONNECTIONS_NAMING_ORIGINAL" redefined [enabled by default]
- #define CONNECTIONS_NAMING_ORIGINAL
- ^
-<command-line>:0:0: note: this is the location of the previous definition
-In file included from ../inc/kalman_filter_data_types.hpp:11:0,
-                 from ../inc/mem_wrap.hpp:11,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../../../common/matchlib_toolkit/examples/ac_types/include/ac_std_float.h:165:32: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
- #pragma GCC diagnostic ignored "-Wbool-compare"
-                                ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:57:0,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/mem_wrap.hpp:10,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../inc/kalman_filter.hpp: In constructor ‘kalman_filter_sysc_catapult::kalman_filter_sysc_catapult(sc_core::sc_module_name)’:
-../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning: ‘kalman_filter_sysc_catapult::plm_out_pong’ will be initialized after [-Wreorder]
- #define CCS_INIT_S1(n)              n{#n}
-                                         ^
-../inc/kalman_filter.hpp:212:28: note: in expansion of macro ‘CCS_INIT_S1’
-            plm_RRs<outrp>> CCS_INIT_S1(plm_out_pong);
-                            ^
-../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning:   ‘mem_wrap<1u, 1u, 1u, 800000u, ac_int<32, false>, ac_int<20, false>, plm_WR<20u, 1u>, plm_RRq<20u, 1u>, plm_RRs<1u> > kalman_filter_sysc_catapult::plm_in_b_ping’ [-Wreorder]
- #define CCS_INIT_S1(n)              n{#n}
-                                         ^
-../inc/kalman_filter.hpp:177:27: note: in expansion of macro ‘CCS_INIT_S1’
-            plm_RRs<inrp>> CCS_INIT_S1(plm_in_b_ping);
-                           ^
-In file included from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/systemc:74:0,
-                 from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/systemc.h:219,
-                 from ../inc/mem_wrap.hpp:9,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../inc/kalman_filter.hpp:53:11: warning:   when initialized here [-Wreorder]
-   SC_CTOR(kalman_filter_sysc_catapult):  
-           ^
-../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/kernel/sc_module.h:401:5: note: in definition of macro ‘SC_CTOR’
-     user_module_name( ::sc_core::sc_module_name )
-     ^
-In file included from ../inc/mem_wrap.hpp:10:0,
-                 from ../inc/kalman_filter.hpp:9,
-                 from ../src/kalman_filter.cpp:4:
-../inc/kalman_filter_utils.hpp: In member function ‘void kalman_filter_sysc_catapult::load_d(bool, uint32_t, uint32_t)’:
-../inc/kalman_filter_specs.hpp:35:20: warning: left shift count >= width of type [enabled by default]
- #define DATA_WIDTH 32
-                    ^
-../inc/kalman_filter_data_types.hpp:16:19: note: in expansion of macro ‘DATA_WIDTH’
- #define FPDATA_WL DATA_WIDTH
-                   ^
-../inc/kalman_filter_utils.hpp:27:55: note: in expansion of macro ‘FPDATA_WL’
-         const uint32_t data_mask = (((uint32_t) 1) << FPDATA_WL) - 1;
-                                                       ^
-../inc/kalman_filter_utils.hpp: In member function ‘void kalman_filter_sysc_catapult::load_b(bool, uint32_t, uint32_t)’:
-../inc/kalman_filter_specs.hpp:35:20: warning: left shift count >= width of type [enabled by default]
- #define DATA_WIDTH 32
-                    ^
-../inc/kalman_filter_data_types.hpp:16:19: note: in expansion of macro ‘DATA_WIDTH’
- #define FPDATA_WL DATA_WIDTH
-                   ^
-../inc/kalman_filter_utils.hpp:70:55: note: in expansion of macro ‘FPDATA_WL’
-         const uint32_t data_mask = (((uint32_t) 1) << FPDATA_WL) - 1;
-                                                       ^
-    CXX sc_main.o
-In file included from ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:21:0,
-                 from ../inc/kalman_filter_specs.hpp:8,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections_utils.h:23:0: warning: "CONNECTIONS_ASSERT_MSG" redefined [enabled by default]
- #define CONNECTIONS_ASSERT_MSG(X,MSG) NVHLS_ASSERT_MSG(X,MSG)
- ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:42:0,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections_utils.h:50:0: note: this is the location of the previous definition
- #define CONNECTIONS_ASSERT_MSG(X,MSG)           \
- ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:21:0,
-                 from ../inc/kalman_filter_specs.hpp:8,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections_utils.h:24:0: warning: "CONNECTIONS_SIM_ONLY_ASSERT_MSG" redefined [enabled by default]
- #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) CMOD_ASSERT_MSG(X,MSG)
- ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/marshaller.h:42:0,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:82,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections_utils.h:75:0: note: this is the location of the previous definition
- #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) \
- ^
-In file included from ../inc/kalman_filter_specs.hpp:8:0,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:34:0: warning: "CONNECTIONS_NAMING_ORIGINAL" redefined [enabled by default]
- #define CONNECTIONS_NAMING_ORIGINAL
- ^
-<command-line>:0:0: note: this is the location of the previous definition
-In file included from ../inc/kalman_filter_data_types.hpp:11:0,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../../../common/matchlib_toolkit/examples/ac_types/include/ac_std_float.h:165:32: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
- #pragma GCC diagnostic ignored "-Wbool-compare"
-                                ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:57:0,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../inc/kalman_filter.hpp: In constructor ‘kalman_filter_sysc_catapult::kalman_filter_sysc_catapult(sc_core::sc_module_name)’:
-../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning: ‘kalman_filter_sysc_catapult::plm_out_pong’ will be initialized after [-Wreorder]
- #define CCS_INIT_S1(n)              n{#n}
-                                         ^
-../inc/kalman_filter.hpp:212:28: note: in expansion of macro ‘CCS_INIT_S1’
-            plm_RRs<outrp>> CCS_INIT_S1(plm_out_pong);
-                            ^
-../../../common/matchlib_toolkit/examples/ac_simutils/include/ac_sysc_macros.h:51:41: warning:   ‘mem_wrap<1u, 1u, 1u, 800000u, ac_int<32, false>, ac_int<20, false>, plm_WR<20u, 1u>, plm_RRq<20u, 1u>, plm_RRs<1u> > kalman_filter_sysc_catapult::plm_in_b_ping’ [-Wreorder]
- #define CCS_INIT_S1(n)              n{#n}
-                                         ^
-../inc/kalman_filter.hpp:177:27: note: in expansion of macro ‘CCS_INIT_S1’
-            plm_RRs<inrp>> CCS_INIT_S1(plm_in_b_ping);
-                           ^
-In file included from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/systemc:74:0,
-                 from ../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/systemc.h:219,
-                 from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:56,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../inc/kalman_filter.hpp:53:11: warning:   when initialized here [-Wreorder]
-   SC_CTOR(kalman_filter_sysc_catapult):  
-           ^
-../../../common/matchlib_toolkit/examples/systemc-2.3.3/include/sysc/kernel/sc_module.h:401:5: note: in definition of macro ‘SC_CTOR’
-     user_module_name( ::sc_core::sc_module_name )
-     ^
-In file included from ../tb/system.hpp:13:0,
-                 from ../tb/sc_main.cpp:4:
-../../../common/inc/core/systems/esp_dma_controller.hpp: In instantiation of ‘esp_dma_controller<_DMA_WIDTH_, _MEM_SIZE_>::esp_dma_controller(sc_core::sc_module_name, ac_int<32, true>*) [with int _DMA_WIDTH_ = 32; int _MEM_SIZE_ = 16842752]’:
-../tb/testbench.hpp:49:81:   required from here
-../../../common/inc/core/systems/esp_dma_controller.hpp:41:50: warning: ‘esp_dma_controller<32, 16842752>::dma_read_chnl’ will be initialized after [-Wreorder]
-         Connections::Out<ac_int<DMA_WIDTH,true>> dma_read_chnl;
-                                                  ^
-../../../common/inc/core/systems/esp_dma_controller.hpp:36:21: warning:   ‘sc_core::sc_in<bool> esp_dma_controller<32, 16842752>::acc_done’ [-Wreorder]
-         sc_in<bool> acc_done;
-                     ^
-../../../common/inc/core/systems/esp_dma_controller.hpp:48:9: warning:   when initialized here [-Wreorder]
-         esp_dma_controller(sc_module_name name, ac_int<DMA_WIDTH,true> *ptr)
-         ^
-In file included from ../../../common/matchlib_toolkit/examples/matchlib_connections/include/mc_connections.h:59:0,
-                 from ../inc/kalman_filter_specs.hpp:7,
-                 from ../inc/kalman_filter_data_types.hpp:9,
-                 from ../tb/system.hpp:9,
-                 from ../tb/sc_main.cpp:4:
-../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h: In member function ‘bool Connections::InBlocking_SimPorts_abs<Message>::PopNB(Message&, const bool&) [with Message = bool]’:
-../../../common/matchlib_toolkit/examples/matchlib_connections/include/connections/connections.h:1818:9: warning: ‘m’ may be used uninitialized in this function [-Wmaybe-uninitialized]
-         data = m;
-         ^
     CXX testbench.o
 In file included from ../../../common/matchlib_toolkit/examples/matchlib/cmod/include/nvhls_connections.h:21:0,
                  from ../inc/kalman_filter_specs.hpp:8,
@@ -264,17 +52,17 @@ In file included from ../inc/kalman_filter_data_types.hpp:11:0,
  #pragma GCC diagnostic ignored "-Wbool-compare"
                                 ^
 ../tb/testbench.cpp: In member function ‘void testbench::dump_memory()’:
-../tb/testbench.cpp:430:24: warning: variable ‘out_fixed’ set but not used [-Wunused-but-set-variable]
+../tb/testbench.cpp:445:24: warning: variable ‘out_fixed’ set but not used [-Wunused-but-set-variable]
                  FPDATA out_fixed = 0;
                         ^
 In file included from ../tb/testbench.hpp:15:0,
                  from ../tb/testbench.cpp:4:
-../../../common/inc/core/systems/esp_dma_controller.hpp: In instantiation of ‘esp_dma_controller<_DMA_WIDTH_, _MEM_SIZE_>::esp_dma_controller(sc_core::sc_module_name, ac_int<32, true>*) [with int _DMA_WIDTH_ = 32; int _MEM_SIZE_ = 16842752]’:
+../../../common/inc/core/systems/esp_dma_controller.hpp: In instantiation of ‘esp_dma_controller<_DMA_WIDTH_, _MEM_SIZE_>::esp_dma_controller(sc_core::sc_module_name, ac_int<32, true>*) [with int _DMA_WIDTH_ = 32; int _MEM_SIZE_ = 104000]’:
 ../tb/testbench.hpp:49:81:   required from here
-../../../common/inc/core/systems/esp_dma_controller.hpp:41:50: warning: ‘esp_dma_controller<32, 16842752>::dma_read_chnl’ will be initialized after [-Wreorder]
+../../../common/inc/core/systems/esp_dma_controller.hpp:41:50: warning: ‘esp_dma_controller<32, 104000>::dma_read_chnl’ will be initialized after [-Wreorder]
          Connections::Out<ac_int<DMA_WIDTH,true>> dma_read_chnl;
                                                   ^
-../../../common/inc/core/systems/esp_dma_controller.hpp:36:21: warning:   ‘sc_core::sc_in<bool> esp_dma_controller<32, 16842752>::acc_done’ [-Wreorder]
+../../../common/inc/core/systems/esp_dma_controller.hpp:36:21: warning:   ‘sc_core::sc_in<bool> esp_dma_controller<32, 104000>::acc_done’ [-Wreorder]
          sc_in<bool> acc_done;
                      ^
 ../../../common/inc/core/systems/esp_dma_controller.hpp:48:9: warning:   when initialized here [-Wreorder]
@@ -297,15 +85,25 @@ vec_X_address	0
 Mat_F_address	6
 Mat_Q_address	42
 Mat_R_address	78
-Mat_H_address	2194
-Mat_P_address	2470
-constant_matrices_size	2506
+Mat_H_address	2782
+Mat_P_address	3094
+constant_matrices_size	3130
 
-input_vecs_total_size	2966
+input_vecs_total_size	4170
 output_size_per_iter	42
 output_total_size	42
-in_size	2966
+in_size	4170
 out_size	42
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -318,8 +116,81 @@ out_size	42
 
 Partition completed
 Single input array completed
-load_data	2966
-/bin/sh: line 1: 25794 Segmentation fault      (core dumped) LD_LIBRARY_PATH=/opt/prodesign/profpga/proFPGA-2021A/lib/linux_x86_64:/opt/matchlib_toolkit/examples/Boost-Preprocessor-master/lib:/opt/systemc/lib-linux64:../../../common/matchlib_toolkit/examples/systemc-2.3.3/lib-linux64 ./kalman_filter_sysc_catapult
-make[1]: *** [run] Error 139
+load_data	4170
+inn_size:4170	DMA_WORD_PER_BEAT:1	inn_size / DMA_WORD_PER_BEAT:4170
+Load datafloat done
+Do config done
+Entered Dump Memory
+Dump memory offset address: 4170
+
+OUT_SIZE[42]:
+
+offset[4170]:
+
+(0): vecX:	2.3834168910980224609375	-3.9093306064605712890625	-0.813375174999237060546875	-0.865314543247222900390625	-1.265363216400146484375	0.082916252315044403076171875	
+(0): REF PRED:	2.3834168910980224609375	-3.9093306064605712890625	-0.813375174999237060546875	-0.865314543247222900390625	-1.26536333560943603515625	0.08291621506214141845703125	
+
+(1): vecX:	2.342748165130615234375	-3.9525964260101318359375	-2.4728145599365234375	-1.768565654754638671875	-1.144719600677490234375	-0.504100382328033447265625	
+(1): REF PRED:	2.342748165130615234375	-3.9525964260101318359375	-2.4728145599365234375	-1.76856625080108642578125	-1.14471971988677978515625	-0.5041005611419677734375	
+
+(2): vecX:	2.1974861621856689453125	-4.09946918487548828125	-4.77293872833251953125	-5.40986919403076171875	-1.25746667385101318359375	-2.00946521759033203125	
+(2): REF PRED:	2.1974861621856689453125	-4.09946918487548828125	-4.772938251495361328125	-5.409868717193603515625	-1.25746667385101318359375	-2.009464263916015625	
+
+(3): vecX:	1.9049265384674072265625	-4.5179576873779296875	-7.530777454376220703125	-11.29972553253173828125	-0.6991055011749267578125	-1.6816813945770263671875	
+(3): REF PRED:	1.9049265384674072265625	-4.5179576873779296875	-7.53077602386474609375	-11.2997226715087890625	-0.6991055011749267578125	-1.68168056011199951171875	
+
+(4): vecX:	1.55228960514068603515625	-5.00291538238525390625	-8.436840057373046875	-12.87835788726806640625	0.01580965518951416015625	-0.70603430271148681640625	
+(4): REF PRED:	1.55228960514068603515625	-5.00291538238525390625	-8.43683910369873046875	-12.87835693359375	0.01580915786325931549072265625	-0.70603430271148681640625	
+
+(5): vecX:	1.20452201366424560546875	-5.67077350616455078125	-7.42403125762939453125	-13.9061985015869140625	1.4673988819122314453125	1.42786204814910888671875	
+(5): REF PRED:	1.2045218944549560546875	-5.67077350616455078125	-7.424031734466552734375	-13.90619754791259765625	1.46739804744720458984375	1.42786180973052978515625	
+
+(6): vecX:	0.74078214168548583984375	-6.4223384857177734375	-5.67119121551513671875	-12.5484523773193359375	3.17849063873291015625	3.412423610687255859375	
+(6): REF PRED:	0.740782082080841064453125	-6.4223384857177734375	-5.671192169189453125	-12.54845333099365234375	3.178490161895751953125	3.412422657012939453125	
+
+(7): vecX:	0.501605987548828125	-7.4129199981689453125	-4.6622447967529296875	-16.769756317138671875	1.72289717197418212890625	1.7871253490447998046875	
+(7): REF PRED:	0.501605927944183349609375	-7.4129199981689453125	-4.66224575042724609375	-16.769756317138671875	1.722897052764892578125	1.78712546825408935546875	
+
+(8): vecX:	0.16580402851104736328125	-8.28354549407958984375	-2.0636432170867919921875	-14.92278194427490234375	2.595586299896240234375	3.504680156707763671875	
+(8): REF PRED:	0.16580395400524139404296875	-8.28354549407958984375	-2.063644886016845703125	-14.92278289794921875	2.5955860614776611328125	3.5046799182891845703125	
+
+(9): vecX:	0.000853590667247772216796875	-8.9406948089599609375	-0.075655519962310791015625	-12.33665943145751953125	2.3606088161468505859375	3.9671900272369384765625	
+(9): REF PRED:	0.00085349171422421932220458984375	-8.9406948089599609375	-0.075657092034816741943359375	-12.336658477783203125	2.3606092929840087890625	3.967190265655517578125	
+
+(10): vecX:	-0.141125619411468505859375	-9.47168445587158203125	3.0142142772674560546875	-6.950855731964111328125	2.431112766265869140625	4.5689544677734375	
+(10): REF PRED:	-0.141125857830047607421875	-9.47168445587158203125	3.0142128467559814453125	-6.950852870941162109375	2.4311134815216064453125	4.5689544677734375	
+
+(11): vecX:	0.2635118067264556884765625	-9.97165012359619140625	6.8618564605712890625	-6.08994293212890625	0.67822206020355224609375	3.198223114013671875	
+(11): REF PRED:	0.263511478900909423828125	-9.97165012359619140625	6.861856937408447265625	-6.0899410247802734375	0.678222715854644775390625	3.198222637176513671875	
+
+(12): vecX:	-0.028458654880523681640625	-9.960163116455078125	4.7468280792236328125	-2.13073825836181640625	0.8023035526275634765625	3.021802425384521484375	
+(12): REF PRED:	-0.02845899760723114013671875	-9.960163116455078125	4.746829509735107421875	-2.1307373046875	0.802303731441497802734375	3.02180194854736328125	
+
+(13): vecX:	0.1506862938404083251953125	-9.9600009918212890625	4.4588222503662109375	-0.35652959346771240234375	-0.61369717121124267578125	1.922221660614013671875	
+(13): REF PRED:	0.15068604052066802978515625	-9.9600009918212890625	4.458823680877685546875	-0.35652887821197509765625	-0.613697230815887451171875	1.92222106456756591796875	
+
+(14): vecX:	0.580165326595306396484375	-10.1240749359130859375	5.806729793548583984375	-1.57726180553436279296875	-1.18243038654327392578125	0.565522253513336181640625	
+(14): REF PRED:	0.5801651477813720703125	-10.12407588958740234375	5.806732177734375	-1.5772609710693359375	-1.1824305057525634765625	0.565521717071533203125	
+
+(15): vecX:	0.64611136913299560546875	-9.97908496856689453125	6.126880645751953125	-3.019481182098388671875	-0.58718192577362060546875	-0.078912317752838134765625	
+(15): REF PRED:	0.6461112499237060546875	-9.97908496856689453125	6.126881122589111328125	-3.0194799900054931640625	-0.587182343006134033203125	-0.078912965953350067138671875	
+
+(16): vecX:	0.72235333919525146484375	-9.686191558837890625	3.8979561328887939453125	-1.41893398761749267578125	-1.47420632839202880859375	0.3275203406810760498046875	
+(16): REF PRED:	0.72235333919525146484375	-9.686191558837890625	3.897957324981689453125	-1.418933868408203125	-1.4742066860198974609375	0.327519834041595458984375	
+
+(17): vecX:	0.602845251560211181640625	-9.7530612945556640625	2.2350614070892333984375	-2.261943340301513671875	-0.603169977664947509765625	0.654554426670074462890625	
+(17): REF PRED:	0.602845132350921630859375	-9.7530612945556640625	2.235061168670654296875	-2.261943340301513671875	-0.603170692920684814453125	0.65455400943756103515625	
+
+(18): vecX:	0.508158504962921142578125	-9.5688228607177734375	0.685688674449920654296875	-3.6212310791015625	-0.642905175685882568359375	-0.178309381008148193359375	
+(18): REF PRED:	0.508158266544342041015625	-9.5688228607177734375	0.685688316822052001953125	-3.621228694915771484375	-0.642905533313751220703125	-0.17830945551395416259765625	
+
+(19): vecX:	0.284570276737213134765625	-9.20831203460693359375	-3.167028903961181640625	-0.497133731842041015625	-0.61427342891693115234375	0.76988780498504638671875	
+(19): REF PRED:	0.2845700681209564208984375	-9.20831203460693359375	-3.16703033447265625	-0.4971312582492828369140625	-0.61427366733551025390625	0.76988732814788818359375	
+
+MSE: 1.89403917896791007535739481682e-12
+349005 ns system_t.testbench_inst SIMULATION PASSED 1.89403917896791007535739481682e-12
+Dump memory completed
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+Simulation PASSED
 make[1]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/sim'
-make: *** [kalman_filter_sysc_catapult-exe] Error 2

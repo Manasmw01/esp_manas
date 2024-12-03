@@ -20,12 +20,12 @@
 
 #define STATE_SIZE 6  // Number of states n
 // #define MEAS_SIZE 164  // Number of measurements m
-// #define MEAS_SIZE 46  // Number of measurements m
 #define MEAS_SIZE 52  // Number of measurements m
+// #define MEAS_SIZE 52  // Number of measurements m
 
 #define MAX_MEAS_SIZE 52  // Number of measurements m
 
-#define SAMPLES 10  // Number of measurements m
+#define SAMPLES 20  // Number of measurements m
 
 #define iterations SAMPLES
 #define dimensions STATE_SIZE
