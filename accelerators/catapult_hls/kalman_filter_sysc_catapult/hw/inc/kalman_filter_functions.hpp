@@ -5,10 +5,10 @@
 #define __FUNCTIONS_HPP__
 
 #include "kalman_filter.hpp"
-void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong)
+void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong, uint32_t meas_size_reg)
 {
     
-        for (uint32_t i = 0; i < MEAS_SIZE; i++)
+        for (uint32_t i = 0; i < meas_size_reg; i++)
         {
             plm_RRq<in_as,inrp> rreq;
             rreq.indx[0]=i;
@@ -49,7 +49,7 @@ void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_ite
 
 void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, 
                                     uint32_t vec_X_address, uint32_t Mat_F_address  , uint32_t Mat_Q_address, uint32_t Mat_R_address, 
-                                    uint32_t Mat_H_address, uint32_t Mat_P_address, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong)
+                                    uint32_t Mat_H_address, uint32_t Mat_P_address, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong,  uint32_t meas_size_reg)
 {
 
     FLOAT_TYPE vec_X[STATE_SIZE];
@@ -85,7 +85,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // uint32_t current_address = 0;
 
 
-    for (uint32_t k = 0; k < MEAS_SIZE; k++)
+    for (uint32_t k = 0; k < meas_size_reg; k++)
     {
         if(pingpong)            
             input_measurements_word=in_ping_rd.Pop().data[0];
@@ -232,19 +232,19 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
 
     // FPDATA HtF[MEAS_SIZE * STATE_SIZE];
     FLOAT_TYPE HtF[MAX_MEAS_SIZE * MAX_MEAS_SIZE];
-    matrix_multiply(Mat_H, Mat_F, HtF, MEAS_SIZE,   STATE_SIZE, STATE_SIZE); // xp = A*x2
+    matrix_multiply(Mat_H, Mat_F, HtF, meas_size_reg,   STATE_SIZE, STATE_SIZE); // xp = A*x2
 
     // printf("HtF\n");
     // print_matrix_new(HtF, MEAS_SIZE, STATE_SIZE);
 
     FLOAT_TYPE H_F_X[MAX_MEAS_SIZE];
-    matrix_multiply(HtF, vec_X, H_F_X, MEAS_SIZE,   STATE_SIZE, 1); // xp = A*x2
+    matrix_multiply(HtF, vec_X, H_F_X, meas_size_reg,   STATE_SIZE, 1); // xp = A*x2
     // printf("H_F_X\n");
     // print_matrix_new(H_F_X, MEAS_SIZE, 1);
 
     // std::cout << "LINE 231" << std::endl;
 
-    matrix_subtract(vec_Z, H_F_X, Y, MEAS_SIZE); // P3 = Pp - (K * H * Pp)
+    matrix_subtract(vec_Z, H_F_X, Y, meas_size_reg); // P3 = Pp - (K * H * Pp)
     // printf("Y\n");
     // print_matrix_new(Y, MEAS_SIZE, 1);
 
@@ -254,7 +254,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // print_matrix_new(F_Transpose, STATE_SIZE, STATE_SIZE);
 
     FLOAT_TYPE H_Transpose[STATE_SIZE * MAX_MEAS_SIZE];
-    matrix_transpose(Mat_H, H_Transpose, MEAS_SIZE, STATE_SIZE); // A^T
+    matrix_transpose(Mat_H, H_Transpose, meas_size_reg, STATE_SIZE); // A^T
     // printf("H_Transpose\n");
     // print_matrix_new(H_Transpose, STATE_SIZE, MEAS_SIZE);
 
@@ -275,15 +275,15 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
 
 
     FLOAT_TYPE F_P_FT_Q_times_HT[STATE_SIZE*MAX_MEAS_SIZE];
-    matrix_multiply(F_P_FT_Q, H_Transpose, F_P_FT_Q_times_HT, STATE_SIZE,   STATE_SIZE, MEAS_SIZE); 
+    matrix_multiply(F_P_FT_Q, H_Transpose, F_P_FT_Q_times_HT, STATE_SIZE,   STATE_SIZE, meas_size_reg); 
     // printf("F_P_FT_Q_times_HT\n");
     // print_matrix_new(F_P_FT_Q_times_HT, STATE_SIZE, MEAS_SIZE);
 
     FLOAT_TYPE H_times_F_P_FT_Q_times_HT[MAX_MEAS_SIZE * MAX_MEAS_SIZE];
-    matrix_multiply(Mat_H, F_P_FT_Q_times_HT, H_times_F_P_FT_Q_times_HT, MEAS_SIZE,   STATE_SIZE, MEAS_SIZE); 
+    matrix_multiply(Mat_H, F_P_FT_Q_times_HT, H_times_F_P_FT_Q_times_HT, meas_size_reg,   STATE_SIZE, meas_size_reg); 
     // printf("H_times_F_P_FT_Q_times_HT\n");
     // print_matrix_new(H_times_F_P_FT_Q_times_HT, MEAS_SIZE, MEAS_SIZE);
-    matrix_add(H_times_F_P_FT_Q_times_HT, Mat_R, Mat_S, MEAS_SIZE, MEAS_SIZE); // Pp = (A * P2) * A^T + Q
+    matrix_add(H_times_F_P_FT_Q_times_HT, Mat_R, Mat_S, meas_size_reg, meas_size_reg); // Pp = (A * P2) * A^T + Q
     // printf("Mat_S\n");
     // print_matrix_new(Mat_S, MEAS_SIZE, MEAS_SIZE);
 
@@ -292,25 +292,25 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // gauss_inverse(Mat_S, S_inv, MEAS_SIZE); 
 
     // // INVERSE CLEAN IMPLEMENTATION STARTS
-    for (int i = 0; i < MEAS_SIZE; i++)  
+    for (int i = 0; i < meas_size_reg; i++)  
     {
-        for (int j = 0; j < MEAS_SIZE; j++) 
+        for (int j = 0; j < meas_size_reg; j++) 
         {
-            Mat_S_2D[i][j] = Mat_S[i * MEAS_SIZE + j]; // Accessing the 1D array using the row-major order formula
+            Mat_S_2D[i][j] = Mat_S[i * meas_size_reg + j]; // Accessing the 1D array using the row-major order formula
         }
     }
-    inverse_clean(Mat_S_2D, S_inv_2D);
-    for (int i = 0; i < MEAS_SIZE; i++)  
+    inverse_clean(Mat_S_2D, S_inv_2D, meas_size_reg);
+    for (int i = 0; i < meas_size_reg; i++)  
     {
-        for (int j = 0; j < MEAS_SIZE; j++) 
+        for (int j = 0; j < meas_size_reg; j++) 
         {
-            S_inv[i * MEAS_SIZE + j] = S_inv_2D[i][j];  // Converting 2D element back to 1D
+            S_inv[i * meas_size_reg + j] = S_inv_2D[i][j];  // Converting 2D element back to 1D
         }
     }
     // printf("S_inv\n");
     // print_matrix_new(S_inv, MEAS_SIZE, MEAS_SIZE);
 
-    matrix_multiply(F_P_FT_Q_times_HT, S_inv, Mat_K, STATE_SIZE,   MEAS_SIZE, MEAS_SIZE); 
+    matrix_multiply(F_P_FT_Q_times_HT, S_inv, Mat_K, STATE_SIZE,   meas_size_reg, meas_size_reg); 
     // printf("Mat_K\n");
     // print_matrix_new(Mat_K, STATE_SIZE, MEAS_SIZE);
 
@@ -325,7 +325,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     FLOAT_TYPE KtH[STATE_SIZE * MAX_MEAS_SIZE]; // Added Oct 8
 
     FLOAT_TYPE KtY[STATE_SIZE];
-    matrix_multiply(Mat_K, Y, KtY, STATE_SIZE,   MEAS_SIZE, 1); 
+    matrix_multiply(Mat_K, Y, KtY, STATE_SIZE,   meas_size_reg, 1); 
     // printf("KtY\n");
     // print_matrix_new(KtY, STATE_SIZE, 1);
 
@@ -333,7 +333,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // printf("vec_X\n");
     // print_matrix_new(KtY, STATE_SIZE, 1);
 
-    matrix_multiply(Mat_K, Mat_H, KtH, STATE_SIZE,   MEAS_SIZE, STATE_SIZE); 
+    matrix_multiply(Mat_K, Mat_H, KtH, STATE_SIZE,   meas_size_reg, STATE_SIZE); 
     // printf("KtH\n");
     // print_matrix_new(KtH, STATE_SIZE, STATE_SIZE);
     // std::cout << "WORKING TILL HERE" << std::endl;

@@ -71,7 +71,7 @@ void kalman_filter_sysc_catapult:: load() {
         /* <<--local-params-->> */
         uint32_t mac_n = conf.mac_n;
         uint32_t mac_vec = conf.mac_vec;
-        uint32_t mac_len = conf.mac_len;
+        uint32_t meas_size_reg = conf.meas_size_reg;
         uint32_t kalman_iters = conf.kalman_iters;
         uint32_t kalman_mat_rows = conf.kalman_mat_rows;
 
@@ -80,19 +80,22 @@ void kalman_filter_sysc_catapult:: load() {
         
         uint32_t inputs_base_address;
         uint32_t regs_base_address = 0;
+        cout << "Load: " << "meas_size_reg\t" << meas_size_reg << "\n";
 
         // cout << "Load_b: " << regs_base_address << "\t" << constant_matrices_size << "\t" << constant_matrices_size << "\n";
         load_b(ping_pong, regs_base_address, constant_matrices_size);
         // load_b(ping_pong, regs_base_address, input_vecs_total_size);
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
-            inputs_base_address = constant_matrices_size + (iter * MEAS_SIZE);
+            inputs_base_address = constant_matrices_size + (iter * meas_size_reg);
+            // inputs_base_address = constant_matrices_size + (iter * MEAS_SIZE);
 
             #ifdef PRINT_STATEMENTS
             // cout << "Load_d: " << inputs_base_address << "\t" << kalman_mat_rows << "\t" << (inputs_base_address + kalman_mat_rows) << "\n";
             #endif
-            // cout << "Load_d: " << inputs_base_address << "\t" << MEAS_SIZE << "\t" << (inputs_base_address + MEAS_SIZE) << "\n";
-            load_d(ping_pong, inputs_base_address, MEAS_SIZE);
+            // cout << "Load_d: " << inputs_base_address << "\t" << meas_size_reg << "\t" << (inputs_base_address + meas_size_reg) << "\n";
+            load_d(ping_pong, inputs_base_address, meas_size_reg);
+            // load_d(ping_pong, inputs_base_address, MEAS_SIZE);
 
 
             sync12.sync_out();
@@ -136,7 +139,7 @@ void kalman_filter_sysc_catapult::compute_dataReq() {
         /* <<--local-params-->> */
         uint32_t mac_n = conf.mac_n;
         uint32_t mac_vec = conf.mac_vec;
-        uint32_t mac_len = conf.mac_len;
+        uint32_t meas_size_reg = conf.meas_size_reg;
 
         uint32_t kalman_iters = conf.kalman_iters;
         uint32_t kalman_mat_rows = conf.kalman_mat_rows;
@@ -145,7 +148,7 @@ void kalman_filter_sysc_catapult::compute_dataReq() {
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             sync12.sync_in();
-            compute_req(iter, kalman_iters, kalman_mat_rows, constant_matrices_size, ping_pong, out_ping_pong);
+            compute_req(iter, kalman_iters, kalman_mat_rows, constant_matrices_size, ping_pong, out_ping_pong, meas_size_reg);
             sync23.sync_out();
             sync23b.sync_out();
             // ping_pong = !ping_pong;
@@ -190,7 +193,7 @@ void kalman_filter_sysc_catapult:: compute() {
         /* <<--local-params-->> */
         uint32_t mac_n = conf.mac_n;
         uint32_t mac_vec = conf.mac_vec;
-        uint32_t mac_len = conf.mac_len;
+        uint32_t meas_size_reg = conf.meas_size_reg;
         uint32_t kalman_iters = conf.kalman_iters;
         uint32_t kalman_mat_rows = conf.kalman_mat_rows;
         uint32_t constant_matrices_size = conf.constant_matrices_size;
@@ -209,7 +212,7 @@ void kalman_filter_sysc_catapult:: compute() {
             sync12b.sync_in();
             compute(iter, kalman_iters, kalman_mat_rows, 
                     vec_X_address, Mat_F_address, Mat_Q_address, Mat_R_address, Mat_H_address, Mat_P_address,
-                    constant_matrices_size, ping_pong, out_ping_pong);
+                    constant_matrices_size, ping_pong, out_ping_pong, meas_size_reg);
             sync2b3.sync_out();
             sync2b3b.sync_out();
             // ping_pong = !ping_pong;
@@ -241,7 +244,7 @@ void kalman_filter_sysc_catapult:: store_dataReq() {
         /* <<--local-params-->> */
         uint32_t mac_n = conf.mac_n;
         uint32_t mac_vec = conf.mac_vec;
-        uint32_t mac_len = conf.mac_len;
+        uint32_t meas_size_reg = conf.meas_size_reg;
         uint32_t kalman_iters = conf.kalman_iters;
         uint32_t kalman_mat_rows = conf.kalman_mat_rows;
         uint32_t input_vecs_total_size = conf.input_vecs_total_size;
@@ -289,7 +292,7 @@ void kalman_filter_sysc_catapult:: store() {
         /* <<--local-params-->> */
         uint32_t mac_n = conf.mac_n;
         uint32_t mac_vec = conf.mac_vec;
-        uint32_t mac_len = conf.mac_len;
+        uint32_t meas_size_reg = conf.meas_size_reg;
         uint32_t kalman_iters = conf.kalman_iters;
         uint32_t kalman_mat_rows = conf.kalman_mat_rows;
         uint32_t input_vecs_total_size = conf.input_vecs_total_size;

@@ -129,13 +129,13 @@ inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint
 
 
 
-inline void inverse_clean(FN_DATATYPE new_mat[MAX_MEAS_SIZE][MAX_MEAS_SIZE], FN_DATATYPE out[MAX_MEAS_SIZE][MAX_MEAS_SIZE])
+inline void inverse_clean(FN_DATATYPE new_mat[MAX_MEAS_SIZE][MAX_MEAS_SIZE], FN_DATATYPE out[MAX_MEAS_SIZE][MAX_MEAS_SIZE], uint32_t meas_size_reg)
 {
 
 		 FN_DATATYPE ratio;
 		 int i,j,k;
 
-		 if(MEAS_SIZE == 2){
+		 if(meas_size_reg == 2){
 			 FN_DATATYPE a = new_mat[0][0];
 			 FN_DATATYPE b = new_mat[0][1];
 			 FN_DATATYPE c = new_mat[1][0];
@@ -157,17 +157,17 @@ inline void inverse_clean(FN_DATATYPE new_mat[MAX_MEAS_SIZE][MAX_MEAS_SIZE], FN_
 		 }
 
 		 /* Applying Gauss Jordan Elimination */
-		 for(i = 0; i < MEAS_SIZE; i++)
+		 for(i = 0; i < meas_size_reg; i++)
 		 {
-			  for(j = 0; j < MEAS_SIZE; j++)
+			  for(j = 0; j < meas_size_reg; j++)
 			  {
 				   if(i != j)
 				   {
 					    ratio = new_mat[j][i]/new_mat[i][i];
-					    for(k = 0; k < MEAS_SIZE; k++)
+					    for(k = 0; k < meas_size_reg; k++)
 					    {
 
-					    	if(i == MEAS_SIZE-1){
+					    	if(i == meas_size_reg-1){
 					    		if(k == 0){//Calc the diagonal element first
 					    			new_mat[j][j] = FN_DATATYPE(new_mat[j][j] - ratio*new_mat[i][j]);
 					    		}
@@ -213,9 +213,9 @@ inline void inverse_clean(FN_DATATYPE new_mat[MAX_MEAS_SIZE][MAX_MEAS_SIZE], FN_
 
 			  }
 		 }
-		 for(i = 0; i < MEAS_SIZE; i++)
+		 for(i = 0; i < meas_size_reg; i++)
 		 {
-			 out[MEAS_SIZE-1][i] = out[MEAS_SIZE-1][i] / new_mat[MEAS_SIZE-1][MEAS_SIZE-1];
+			 out[meas_size_reg-1][i] = out[meas_size_reg-1][i] / new_mat[meas_size_reg-1][meas_size_reg-1];
 		 }
 		 return;
 }

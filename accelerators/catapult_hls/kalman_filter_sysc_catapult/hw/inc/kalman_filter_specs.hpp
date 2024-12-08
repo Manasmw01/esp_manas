@@ -19,8 +19,10 @@
 #define PRINT_STATEMENTS
 
 #define STATE_SIZE 6  // Number of states n
+// #define MEAS_SIZE 52  // Number of measurements m
+
+
 // #define MEAS_SIZE 164  // Number of measurements m
-#define MEAS_SIZE 52  // Number of measurements m
 // #define MEAS_SIZE 52  // Number of measurements m
 
 #define MAX_MEAS_SIZE 52  // Number of measurements m

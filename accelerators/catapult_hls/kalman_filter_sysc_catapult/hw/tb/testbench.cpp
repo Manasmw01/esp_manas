@@ -9,6 +9,7 @@
 #include <mc_scverify.h>
 
 #include <ac_float.h>
+#define MEAS_SIZE 46  // Number of measurements m
 
 #if (MEAS_SIZE == 164)
 #include "A_array.h"
@@ -217,7 +218,7 @@ void testbench::proc()
     conf_info.Reset();
     mac_n = 1;
     mac_vec = 100;
-    mac_len = 64;
+    meas_size_reg = MEAS_SIZE;
     kalman_iters = num_iterations; // Number of readings taken
     kalman_mat_rows = STATE_SIZE; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
     kalman_mat_cols = STATE_SIZE; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
@@ -384,7 +385,7 @@ void testbench::do_config()
         /* <<--params-->> */
         config.mac_n = mac_n;
         config.mac_vec = mac_vec;
-        config.mac_len = mac_len;
+        config.meas_size_reg = meas_size_reg;
         config.kalman_iters = kalman_iters;
         config.kalman_mat_rows = kalman_mat_rows;
 

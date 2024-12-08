@@ -65,7 +65,7 @@ SC_MODULE(testbench)
         /* <<--params-default-->> */
         // mac_n = 1;
         // mac_vec = 100;
-        // mac_len = 64;
+        // meas_size_reg = 64;
 
     }
     void load_data(ac_int<DATA_WIDTH,false> *inn, uint32_t load_size);
@@ -84,7 +84,7 @@ SC_MODULE(testbench)
     /* <<--params-->> */
     uint32_t mac_n;
     uint32_t mac_vec;
-    uint32_t mac_len;
+    uint32_t meas_size_reg;
     uint32_t kalman_iters; // Number of readings taken
     uint32_t kalman_mat_rows; // Number of num_iterations (4: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
     uint32_t kalman_mat_cols; // Number of num_iterations (4: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])

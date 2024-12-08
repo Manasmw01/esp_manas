@@ -39,11 +39,11 @@ public:
   inline void store_data_req(bool ping, uint32_t base_addr, uint32_t size);
   inline void store_data(bool ping, uint32_t base_addr, uint32_t size);
   
-inline void compute_req(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong);
+inline void compute_req(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong, uint32_t meas_size_reg);
   
 inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, 
                                     uint32_t vec_X_address, uint32_t Mat_F_address  , uint32_t Mat_Q_address, uint32_t Mat_R_address, 
-                                    uint32_t Mat_H_address, uint32_t Mat_P_address, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong);
+                                    uint32_t Mat_H_address, uint32_t Mat_P_address, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong,  uint32_t meas_size_reg);
 
   // SC_CTOR(kalman_filter_sysc_catapult):  
   //     plm_in_ping("plm_in_ping"), 

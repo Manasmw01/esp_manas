@@ -23,7 +23,7 @@ struct conf_info_t
     /* <<--params-->> */
         int32_t mac_n;
         int32_t mac_vec;
-        int32_t mac_len;
+        int32_t meas_size_reg;
 
         int32_t kalman_iters; // Number of readings taken
         int32_t kalman_mat_rows; // Number of measurements (4: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
@@ -48,7 +48,7 @@ struct conf_info_t
   AUTO_GEN_FIELD_METHODS(conf_info_t, ( \
                                 mac_n \
                                 , mac_vec \
-                                , mac_len \
+                                , meas_size_reg \
                                 , kalman_iters \
                                 , kalman_mat_rows \
                                 , kalman_mat_cols \
@@ -71,7 +71,7 @@ struct conf_info_t
     template <unsigned int Size> void Marshall(Marshaller <Size> &m) {
         m &mac_n;
         m &mac_vec;
-        m &mac_len;
+        m &meas_size_reg;
         m &kalman_iters;
         m &kalman_mat_rows;    
         m &kalman_mat_cols;    
@@ -97,7 +97,7 @@ struct conf_info_t
     {
         this->mac_n = 1;
         this->mac_vec = 100;
-        this->mac_len = 64;
+        this->meas_size_reg = 46;
 
         this->kalman_iters = 1;
         this->kalman_mat_rows = 1;
@@ -120,7 +120,7 @@ struct conf_info_t
     conf_info_t(
         int32_t mac_n, 
         int32_t mac_vec, 
-        int32_t mac_len,
+        int32_t meas_size_reg,
 
         int32_t kalman_iters,
         int32_t kalman_mat_rows,
@@ -143,7 +143,7 @@ struct conf_info_t
     {
         this->mac_n = mac_n;
         this->mac_vec = mac_vec;
-        this->mac_len = mac_len;
+        this->meas_size_reg = meas_size_reg;
         this->kalman_iters = kalman_iters;
         this->kalman_mat_rows = kalman_mat_rows;
         this->kalman_mat_cols = kalman_mat_cols;
@@ -172,7 +172,7 @@ struct conf_info_t
     {
         sc_trace(tf,v.mac_n, NAME + ".mac_n");
         sc_trace(tf,v.mac_vec, NAME + ".mac_vec");
-        sc_trace(tf,v.mac_len, NAME + ".mac_len");
+        sc_trace(tf,v.meas_size_reg, NAME + ".meas_size_reg");
 
         sc_trace(tf,v.kalman_iters, NAME + ".kalman_iters");
         sc_trace(tf,v.kalman_mat_rows, NAME + ".kalman_mat_rows");
@@ -198,7 +198,7 @@ struct conf_info_t
         os << "{";
         os << "mac_n = " << conf_info.mac_n << ", ";
         os << "mac_vec = " << conf_info.mac_vec << ", ";
-        os << "mac_len = " << conf_info.mac_len << "";
+        os << "meas_size_reg = " << conf_info.meas_size_reg << "";
 
         os << "kalman_iters = " << conf_info.kalman_iters << "";
         os << "kalman_mat_rows = " << conf_info.kalman_mat_rows << "";
