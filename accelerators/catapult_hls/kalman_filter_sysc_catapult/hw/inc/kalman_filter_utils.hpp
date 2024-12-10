@@ -6,10 +6,10 @@
 
 #include "kalman_filter.hpp"
 
-void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t size)
+void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t size, bool d, uint32_t mem_index)
 {
     uint32_t index = 0;
-    uint32_t mem_index = 0;
+    // uint32_t mem_index = 0;
     uint32_t mem_off = base_addr;
     // std::cout << "Load_d: " << base_addr << "-" << size << "\n";
 
@@ -35,11 +35,30 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
             plm_WR<in_as,inwp> wreq;
             wreq.indx[0]=mem_index++;
             wreq.data[0]=data_mask & r;
+            if (d) std::cout << "\tmem_index: " << mem_index << "\n";
 
             if (ping)
+            {
+                if(d)
+                {
                 in_ping_w.Push(wreq);
+                }
+                else
+                {
+                in_b_ping_w.Push(wreq);
+                }
+            }
             else
+            {
+                if(d)
+                {
                 in_pong_w.Push(wreq);
+                }
+                else
+                {
+                in_b_pong_w.Push(wreq);
+                }
+            }
 
         }
 

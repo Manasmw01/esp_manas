@@ -50,6 +50,7 @@ void kalman_filter_sysc_catapult:: load() {
     sync01.ResetRead();
     sync12.reset_sync_out();
     sync12b.reset_sync_out();
+    sync_load.reset_sync_out();
 
     conf1.ResetRead();
 
@@ -82,27 +83,34 @@ void kalman_filter_sysc_catapult:: load() {
         uint32_t regs_base_address = 0;
         cout << "Load: " << "meas_size_reg\t" << meas_size_reg << "\n";
 
-        // cout << "Load_b: " << regs_base_address << "\t" << constant_matrices_size << "\t" << constant_matrices_size << "\n";
-        load_b(ping_pong, regs_base_address, constant_matrices_size);
-        // load_b(ping_pong, regs_base_address, input_vecs_total_size);
+        // load_b(ping_pong, regs_base_address, constant_matrices_size);
+        load_d(ping_pong, regs_base_address, constant_matrices_size, 0, 0);
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             inputs_base_address = constant_matrices_size + (iter * meas_size_reg);
-            // inputs_base_address = constant_matrices_size + (iter * MEAS_SIZE);
+            uint32_t temp_indx = 0;  
+            uint32_t chunk_meas_size_reg = 46; 
+            uint32_t num_chunks = (meas_size_reg + chunk_meas_size_reg - 1) / chunk_meas_size_reg; 
 
-            #ifdef PRINT_STATEMENTS
-            // cout << "Load_d: " << inputs_base_address << "\t" << kalman_mat_rows << "\t" << (inputs_base_address + kalman_mat_rows) << "\n";
-            #endif
-            // cout << "Load_d: " << inputs_base_address << "\t" << meas_size_reg << "\t" << (inputs_base_address + meas_size_reg) << "\n";
-            load_d(ping_pong, inputs_base_address, meas_size_reg);
-            // load_d(ping_pong, inputs_base_address, MEAS_SIZE);
+            for (uint32_t chunk = 0; chunk < num_chunks; ++chunk)
+            {
+                uint32_t current_chunk_size = chunk_meas_size_reg; 
+                if (chunk == num_chunks - 1)
+                {
+                    current_chunk_size = meas_size_reg - (chunk * chunk_meas_size_reg);
+                }
+                uint32_t current_chunk_address = inputs_base_address + (chunk * chunk_meas_size_reg);
+                cout << "Load_d: " << current_chunk_address << "\t" << current_chunk_size 
+                    << "\t" << (current_chunk_address + current_chunk_size) << "\n";
 
-
-            sync12.sync_out();
-
-
-            sync12b.sync_out();
-            // ping_pong = !ping_pong;
+                load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
+                temp_indx += current_chunk_size;
+                // sync_load.sync_out();
+            }
+                sync12.sync_out();
+                sync_load.sync_out();
+                sync12b.sync_out();
+                // ping_pong = !ping_pong;
         }
     }
 }
@@ -112,6 +120,8 @@ void kalman_filter_sysc_catapult::compute_dataReq() {
     bool ping_pong = true;
     bool out_ping_pong = true;
     sync12.reset_sync_in();
+    sync_load.reset_sync_in();
+
     sync23.reset_sync_out();
     sync23b.reset_sync_out();
 
@@ -148,6 +158,8 @@ void kalman_filter_sysc_catapult::compute_dataReq() {
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             sync12.sync_in();
+            sync_load.sync_in();
+            
             compute_req(iter, kalman_iters, kalman_mat_rows, constant_matrices_size, ping_pong, out_ping_pong, meas_size_reg);
             sync23.sync_out();
             sync23b.sync_out();
@@ -162,6 +174,7 @@ void kalman_filter_sysc_catapult:: compute() {
     bool ping_pong = true;
     bool out_ping_pong = true;
     sync12b.reset_sync_in();
+
     sync2b3.reset_sync_out();
     sync2b3b.reset_sync_out();
 
@@ -169,7 +182,7 @@ void kalman_filter_sysc_catapult:: compute() {
     conf2b.ResetRead();
     sync_comp.reset_sync_in();
 
-    sync_comp.reset_sync_in();
+    // sync_comp.reset_sync_in();
 
     xp_ping_w.ResetWrite();
     xp_pong_w.ResetWrite();

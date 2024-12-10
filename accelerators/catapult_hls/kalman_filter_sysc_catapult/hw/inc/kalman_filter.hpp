@@ -34,7 +34,7 @@ public:
   void store_dataReq(void);
   void store(void);
 
-  inline void load_d(bool ping, uint32_t base_addr, uint32_t size);
+  inline void load_d(bool ping, uint32_t base_addr, uint32_t size, bool d, uint32_t mem_indx);
   inline void load_b(bool ping, uint32_t base_addr, uint32_t size);
   inline void store_data_req(bool ping, uint32_t base_addr, uint32_t size);
   inline void store_data(bool ping, uint32_t base_addr, uint32_t size);
@@ -138,6 +138,8 @@ inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_di
     }
   Connections::SyncChannel CCS_INIT_S1(sync12);
   Connections::SyncChannel CCS_INIT_S1(sync12b);
+  Connections::SyncChannel CCS_INIT_S1(sync_load);
+
   Connections::SyncChannel CCS_INIT_S1(sync23);
   Connections::SyncChannel CCS_INIT_S1(sync2b3);
   Connections::SyncChannel CCS_INIT_S1(sync23b);

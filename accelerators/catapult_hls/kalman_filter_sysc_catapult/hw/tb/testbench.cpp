@@ -9,7 +9,8 @@
 #include <mc_scverify.h>
 
 #include <ac_float.h>
-#define MEAS_SIZE 46  // Number of measurements m
+// #define MEAS_SIZE 46  // Number of measurements m
+#define MEAS_SIZE 52  // Number of measurements m
 
 #if (MEAS_SIZE == 164)
 #include "A_array.h"
