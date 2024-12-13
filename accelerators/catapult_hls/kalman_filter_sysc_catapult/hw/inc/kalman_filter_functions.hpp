@@ -8,19 +8,47 @@
 void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong, uint32_t meas_size_reg)
 {
     
-        for (uint32_t i = 0; i < meas_size_reg; i++)
-        {
-            plm_RRq<in_as,inrp> rreq;
-            rreq.indx[0]=i;
-            if(pingpong)            
-                in_ping_ra.Push(rreq);
-            else
-                in_pong_ra.Push(rreq);
-        }
-        
+        // for (uint32_t i = 0; i < meas_size_reg; i++)
+        // {
+        //     plm_RRq<in_as,inrp> rreq;
+        //     rreq.indx[0]=i;
+        //     if(pingpong)            
+        //         in_ping_ra.Push(rreq);
+        //     else
+        //         in_pong_ra.Push(rreq);
+        //     cout << "in_ping_ra: " << i << "\n";
+        // }
+
+        // uint32_t chunk_meas_size_reg = 52; // Define chunk size
+        uint32_t chunk_meas_size_reg = 20; // Define chunk size
+        uint32_t num_chunks = (meas_size_reg + chunk_meas_size_reg - 1) / chunk_meas_size_reg; // Calculate number of chunks
+        sync_load.sync_in();
+
+        for (uint32_t chunk = 0; chunk < num_chunks; ++chunk) {
+            // Determine the size of the current chunk
+            uint32_t current_chunk_size = chunk_meas_size_reg; 
+            if (chunk == num_chunks - 1) {
+                current_chunk_size = meas_size_reg - (chunk * chunk_meas_size_reg);
+            }
+
+            for (uint32_t i = 0; i < current_chunk_size; ++i) {
+                plm_RRq<in_as, inrp> rreq;
+                rreq.indx[0] = (chunk * chunk_meas_size_reg) + i; // Update index with the appropriate value
+
+                if (pingpong) {
+                    in_ping_ra.Push(rreq);
+                } else {
+                    in_pong_ra.Push(rreq);
+                }
+                // cout << "in_ping_ra: " << i << "\n";
+            }
+        }       
+
+
         for (uint32_t i = 0; i < constant_matrices_size; i++)
         {
-            plm_RRq<in_as,inrp> rreq;
+            // plm_RRq<in_as,inrp> rreq;
+            plm_RRq<inb_as,inrp> rreq;
             rreq.indx[0]=i;
             if(pingpong)            
                 in_b_ping_ra.Push(rreq);
@@ -392,9 +420,14 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             wreq.indx[0]=input_ptr;
 
             if (out_pingpong)
+            {
                 out_ping_w.Push(wreq);
+                std::cout << "\tout_ping_w: " << input_ptr << "\n";
+            }
             else
+            {
                 out_pong_w.Push(wreq);
+            }
             input_ptr++;
         }
         input_ptr = 0;
@@ -425,9 +458,14 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             wreq1.indx[0]=input_ptr;
 
             if (out_pingpong)
+            {
                 xp_ping_w.Push(wreq1);
+                std::cout << "\txp_ping_w: " << input_ptr << "\n";
+            }
             else
+            {
                 xp_pong_w.Push(wreq1);
+            }
             input_ptr++;
         }
     wait();

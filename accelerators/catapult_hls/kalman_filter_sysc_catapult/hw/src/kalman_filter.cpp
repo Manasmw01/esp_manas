@@ -82,14 +82,36 @@ void kalman_filter_sysc_catapult:: load() {
         uint32_t inputs_base_address;
         uint32_t regs_base_address = 0;
         cout << "Load: " << "meas_size_reg\t" << meas_size_reg << "\n";
+        cout << "PLM_IN_WORD: " << PLM_IN_WORD << "\n";
 
-        // load_b(ping_pong, regs_base_address, constant_matrices_size);
-        load_d(ping_pong, regs_base_address, constant_matrices_size, 0, 0);
+        // load_d(ping_pong, regs_base_address, constant_matrices_size, 0, 0);
+        uint32_t temp_indx_const = 0;  
+        uint32_t chunk_reg = 50; 
+        uint32_t num_chunks_d = (constant_matrices_size + chunk_reg - 1) / chunk_reg; 
+        for (uint32_t chunk = 0; chunk < num_chunks_d; ++chunk)
+        {
+            uint32_t current_chunk_size = chunk_reg; 
+            if (chunk == num_chunks_d - 1)
+            {
+                current_chunk_size = constant_matrices_size - (chunk * chunk_reg);
+            }
+            uint32_t current_chunk_address = regs_base_address + (chunk * chunk_reg);
+            // cout << "Load_d const" << "(" << chunk << "): " << current_chunk_address << "\t" << current_chunk_size 
+            //     << "\t" << (current_chunk_address + current_chunk_size) << "\n";
+
+            load_d(ping_pong, current_chunk_address, current_chunk_size, 0, temp_indx_const);
+            // load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
+            temp_indx_const += current_chunk_size;
+            // sync_load.sync_out();
+        }
+
+
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             inputs_base_address = constant_matrices_size + (iter * meas_size_reg);
             uint32_t temp_indx = 0;  
-            uint32_t chunk_meas_size_reg = 46; 
+            uint32_t chunk_meas_size_reg = 20; 
+            // uint32_t chunk_meas_size_reg = 52; 
             uint32_t num_chunks = (meas_size_reg + chunk_meas_size_reg - 1) / chunk_meas_size_reg; 
 
             for (uint32_t chunk = 0; chunk < num_chunks; ++chunk)
@@ -100,13 +122,14 @@ void kalman_filter_sysc_catapult:: load() {
                     current_chunk_size = meas_size_reg - (chunk * chunk_meas_size_reg);
                 }
                 uint32_t current_chunk_address = inputs_base_address + (chunk * chunk_meas_size_reg);
-                cout << "Load_d: " << current_chunk_address << "\t" << current_chunk_size 
-                    << "\t" << (current_chunk_address + current_chunk_size) << "\n";
+                // cout << "Load_d measurements" << "(" << iter << "): " << current_chunk_address << "\t" << current_chunk_size 
+                    // << "\t" << (current_chunk_address + current_chunk_size) << "\n";
 
                 load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
                 temp_indx += current_chunk_size;
                 // sync_load.sync_out();
             }
+                // cout << "\n";
                 sync12.sync_out();
                 sync_load.sync_out();
                 sync12b.sync_out();
@@ -158,7 +181,7 @@ void kalman_filter_sysc_catapult::compute_dataReq() {
         for (uint16_t iter = 0; iter < kalman_iters; iter++)
         {
             sync12.sync_in();
-            sync_load.sync_in();
+            // sync_load.sync_in();
             
             compute_req(iter, kalman_iters, kalman_mat_rows, constant_matrices_size, ping_pong, out_ping_pong, meas_size_reg);
             sync23.sync_out();
@@ -320,6 +343,7 @@ void kalman_filter_sysc_catapult:: store() {
             out_index = input_vecs_total_size + out_len*b;
             // cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
             store_data(ping_pong, out_index, out_len);
+            cout << "store_data(" << b << "): " << out_index << "\t" << out_len << "\n";        
         }
 
         acc_done.write(true); wait();

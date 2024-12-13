@@ -25,7 +25,8 @@
 // #define MEAS_SIZE 164  // Number of measurements m
 // #define MEAS_SIZE 52  // Number of measurements m
 
-#define MAX_MEAS_SIZE 52  // Number of measurements m
+// #define MAX_MEAS_SIZE 52  // Number of measurements m
+#define MAX_MEAS_SIZE 124  // Number of measurements m
 
 #define SAMPLES 20  // Number of measurements m
 
@@ -38,11 +39,14 @@
 #define DATA_WIDTH 32
 // #define DATA_WIDTH 64
 #define DMA_SIZE SIZE_WORD
-// #define PLM_IN_WORD 800000
 // #define PLM_OUT_WORD 1000
 
-#define PLM_IN_WORD 3650
-#define PLM_OUT_WORD 1000
+// #define PLM_IN_WORD 80000
+#define PLM_IN_WORD (STATE_SIZE + (STATE_SIZE*STATE_SIZE) + (STATE_SIZE*STATE_SIZE) + (MAX_MEAS_SIZE*MAX_MEAS_SIZE) + (MAX_MEAS_SIZE*STATE_SIZE) + (STATE_SIZE*STATE_SIZE) + (SAMPLES*MAX_MEAS_SIZE))
+#define PLM_B_IN_WORD 3000
+
+// #define PLM_IN_WORD 3650
+#define PLM_OUT_WORD 3000
 
 #define MEM_SIZE 416000/(DMA_WIDTH/8)
 
@@ -74,10 +78,15 @@ const unsigned int outwp = PLM_OUT_WP;
 const unsigned int outrp = PLM_OUT_RP;
 const unsigned int inbks = PLM_IN_WP;
 const unsigned int outbks = PLM_OUT_RP;
-const unsigned int inebks = PLM_IN_WORD/PLM_IN_WP;
+// const unsigned int inebks = PLM_IN_WORD/PLM_IN_WP;
+const unsigned int inebks = PLM_B_IN_WORD/PLM_IN_WP;
 const unsigned int outebks = PLM_OUT_WORD/PLM_OUT_RP;
 const unsigned int in_as = nvhls::index_width<inbks * inebks>::val;
 const unsigned int out_as = nvhls::index_width<outbks * outebks>::val;
+
+const unsigned int inbebks = PLM_IN_WORD/PLM_IN_WP;
+// const unsigned int inbebks = PLM_B_IN_WORD/PLM_IN_WP;
+const unsigned int inb_as = nvhls::index_width<inbks * inbebks>::val;
 
 template<unsigned int kAddressSz>
 struct Address{

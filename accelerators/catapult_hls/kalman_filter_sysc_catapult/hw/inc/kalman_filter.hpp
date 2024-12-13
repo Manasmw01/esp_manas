@@ -172,16 +172,17 @@ mem_wrap<inbks, inrp,
            plm_RRs<inrp>> CCS_INIT_S1(plm_in_pong);
 
   mem_wrap<inbks, inrp,
-           inwp, inebks,
-           DATA_TYPE, NVUINTW(in_as),
-           plm_WR<in_as, inwp>,
-           plm_RRq<in_as,inrp>,
+          //  inwp, inebks,
+           inwp, inbebks,
+           DATA_TYPE, NVUINTW(inb_as),
+           plm_WR<inb_as, inwp>,
+           plm_RRq<inb_as,inrp>,
            plm_RRs<inrp>> CCS_INIT_S1(plm_in_b_ping);
   mem_wrap<inbks, inrp,
-           inwp, inebks,
-           DATA_TYPE, NVUINTW(in_as),
-           plm_WR<in_as, inwp>,
-           plm_RRq<in_as, inrp>,
+           inwp, inbebks,
+           DATA_TYPE, NVUINTW(inb_as),
+           plm_WR<inb_as, inwp>,
+           plm_RRq<inb_as, inrp>,
            plm_RRs<inrp>> CCS_INIT_S1(plm_in_b_pong);
 
 
@@ -222,13 +223,22 @@ mem_wrap<inbks, inrp,
   Connections::Combinational<plm_RRs<inrp>> in_pong_rd;
 
 
-  Connections::Combinational<plm_WR<in_as,inwp>> in_b_ping_w;
-  Connections::Combinational<plm_RRq<in_as,inrp>> in_b_ping_ra;
+  // Connections::Combinational<plm_WR<in_as,inwp>> in_b_ping_w;
+  // Connections::Combinational<plm_RRq<in_as,inrp>> in_b_ping_ra;
+  // Connections::Combinational<plm_RRs<inrp>> in_b_ping_rd;
+
+  // Connections::Combinational<plm_WR<in_as,inwp>> in_b_pong_w;
+  // Connections::Combinational<plm_RRq<in_as,inrp>> in_b_pong_ra;
+  // Connections::Combinational<plm_RRs<inrp>> in_b_pong_rd;
+
+  Connections::Combinational<plm_WR<inb_as,inwp>> in_b_ping_w;
+  Connections::Combinational<plm_RRq<inb_as,inrp>> in_b_ping_ra;
   Connections::Combinational<plm_RRs<inrp>> in_b_ping_rd;
 
-  Connections::Combinational<plm_WR<in_as,inwp>> in_b_pong_w;
-  Connections::Combinational<plm_RRq<in_as,inrp>> in_b_pong_ra;
+  Connections::Combinational<plm_WR<inb_as,inwp>> in_b_pong_w;
+  Connections::Combinational<plm_RRq<inb_as,inrp>> in_b_pong_ra;
   Connections::Combinational<plm_RRs<inrp>> in_b_pong_rd;
+
 
 
   Connections::Combinational<plm_WR<out_as,outwp>> xp_ping_w;

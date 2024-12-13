@@ -33,19 +33,33 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
             DMA_WORD r=dma_read_chnl.Pop();
 
             plm_WR<in_as,inwp> wreq;
+            plm_WR<inb_as,inwp> wreqb;
+            if(d)
+            {
             wreq.indx[0]=mem_index++;
             wreq.data[0]=data_mask & r;
-            if (d) std::cout << "\tmem_index: " << mem_index << "\n";
+            }
+            else
+            {
+            wreqb.indx[0]=mem_index++;
+            wreqb.data[0]=data_mask & r;
+            }
+            // wreq.indx[0]=mem_index++;
+            // wreq.data[0]=data_mask & r;
+            std::cout << "\tmem_index: " << mem_index << "\n";
 
             if (ping)
             {
                 if(d)
                 {
                 in_ping_w.Push(wreq);
+                std::cout << "\t\tin_ping_w.Push:\n";
                 }
                 else
                 {
-                in_b_ping_w.Push(wreq);
+                // in_b_ping_w.Push(wreq);
+                in_b_ping_w.Push(wreqb);
+                std::cout << "\tin_b_ping_w.push: " << mem_index << "\n";
                 }
             }
             else
@@ -53,10 +67,13 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
                 if(d)
                 {
                 in_pong_w.Push(wreq);
+                std::cout << "\t\tin_pong_w.Push:\n";
                 }
                 else
                 {
-                in_b_pong_w.Push(wreq);
+                // in_b_pong_w.Push(wreq);
+                in_b_pong_w.Push(wreqb);
+                std::cout << "\t\tin_b_pong_w.Push:\n";
                 }
             }
 
@@ -93,7 +110,8 @@ void kalman_filter_sysc_catapult::load_b(bool ping, uint32_t base_addr, uint32_t
 
             DMA_WORD r=dma_read_chnl.Pop();
 
-            plm_WR<in_as,inwp> wreq;
+            // plm_WR<in_as,inwp> wreq;
+            plm_WR<inb_as,inwp> wreq;
             wreq.indx[0]=mem_index++;
             wreq.data[0]=data_mask & r;
 
