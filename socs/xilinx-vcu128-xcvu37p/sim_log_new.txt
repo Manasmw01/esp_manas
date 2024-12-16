@@ -1,14 +1,9 @@
-    MKDIR socgen/esp/.esp_config
-    CP socgen/esp/.esp_config
-    MKDIR socgen/grlib/.grlib_config
-    CP socgen/grlib/.grlib_config
-    MKDIR logs/hls
-    MKDIR kalman_filter_sysc_catapult-wdir
-    INFO Running RTL simulation for available implementations of kalman_filter_sysc_catapult-sim
-    RUN kalman_filter_sysc_catapult-sim
-make[1]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup'
+    MKDIR mac_sysc_catapult-wdir
+    INFO Running RTL simulation for available implementations of mac_sysc_catapult-sim
+    RUN mac_sysc_catapult-sim
+make[1]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup'
 catapult -product ultra -shell -f ./rtl_sim.tcl &
-make[1]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup'
+make[1]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup'
 //  Catapult Ultra Synthesis 2021.1/950854 (Production Release) Mon Aug  2 21:36:02 PDT 2021
 //  
 //          Copyright (c) Siemens EDA, 1996-2021, All Rights Reserved.
@@ -31,24 +26,1304 @@ dofile ./rtl_sim.tcl
 # > source ../../../common/hls/common.tcl
 # -2
 # > project load ${ACCELERATOR}_dma${DMA_WIDTH}.ccs
-# Moving session transcript to file "/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/catapult.log"
-# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_in_eaa9b258ff72a822fcdc7b6c8886825158b5_0/.sif/solIndex_2_8e7d0e29-19aa-4b22-a9b8-38fe411866f9.xml' ... (LIB-129)
-# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_out_9cf25de6b7d83ca42d60f7e9dca5dd3c585b_0/.sif/solIndex_2_99258918-fe49-4754-960e-d31d78551011.xml' ... (LIB-129)
-# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/ac__fx_div_24__adb58553ec438a5f795c39f8127687fd18639_0/.sif/solIndex_2_6f5e2b17-9f33-4282-86ad-cd28f62f92c3.xml' ... (LIB-129)
-# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/leading_sign_28_1_1_0_0e043da8b3e1a4c6b0a45d3556b7489a7550_0/.sif/solIndex_2_e1e0ef05-21f2-49a4-a649-c7f9a861b730.xml' ... (LIB-129)
-# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/td_ccore_solutions/leading_sign_24_0_31c3f6c74cfc8824cb1afda72c3f9a3c6b05_0/.sif/solIndex_2_cf50dadb-4299-444b-a509-339eab033294.xml' ... (LIB-129)
+# Moving session transcript to file "/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/catapult.log"
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_in_cc67413ea71039052ba30850b6ca15dc57ed_0/.sif/solIndex_2_3350278d-c5d0-4a90-9ea3-92b8dda50f37.xml' ... (LIB-129)
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/td_ccore_solutions/Connections__conn_sync__chan__sync_out_71427fb3f777dc935427f58ca3978b2157f7_0/.sif/solIndex_2_5e3b5508-8f06-41ae-b1d1-359fc08668d4.xml' ... (LIB-129)
+# Reading solution library '/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/td_ccore_solutions/leading_sign_24_0_b103d94b81aa96d24d862b78882ef2c16b05_0/.sif/solIndex_2_604ce8ab-7b04-46cb-9293-39390e008c00.xml' ... (LIB-129)
 # > flow run /SCVerify/launch_make ./scverify/Verify_concat_sim_${ACCELERATOR}_v_msim.mk {} SIMTOOL=msim simgui
-# Making './scverify/Verify_concat_sim_kalman_filter_sysc_catapult_v_msim.mk {} SIMTOOL=msim simgui'
-# Make utility invoked from '/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1'
-#     /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/bin/make -f ./scverify/Verify_concat_sim_kalman_filter_sysc_catapult_v_msim.mk SIMTOOL=msim build < "/dev/null" (BASIC-15)
-# make[2]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1'
-# make[2]: Nothing to be done for `build'.
-# make[2]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1'
-#     /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/bin/make -f ./scverify/Verify_concat_sim_kalman_filter_sysc_catapult_v_msim.mk SIMTOOL=msim simgui < "/dev/null" (BASIC-15)
-make[2]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1'
+# Making './scverify/Verify_concat_sim_mac_sysc_catapult_v_msim.mk {} SIMTOOL=msim simgui'
+# Make utility invoked from '/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'
+#     /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/bin/make -f ./scverify/Verify_concat_sim_mac_sysc_catapult_v_msim.mk SIMTOOL=msim build < "/dev/null" (BASIC-15)
+# make[2]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'
+# ============================================
+# Creating simulation directory 'scverify/concat_sim_mac_sysc_catapult_v_msim'
+# mkdir -p scverify/concat_sim_mac_sysc_catapult_v_msim
+# ============================================
+# Setting up default modelsim.ini file from '/opt/cad/modelsim/bin/../modelsim.ini'
+# cat "/opt/cad/modelsim/bin/../modelsim.ini" >scverify/concat_sim_mac_sysc_catapult_v_msim/modelsim.ini
+# ============================================
+# Creating physical library 'scverify/concat_sim_mac_sysc_catapult_v_msim/work'
+# /opt/cad/modelsim/bin/vlib scverify/concat_sim_mac_sysc_catapult_v_msim/work
+# ============================================
+# Mapping logical library 'work' to physical path '$SCVLIBS/scverify/concat_sim_mac_sysc_catapult_v_msim/work'
+# /opt/cad/modelsim/bin/vmap work \$SCVLIBS/scverify/concat_sim_mac_sysc_catapult_v_msim/work
+# Model Technology ModelSim SE-64 vmap 2019.2 Lib Mapping Utility 2019.04 Apr 16 2019
+# vmap work $SCVLIBS/scverify/concat_sim_mac_sysc_catapult_v_msim/work 
+# Modifying scverify/concat_sim_mac_sysc_catapult_v_msim/modelsim.ini
+# ============================================
+# Creating Questa SIM wave TCL file 'scverify/concat_sim_mac_sysc_catapult_v_msim/scverify_msim_wave.tcl' from 'scverify/ccs_wave_signals.dat'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/bin/tclsh8.5 /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/sif/userware/En_na/flows/app_questasim.flo create_wave_script ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/ccs_wave_signals.dat scverify/concat_sim_mac_sysc_catapult_v_msim/scverify_msim_wave.tcl ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/.dut_inst_info.tcl ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/.qwave_signal 
+# app_questasim.flo - Executing command 'create_wave_script ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/ccs_wave_signals.dat scverify/concat_sim_mac_sysc_catapult_v_msim/scverify_msim_wave.tcl ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/.dut_inst_info.tcl ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/.qwave_signal'...
+# Wrote Questa SIM waveform creation script to 'scverify/concat_sim_mac_sysc_catapult_v_msim/scverify_msim_wave.tcl'
+# ============================================
+# Compiling Verilog file: concat_sim_mac_sysc_catapult.v
+# /opt/cad/modelsim/bin/vlog -work work     concat_sim_mac_sysc_catapult.v
+# Model Technology ModelSim SE-64 vlog 2019.2 Compiler 2019.04 Apr 16 2019
+# Start time: 17:45:30 on Dec 15,2024
+# vlog -work work concat_sim_mac_sysc_catapult.v 
+# -- Compiling module esp_acc_mac_sysc_catapult_ccs_ctrl_in_buf_wait_v4
+# -- Compiling module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5
+# -- Compiling module DUAL_PORT_RBW
+# -- Compiling module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_in_v1
+# -- Compiling module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_sync_out_vld_v1
+# -- Compiling module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_out_core
+# -- Compiling module esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_out
+# -- Compiling module esp_acc_mac_sysc_catapult_mgc_mul_pipe
+# ** Warning: concat_sim_mac_sysc_catapult.v(760): (vlog-2275) 'esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_in_v1' already exists and will be overwritten.
+# -- Compiling module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_in_v1
+# ** Warning: concat_sim_mac_sysc_catapult.v(793): (vlog-2275) 'esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_sync_out_vld_v1' already exists and will be overwritten.
+# -- Compiling module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_sync_out_vld_v1
+# -- Compiling module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_in_core
+# -- Compiling module esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_in
+# -- Compiling module esp_acc_mac_sysc_catapult_leading_sign_24_0
+# -- Compiling module esp_acc_mac_sysc_catapult_mgc_shift_l_v5
+# -- Compiling module esp_acc_mac_sysc_catapult_mgc_shift_r_v5
+# -- Compiling module esp_acc_mac_sysc_catapult_mgc_shift_br_v5
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_store_fsm
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_staller
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi_dma_write_chnl_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi_dma_write_chnl_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi_out_pong_rd_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi_out_pong_rd_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi_out_ping_rd_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi_out_ping_rd_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_ctrl_Push_mioi_dma_write_ctrl_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync2b3b_sync_in_mioi_sync2b3b_sync_in_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync23b_sync_in_mioi_sync23b_sync_in_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi_conf3b_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi_conf3b_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi_sync03b_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi_sync03b_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_store_dataReq_fsm
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_staller
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi_out_pong_ra_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi_out_pong_ra_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi_out_ping_ra_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi_out_ping_ra_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync2b3_sync_in_mioi_sync2b3_sync_in_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync23_sync_in_mioi_sync23_sync_in_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi_conf3_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi_conf3_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi_sync03_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi_sync03_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_compute_fsm
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_staller
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3b_sync_out_mioi_sync2b3b_sync_out_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3_sync_out_mioi_sync2b3_sync_out_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi_out_pong_w_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi_out_pong_w_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi_out_ping_w_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi_out_ping_w_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi_in_pong_rd_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi_in_pong_rd_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi_in_ping_rd_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi_in_ping_rd_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync12b_sync_in_mioi_sync12b_sync_in_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi_conf2b_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi_conf2b_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi_sync02b_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi_sync02b_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_compute_dataReq_fsm
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_staller
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23b_sync_out_mioi_sync23b_sync_out_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23_sync_out_mioi_sync23_sync_out_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi_in_pong_ra_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi_in_pong_ra_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi_in_ping_ra_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi_in_ping_ra_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync12_sync_in_mioi_sync12_sync_in_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi_conf2_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi_conf2_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi_sync02_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi_sync02_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_load_fsm
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_staller
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12b_sync_out_mioi_sync12b_sync_out_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12_sync_out_mioi_sync12_sync_out_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi_in_pong_w_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi_in_pong_w_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi_in_ping_w_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi_in_ping_w_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi_dma_read_chnl_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi_dma_read_chnl_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_ctrl_Push_mioi_dma_read_ctrl_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi_conf1_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi_conf1_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi_sync01_Pop_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi_sync01_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_config_fsm
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_staller
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi_sync03b_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi_sync03b_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi_sync03_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi_sync03_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi_sync02b_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi_sync02b_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi_sync02_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi_sync02_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi_sync01_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi_sync01_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi_conf3b_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi_conf3b_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi_conf3_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi_conf3_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi_conf2b_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi_conf2b_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi_conf2_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi_conf2_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi_conf1_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi_conf1_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf_info_Pop_mioi_conf_info_Pop_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_DUAL_PORT_RBW_DUAL_PORT_RBW_rwport_en_19_16_32_65536_65536_32_gen
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_mem_run_fsm
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_staller
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi_read_rsp_Push_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi_read_rsp_Push_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi_read_req_PopNB_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi_read_req_PopNB_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi_write_req_PopNB_mio_wait_dp
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi_write_req_PopNB_mio_wait_ctrl
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_ctrl_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync2b3b_sync_in_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync23b_sync_in_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync2b3_sync_in_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync23_sync_in_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3b_sync_out_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3_sync_out_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync12b_sync_in_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23b_sync_out_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23_sync_out_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync12_sync_in_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12b_sync_out_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12_sync_out_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_ctrl_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf_info_Pop_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load
+# -- Compiling module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config
+# -- Compiling module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U
+# -- Compiling module mac_sysc_catapult
+# 
+# Top level modules:
+# 	mac_sysc_catapult
+# End time: 17:45:32 on Dec 15,2024, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 2
+# ============================================
+# Compiling C++ file: ../../../tb/testbench.cpp
+# /opt/cad/modelsim/bin/sccom -g -x c++ -Wall -Wno-unused-label -Wno-unknown-pragmas -scpoptions "--c++11" -DCCS_DUT_RTL -DCCS_DUT_VERILOG -DCONNECTIONS_ACCURATE_SIM -DCONNECTIONS_NAMING_ORIGINAL -DHLS_CATAPULT -DSC_INCLUDE_DYNAMIC_PROCESSES -DCCS_SYSC -DSC_USE_STD_STRING -DTOP_HDL_ENTITY=mac_sysc_catapult -DDMA_WIDTH=32 -DDEADLOCK_DETECTION -std=gnu++11 -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/sieme
+# ns_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/src -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/siflibs -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/mgc_comps_src -DUSE_STD_STRING -DSC_INCLUDE_MTI_AC  -c ../../../tb/testbench.cpp
+# Start time: 17:45:32 on Dec 15,2024
+# 
+# Model Technology ModelSim SE-64 sccom 2019.2 compiler 2019.04 Apr 16 2019
+# 
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ../../../inc/mac_specs.hpp:8,
+#                  from ../../../inc/mac_conf_info.hpp:12,
+#                  from ../../../tb/testbench.hpp:10,
+#                  from ../../../tb/testbench.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:23:0: warning: "CONNECTIONS_ASSERT_MSG" redefined
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG) NVHLS_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ../../../inc/mac_specs.hpp:7,
+#                  from ../../../inc/mac_conf_info.hpp:12,
+#                  from ../../../tb/testbench.hpp:10,
+#                  from ../../../tb/testbench.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:50:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG)           \
+#  ^
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ../../../inc/mac_specs.hpp:8,
+#                  from ../../../inc/mac_conf_info.hpp:12,
+#                  from ../../../tb/testbench.hpp:10,
+#                  from ../../../tb/testbench.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:24:0: warning: "CONNECTIONS_SIM_ONLY_ASSERT_MSG" redefined
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) CMOD_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ../../../inc/mac_specs.hpp:7,
+#                  from ../../../inc/mac_conf_info.hpp:12,
+#                  from ../../../tb/testbench.hpp:10,
+#                  from ../../../tb/testbench.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:75:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) \
+#  ^
+# In file included from ../../../inc/mac_specs.hpp:8:0,
+#                  from ../../../inc/mac_conf_info.hpp:12,
+#                  from ../../../tb/testbench.hpp:10,
+#                  from ../../../tb/testbench.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:34:0: warning: "CONNECTIONS_NAMING_ORIGINAL" redefined
+#  #define CONNECTIONS_NAMING_ORIGINAL
+#  ^
+# <command-line>:0:0: note: this is the location of the previous definition
+# ../../../tb/testbench.cpp: In member function 'void testbench::proc()':
+# ../../../tb/testbench.cpp:76:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#      for (int i = 0; i < mac_n; i++)
+#                        ^
+# ../../../tb/testbench.cpp:77:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#          for (int j = 0; j < mac_vec; j++) {
+#                            ^
+# ../../../tb/testbench.cpp:81:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#              for (int k = 0; k < mac_len; k += 2) {
+#                                ^
+# In file included from ../../../tb/testbench.hpp:14:0,
+#                  from ../../../tb/testbench.cpp:4:
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp: In instantiation of 'esp_dma_controller<_DMA_WIDTH_, _MEM_SIZE_>::esp_dma_controller(sc_core::sc_module_name, mti_ac::ac_int<32, true>*) [with int _DMA_WIDTH_ = 32; int _MEM_SIZE_ = 16842752]':
+# ../../../tb/testbench.hpp:44:81:   required from here
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp:41:50: warning: 'esp_dma_controller<32, 16842752>::dma_read_chnl' will be initialized after [-Wreorder]
+#          Connections::Out<ac_int<DMA_WIDTH,true>> dma_read_chnl;
+#                                                   ^
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp:36:21: warning:   'sc_core::sc_in<bool> esp_dma_controller<32, 16842752>::acc_done' [-Wreorder]
+#          sc_in<bool> acc_done;
+#                      ^
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp:48:9: warning:   when initialized here [-Wreorder]
+#          esp_dma_controller(sc_module_name name, ac_int<DMA_WIDTH,true> *ptr)
+#          ^
+# In file included from ./../../../inc/mac.hpp:9:0,
+#                  from ./scverify/sysc_sim.h:32,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_scverify.h:132,
+#                  from ../../../tb/testbench.cpp:7:
+# ./../../../inc/mem_wrap.hpp: In instantiation of 'void mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_run() [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]':
+# ./../../../inc/mem_wrap.hpp:40:9:   required from 'mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_wrap(sc_core::sc_module_name) [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]'
+# ./../../../inc/mac.hpp:112:27:   required from here
+# ./../../../inc/mem_wrap.hpp:72:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumWritePorts; i++)
+#                                 ^
+# ./../../../inc/mem_wrap.hpp:83:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# ./../../../inc/mem_wrap.hpp:107:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# In file included from ../../../inc/mac_data_types.hpp:11:0,
+#                  from ../../../tb/testbench.hpp:12,
+#                  from ../../../tb/testbench.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 141; int W = 16; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 16; int IFX = 16; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 16; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2277:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '141' with boolean expression is always true [-Wbool-compare]
+#      const bool pos_width = MaxLShift > S;
+#                                       ^
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 156; int W = 32; bool S = true]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = true; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = true; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2282:54:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '156' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 157; int W = 32; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2287:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '157' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 189; int W = 64; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 64; int IFX = 64; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 64; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2293:59:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '189' with boolean expression is always true [-Wbool-compare]
+# 
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (./scverify/sysc_sim.h, 50)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (./scverify/sysc_sim.h, 51)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (./scverify/sysc_sim.h, 52)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (./scverify/sysc_sim.h, 53)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (./scverify/sysc_sim.h, 54)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 30)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 33)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 41)
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (./../../../inc/mac.hpp, 24)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (./../../../inc/mac.hpp, 25)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (./../../../inc/mac.hpp, 26)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (./../../../inc/mac.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (./../../../inc/mac.hpp, 28)
+# ** Warning: (sccom-6102) The object "write_req" is not debuggable. (./../../../inc/mem_wrap.hpp, 23)
+# ** Warning: (sccom-6102) The object "read_req" is not debuggable. (./../../../inc/mem_wrap.hpp, 24)
+# ** Warning: (sccom-6102) The object "read_rsp" is not debuggable. (./../../../inc/mem_wrap.hpp, 25)
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (../../../tb/testbench.hpp, 24)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (../../../tb/testbench.hpp, 25)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (../../../tb/testbench.hpp, 26)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (../../../tb/testbench.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (../../../tb/testbench.hpp, 28)
+# End time: 17:46:52 on Dec 15,2024, Elapsed time: 0:01:20
+# Errors: 0, Warnings: 32
+# ============================================
+# Compiling C++ file: ../../../tb/sc_main.cpp
+# /opt/cad/modelsim/bin/sccom -g -x c++ -Wall -Wno-unused-label -Wno-unknown-pragmas -scpoptions "--c++11" -DCCS_DUT_RTL -DCCS_DUT_VERILOG -DCONNECTIONS_ACCURATE_SIM -DCONNECTIONS_NAMING_ORIGINAL -DHLS_CATAPULT -DSC_INCLUDE_DYNAMIC_PROCESSES -DCCS_SYSC -DSC_USE_STD_STRING -DTOP_HDL_ENTITY=mac_sysc_catapult -DDMA_WIDTH=32 -DDEADLOCK_DETECTION -std=gnu++11 -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/sieme
+# ns_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/src -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/siflibs -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/mgc_comps_src -DUSE_STD_STRING -DSC_INCLUDE_MTI_AC  -c ../../../tb/sc_main.cpp
+# Start time: 17:46:53 on Dec 15,2024
+# 
+# Model Technology ModelSim SE-64 sccom 2019.2 compiler 2019.04 Apr 16 2019
+# 
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ../../../inc/mac_specs.hpp:8,
+#                  from ../../../inc/mac_data_types.hpp:9,
+#                  from ../../../tb/system.hpp:9,
+#                  from ../../../tb/sc_main.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:23:0: warning: "CONNECTIONS_ASSERT_MSG" redefined
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG) NVHLS_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ../../../inc/mac_specs.hpp:7,
+#                  from ../../../inc/mac_data_types.hpp:9,
+#                  from ../../../tb/system.hpp:9,
+#                  from ../../../tb/sc_main.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:50:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG)           \
+#  ^
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ../../../inc/mac_specs.hpp:8,
+#                  from ../../../inc/mac_data_types.hpp:9,
+#                  from ../../../tb/system.hpp:9,
+#                  from ../../../tb/sc_main.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:24:0: warning: "CONNECTIONS_SIM_ONLY_ASSERT_MSG" redefined
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) CMOD_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ../../../inc/mac_specs.hpp:7,
+#                  from ../../../inc/mac_data_types.hpp:9,
+#                  from ../../../tb/system.hpp:9,
+#                  from ../../../tb/sc_main.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:75:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) \
+#  ^
+# In file included from ../../../inc/mac_specs.hpp:8:0,
+#                  from ../../../inc/mac_data_types.hpp:9,
+#                  from ../../../tb/system.hpp:9,
+#                  from ../../../tb/sc_main.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:34:0: warning: "CONNECTIONS_NAMING_ORIGINAL" redefined
+#  #define CONNECTIONS_NAMING_ORIGINAL
+#  ^
+# <command-line>:0:0: note: this is the location of the previous definition
+# In file included from ../../../tb/system.hpp:13:0,
+#                  from ../../../tb/sc_main.cpp:4:
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp: In instantiation of 'esp_dma_controller<_DMA_WIDTH_, _MEM_SIZE_>::esp_dma_controller(sc_core::sc_module_name, mti_ac::ac_int<32, true>*) [with int _DMA_WIDTH_ = 32; int _MEM_SIZE_ = 16842752]':
+# ../../../tb/testbench.hpp:44:81:   required from here
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp:41:50: warning: 'esp_dma_controller<32, 16842752>::dma_read_chnl' will be initialized after [-Wreorder]
+#          Connections::Out<ac_int<DMA_WIDTH,true>> dma_read_chnl;
+#                                                   ^
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp:36:21: warning:   'sc_core::sc_in<bool> esp_dma_controller<32, 16842752>::acc_done' [-Wreorder]
+#          sc_in<bool> acc_done;
+#                      ^
+# ../../../../../common/inc/core/systems/esp_dma_controller.hpp:48:9: warning:   when initialized here [-Wreorder]
+#          esp_dma_controller(sc_module_name name, ac_int<DMA_WIDTH,true> *ptr)
+#          ^
+# In file included from ../../../inc/mac.hpp:9:0,
+#                  from ../../../tb/system.hpp:15,
+#                  from ../../../tb/sc_main.cpp:4:
+# ../../../inc/mem_wrap.hpp: In instantiation of 'void mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_run() [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]':
+# ../../../inc/mem_wrap.hpp:40:9:   required from 'mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_wrap(sc_core::sc_module_name) [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]'
+# ../../../inc/mac.hpp:112:27:   required from here
+# ../../../inc/mem_wrap.hpp:72:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumWritePorts; i++)
+#                                 ^
+# ../../../inc/mem_wrap.hpp:83:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# ../../../inc/mem_wrap.hpp:107:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# In file included from ../../../inc/mac_data_types.hpp:11:0,
+#                  from ../../../tb/system.hpp:9,
+#                  from ../../../tb/sc_main.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 141; int W = 16; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 16; int IFX = 16; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 16; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2277:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '141' with boolean expression is always true [-Wbool-compare]
+#      const bool pos_width = MaxLShift > S;
+#                                       ^
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 156; int W = 32; bool S = true]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = true; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = true; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2282:54:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '156' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 157; int W = 32; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2287:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '157' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 189; int W = 64; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 64; int IFX = 64; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 64; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2293:59:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '189' with boolean expression is always true [-Wbool-compare]
+# 
+# Exported modules:
+# 	sc_main
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (./scverify/sysc_sim.h, 50)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (./scverify/sysc_sim.h, 51)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (./scverify/sysc_sim.h, 52)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (./scverify/sysc_sim.h, 53)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (./scverify/sysc_sim.h, 54)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 30)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 33)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (../../../../../common/inc/core/systems/esp_dma_controller.hpp, 41)
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (../../../inc/mac.hpp, 24)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (../../../inc/mac.hpp, 25)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (../../../inc/mac.hpp, 26)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (../../../inc/mac.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (../../../inc/mac.hpp, 28)
+# ** Warning: (sccom-6102) The object "write_req" is not debuggable. (../../../inc/mem_wrap.hpp, 23)
+# ** Warning: (sccom-6102) The object "read_req" is not debuggable. (../../../inc/mem_wrap.hpp, 24)
+# ** Warning: (sccom-6102) The object "read_rsp" is not debuggable. (../../../inc/mem_wrap.hpp, 25)
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (../../../tb/testbench.hpp, 24)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (../../../tb/testbench.hpp, 25)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (../../../tb/testbench.hpp, 26)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (../../../tb/testbench.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (../../../tb/testbench.hpp, 28)
+# End time: 17:48:12 on Dec 15,2024, Elapsed time: 0:01:19
+# Errors: 0, Warnings: 36
+# ============================================
+# Compiling C++ file: ../../../src/mac.cpp
+# /opt/cad/modelsim/bin/sccom -g -x c++ -Wall -Wno-unused-label -Wno-unknown-pragmas -scpoptions "--c++11" -DCCS_DUT_RTL -DCCS_DUT_VERILOG -DCONNECTIONS_ACCURATE_SIM -DCONNECTIONS_NAMING_ORIGINAL -DHLS_CATAPULT -DSC_INCLUDE_DYNAMIC_PROCESSES -DCCS_SYSC -DSC_USE_STD_STRING -DTOP_HDL_ENTITY=mac_sysc_catapult -DDMA_WIDTH=32 -DDEADLOCK_DETECTION -std=gnu++11 -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/sieme
+# ns_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/src -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/siflibs -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/mgc_comps_src -DUSE_STD_STRING -DSC_INCLUDE_MTI_AC  -c ../../../src/mac.cpp
+# Start time: 17:48:12 on Dec 15,2024
+# 
+# Model Technology ModelSim SE-64 sccom 2019.2 compiler 2019.04 Apr 16 2019
+# 
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ../../../inc/mac_specs.hpp:8,
+#                  from ../../../inc/mem_wrap.hpp:10,
+#                  from ../../../inc/mac.hpp:9,
+#                  from ../../../src/mac.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:23:0: warning: "CONNECTIONS_ASSERT_MSG" redefined
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG) NVHLS_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ../../../inc/mac_specs.hpp:7,
+#                  from ../../../inc/mem_wrap.hpp:10,
+#                  from ../../../inc/mac.hpp:9,
+#                  from ../../../src/mac.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:50:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG)           \
+#  ^
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ../../../inc/mac_specs.hpp:8,
+#                  from ../../../inc/mem_wrap.hpp:10,
+#                  from ../../../inc/mac.hpp:9,
+#                  from ../../../src/mac.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:24:0: warning: "CONNECTIONS_SIM_ONLY_ASSERT_MSG" redefined
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) CMOD_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ../../../inc/mac_specs.hpp:7,
+#                  from ../../../inc/mem_wrap.hpp:10,
+#                  from ../../../inc/mac.hpp:9,
+#                  from ../../../src/mac.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:75:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) \
+#  ^
+# In file included from ../../../inc/mac_specs.hpp:8:0,
+#                  from ../../../inc/mem_wrap.hpp:10,
+#                  from ../../../inc/mac.hpp:9,
+#                  from ../../../src/mac.cpp:4:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:34:0: warning: "CONNECTIONS_NAMING_ORIGINAL" redefined
+#  #define CONNECTIONS_NAMING_ORIGINAL
+#  ^
+# <command-line>:0:0: note: this is the location of the previous definition
+# ../../../src/mac.cpp: In member function 'void mac_sysc_catapult::load()':
+# ../../../src/mac.cpp:67:14: warning: unused variable 'ping' [-Wunused-variable]
+#          bool ping = true;
+#               ^
+# ../../../src/mac.cpp: In member function 'void mac_sysc_catapult::store_dataReq()':
+# ../../../src/mac.cpp:381:18: warning: unused variable 'mac_len' [-Wunused-variable]
+#          uint32_t mac_len = conf.mac_len;
+#                   ^
+# In file included from ../../../inc/mac.hpp:9:0,
+#                  from ../../../src/mac.cpp:4:
+# ../../../inc/mem_wrap.hpp: In instantiation of 'void mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_run() [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]':
+# ../../../inc/mem_wrap.hpp:40:9:   required from 'mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_wrap(sc_core::sc_module_name) [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]'
+# ../../../inc/mac.hpp:112:27:   required from here
+# ../../../inc/mem_wrap.hpp:72:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumWritePorts; i++)
+#                                 ^
+# ../../../inc/mem_wrap.hpp:83:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# ../../../inc/mem_wrap.hpp:107:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# In file included from ../../../inc/mac_data_types.hpp:11:0,
+#                  from ../../../inc/mem_wrap.hpp:11,
+#                  from ../../../inc/mac.hpp:9,
+#                  from ../../../src/mac.cpp:4:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 141; int W = 16; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 16; int IFX = 16; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 16; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2277:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '141' with boolean expression is always true [-Wbool-compare]
+#      const bool pos_width = MaxLShift > S;
+#                                       ^
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 156; int W = 32; bool S = true]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = true; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = true; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2282:54:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '156' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 157; int W = 32; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2287:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '157' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 189; int W = 64; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 64; int IFX = 64; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 64; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2293:59:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '189' with boolean expression is always true [-Wbool-compare]
+# 
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (./scverify/sysc_sim.h, 50)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (./scverify/sysc_sim.h, 51)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (./scverify/sysc_sim.h, 52)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (./scverify/sysc_sim.h, 53)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (./scverify/sysc_sim.h, 54)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (../../../inc/mac.hpp, 24)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (../../../inc/mac.hpp, 25)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (../../../inc/mac.hpp, 26)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (../../../inc/mac.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (../../../inc/mac.hpp, 28)
+# ** Warning: (sccom-6102) The object "write_req" is not debuggable. (../../../inc/mem_wrap.hpp, 23)
+# ** Warning: (sccom-6102) The object "read_req" is not debuggable. (../../../inc/mem_wrap.hpp, 24)
+# ** Warning: (sccom-6102) The object "read_rsp" is not debuggable. (../../../inc/mem_wrap.hpp, 25)
+# End time: 17:49:21 on Dec 15,2024, Elapsed time: 0:01:09
+# Errors: 0, Warnings: 23
+# ============================================
+# Compiling C++ file: scverify/sysc_sim.cpp
+# /opt/cad/modelsim/bin/sccom -g -x c++ -Wall -Wno-unused-label -Wno-unknown-pragmas -scpoptions "--c++11" -DCCS_DUT_RTL -DCCS_DUT_VERILOG -DCONNECTIONS_ACCURATE_SIM -DCONNECTIONS_NAMING_ORIGINAL -DHLS_CATAPULT -DSC_INCLUDE_DYNAMIC_PROCESSES -DCCS_SYSC -DSC_USE_STD_STRING -DTOP_HDL_ENTITY=mac_sysc_catapult -DDMA_WIDTH=32 -DDEADLOCK_DETECTION -std=gnu++11 -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I. -I/opt/cad/catapult/shared/examples/matchlib/toolkit/include -I/opt/cad/catapult/shared/pkgs/matchlib/cmod/include -I../../../inc/mem_bank -I../../../inc -I../../../tb -I../../../../../common/inc -I../../../../../common/inc/core/systems -I../../../inc/mem_bank -I./scverify -I. -I../.. -I/opt/sieme
+# ns_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/src -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/siflibs -I/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/pkgs/hls_pkgs/mgc_comps_src -DUSE_STD_STRING -DSC_INCLUDE_MTI_AC  -c scverify/sysc_sim.cpp
+# Start time: 17:49:21 on Dec 15,2024
+# 
+# Model Technology ModelSim SE-64 sccom 2019.2 compiler 2019.04 Apr 16 2019
+# 
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ./../../../inc/mac_specs.hpp:8,
+#                  from ./../../../inc/mem_wrap.hpp:10,
+#                  from ./../../../inc/mac.hpp:9,
+#                  from scverify/sysc_sim.h:32,
+#                  from scverify/sysc_sim.cpp:18:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:23:0: warning: "CONNECTIONS_ASSERT_MSG" redefined
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG) NVHLS_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ./../../../inc/mac_specs.hpp:7,
+#                  from ./../../../inc/mem_wrap.hpp:10,
+#                  from ./../../../inc/mac.hpp:9,
+#                  from scverify/sysc_sim.h:32,
+#                  from scverify/sysc_sim.cpp:18:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:50:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_ASSERT_MSG(X,MSG)           \
+#  ^
+# In file included from /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:21:0,
+#                  from ./../../../inc/mac_specs.hpp:8,
+#                  from ./../../../inc/mem_wrap.hpp:10,
+#                  from ./../../../inc/mac.hpp:9,
+#                  from scverify/sysc_sim.h:32,
+#                  from scverify/sysc_sim.cpp:18:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections_utils.h:24:0: warning: "CONNECTIONS_SIM_ONLY_ASSERT_MSG" redefined
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) CMOD_ASSERT_MSG(X,MSG)
+#  ^
+# In file included from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/marshaller.h:39:0,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h:74,
+#                  from /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/mc_connections.h:61,
+#                  from ./../../../inc/mac_specs.hpp:7,
+#                  from ./../../../inc/mem_wrap.hpp:10,
+#                  from ./../../../inc/mac.hpp:9,
+#                  from scverify/sysc_sim.h:32,
+#                  from scverify/sysc_sim.cpp:18:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections_utils.h:75:0: note: this is the location of the previous definition
+#  #define CONNECTIONS_SIM_ONLY_ASSERT_MSG(X,MSG) \
+#  ^
+# In file included from ./../../../inc/mac_specs.hpp:8:0,
+#                  from ./../../../inc/mem_wrap.hpp:10,
+#                  from ./../../../inc/mac.hpp:9,
+#                  from scverify/sysc_sim.h:32,
+#                  from scverify/sysc_sim.cpp:18:
+# /opt/cad/catapult/shared/pkgs/matchlib/cmod/include/nvhls_connections.h:34:0: warning: "CONNECTIONS_NAMING_ORIGINAL" redefined
+#  #define CONNECTIONS_NAMING_ORIGINAL
+#  ^
+# <command-line>:0:0: note: this is the location of the previous definition
+# In file included from ./../../../inc/mac.hpp:9:0,
+#                  from scverify/sysc_sim.h:32,
+#                  from scverify/sysc_sim.cpp:18:
+# ./../../../inc/mem_wrap.hpp: In instantiation of 'void mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_run() [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]':
+# ./../../../inc/mem_wrap.hpp:40:9:   required from 'mem_wrap<kNumBanks, kNumReadPorts, kNumWritePorts, kEntriesPerBank, WordType, Address_type, DataWReq, DataRReq, DataRRsp>::mem_wrap(sc_core::sc_module_name) [with unsigned int kNumBanks = 1u; unsigned int kNumReadPorts = 1u; unsigned int kNumWritePorts = 1u; unsigned int kEntriesPerBank = 65536u; WordType = mti_ac::ac_int<32, false>; Address_type = mti_ac::ac_int<16, false>; DataWReq = plm_WR<16u, 1u>; DataRReq = plm_RRq<16u, 1u>; DataRRsp = plm_RRs<1u>]'
+# ./../../../inc/mac.hpp:112:27:   required from here
+# ./../../../inc/mem_wrap.hpp:72:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumWritePorts; i++)
+#                                 ^
+# ./../../../inc/mem_wrap.hpp:83:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# ./../../../inc/mem_wrap.hpp:107:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+#                  for (int i=0; i<kNumReadPorts; i++)
+#                                 ^
+# In file included from ./../../../inc/mac_data_types.hpp:11:0,
+#                  from ./../../../inc/mem_wrap.hpp:11,
+#                  from ./../../../inc/mac.hpp:9,
+#                  from scverify/sysc_sim.h:32,
+#                  from scverify/sysc_sim.cpp:18:
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 141; int W = 16; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 16; int IFX = 16; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 16; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2277:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '141' with boolean expression is always true [-Wbool-compare]
+#      const bool pos_width = MaxLShift > S;
+#                                       ^
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 156; int W = 32; bool S = true]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = true; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = true; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2282:54:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '156' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 157; int W = 32; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 32; int IFX = 32; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 32; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2287:55:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '157' with boolean expression is always true [-Wbool-compare]
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h: In instantiation of 'unsigned int mti_ac::ac_private::leading_sign_constrained(const mti_ac::ac_int<WX, SX>&, bool&) [with int MaxLShift = 189; int W = 64; bool S = false]':
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:641:78:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_fixed<WFX, IFX, SFX, QFX, OFX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WFX = 64; int IFX = 64; bool SFX = false; mti_ac::ac_q_mode QFX = (mti_ac::ac_q_mode)0u; mti_ac::ac_o_mode OFX = (mti_ac::ac_o_mode)0u; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:701:5:   required from 'void mti_ac::ac_std_float<W, E>::assign_from(const mti_ac::ac_int<WX, SX>&) [with mti_ac::ac_q_mode Q = (mti_ac::ac_q_mode)2u; int WI = 64; bool SI = false; int W = 16; int E = 8]'
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:2293:59:   required from here
+# /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/ac_std_float.h:173:38: warning: comparison of constant '189' with boolean expression is always true [-Wbool-compare]
+# 
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (scverify/sysc_sim.h, 50)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (scverify/sysc_sim.h, 51)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (scverify/sysc_sim.h, 52)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (scverify/sysc_sim.h, 53)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (scverify/sysc_sim.h, 54)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "sim_out" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4255)
+# ** Warning: (sccom-6102) The object "sim_in" is not debuggable. (/opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/shared/include/connections/connections.h, 4256)
+# ** Warning: (sccom-6102) The object "conf_info" is not debuggable. (./../../../inc/mac.hpp, 24)
+# ** Warning: (sccom-6102) The object "dma_read_chnl" is not debuggable. (./../../../inc/mac.hpp, 25)
+# ** Warning: (sccom-6102) The object "dma_write_chnl" is not debuggable. (./../../../inc/mac.hpp, 26)
+# ** Warning: (sccom-6102) The object "dma_read_ctrl" is not debuggable. (./../../../inc/mac.hpp, 27)
+# ** Warning: (sccom-6102) The object "dma_write_ctrl" is not debuggable. (./../../../inc/mac.hpp, 28)
+# ** Warning: (sccom-6102) The object "write_req" is not debuggable. (./../../../inc/mem_wrap.hpp, 23)
+# ** Warning: (sccom-6102) The object "read_req" is not debuggable. (./../../../inc/mem_wrap.hpp, 24)
+# ** Warning: (sccom-6102) The object "read_rsp" is not debuggable. (./../../../inc/mem_wrap.hpp, 25)
+# End time: 17:50:26 on Dec 15,2024, Elapsed time: 0:01:05
+# Errors: 0, Warnings: 23
+# ============================================
+# Linking executable
+# /opt/cad/modelsim/bin/sccom -link   
+# sccom -link 
+# Start time: 17:50:27 on Dec 15,2024
+# 
+# Model Technology ModelSim SE-64 sccom 2019.2 compiler 2019.04 Apr 16 2019
+# End time: 17:50:29 on Dec 15,2024, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+# ============================================
+# Optimizing design: sc_main
+# cd ../..; /opt/cad/modelsim/bin/vopt +acc=npr +cover=sbceft -coverdeglitch 5ps    -L "./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/work"   sc_main  -o sc_main_opt
+# Model Technology ModelSim SE-64 vopt 2019.2 Compiler 2019.04 Apr 16 2019
+# Start time: 17:50:30 on Dec 15,2024
+# vopt "+acc=npr" "+cover=sbceft" -coverdeglitch 5ps -L ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/work sc_main -o sc_main_opt 
+# 
+# Top level modules:
+# 	sc_main
+# 
+# Analyzing design...
+# -- Loading shared library /home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/work/_sc/linux_x86_64_gcc-5.3.0/systemc.so
+# -- Loading systemc module /home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/work.sc_main
+# -- Loading module mac_sysc_catapult
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U
+# -- Loading module DUAL_PORT_RBW
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_DUAL_PORT_RBW_DUAL_PORT_RBW_rwport_en_19_16_32_65536_65536_32_gen
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_ccs_ctrl_in_buf_wait_v4
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi_write_req_PopNB_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi_write_req_PopNB_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi_read_req_PopNB_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi_read_req_PopNB_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi_read_rsp_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi_read_rsp_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_staller
+# -- Loading module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_mem_run_fsm
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf_info_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf_info_Pop_mioi_conf_info_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi_conf1_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi_conf1_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi_conf2_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi_conf2_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi_conf2b_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi_conf2b_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi_conf3_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi_conf3_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi_conf3b_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi_conf3b_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi_sync01_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi_sync01_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi_sync02_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi_sync02_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi_sync02b_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi_sync02b_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi_sync03_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi_sync03_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi_sync03b_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi_sync03b_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_staller
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_config_fsm
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load
+# -- Loading module esp_acc_mac_sysc_catapult_mgc_mul_pipe
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi_sync01_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi_sync01_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi_conf1_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi_conf1_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_ctrl_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_ctrl_Push_mioi_dma_read_ctrl_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi_dma_read_chnl_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi_dma_read_chnl_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi_in_ping_w_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi_in_ping_w_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi_in_pong_w_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi_in_pong_w_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12_sync_out_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_out
+# -- Loading module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_out_core
+# -- Loading module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_in_v1
+# -- Loading module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_sync_out_vld_v1
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12_sync_out_mioi_sync12_sync_out_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12b_sync_out_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12b_sync_out_mioi_sync12b_sync_out_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_staller
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_load_fsm
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi_sync02_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi_sync02_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi_conf2_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi_conf2_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync12_sync_in_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_in
+# -- Loading module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_in_core
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync12_sync_in_mioi_sync12_sync_in_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi_in_ping_ra_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi_in_ping_ra_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi_in_pong_ra_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi_in_pong_ra_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23_sync_out_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23_sync_out_mioi_sync23_sync_out_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23b_sync_out_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23b_sync_out_mioi_sync23b_sync_out_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_staller
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_compute_dataReq_fsm
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute
+# -- Loading module esp_acc_mac_sysc_catapult_leading_sign_24_0
+# -- Loading module esp_acc_mac_sysc_catapult_mgc_shift_l_v5
+# -- Loading module esp_acc_mac_sysc_catapult_mgc_shift_r_v5
+# -- Loading module esp_acc_mac_sysc_catapult_mgc_shift_br_v5
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi_sync02b_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi_sync02b_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi_conf2b_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi_conf2b_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync12b_sync_in_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync12b_sync_in_mioi_sync12b_sync_in_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi_in_ping_rd_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi_in_ping_rd_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi_in_pong_rd_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi_in_pong_rd_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi_out_ping_w_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi_out_ping_w_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi_out_pong_w_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi_out_pong_w_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3_sync_out_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3_sync_out_mioi_sync2b3_sync_out_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3b_sync_out_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3b_sync_out_mioi_sync2b3b_sync_out_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_staller
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_compute_fsm
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi_sync03_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi_sync03_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi_conf3_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi_conf3_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync23_sync_in_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync23_sync_in_mioi_sync23_sync_in_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync2b3_sync_in_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync2b3_sync_in_mioi_sync2b3_sync_in_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi_out_ping_ra_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi_out_ping_ra_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi_out_pong_ra_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi_out_pong_ra_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_staller
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_store_dataReq_fsm
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi_sync03b_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi_sync03b_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi_conf3b_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi_conf3b_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync23b_sync_in_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync23b_sync_in_mioi_sync23b_sync_in_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync2b3b_sync_in_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync2b3b_sync_in_mioi_sync2b3b_sync_in_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_ctrl_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_ctrl_Push_mioi_dma_write_ctrl_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi_out_ping_rd_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi_out_ping_rd_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi_out_pong_rd_Pop_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi_out_pong_rd_Pop_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi_dma_write_chnl_Push_mio_wait_ctrl
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi_dma_write_chnl_Push_mio_wait_dp
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_staller
+# -- Loading module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_store_fsm
+# Optimizing 204 design-units (inlining 0/333 module instances, 0/16 systemc instances):
+# -- Optimizing module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_in_v1(fast__1)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf_info_Pop_mioi_conf_info_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_ctrl_Push_mioi_dma_read_ctrl_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_ctrl_Push_mioi_dma_write_ctrl_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_sync_out_vld_v1(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_sync_out_vld_v1(fast__1)
+# -- Optimizing module mac_sysc_catapult(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_staller(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_staller(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_staller(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi_sync01_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi_conf1_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi_dma_read_chnl_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi_in_ping_w_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi_in_pong_w_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi_sync02_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi_conf2_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi_in_ping_ra_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi_in_pong_ra_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi_sync02b_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi_conf2b_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi_sync03_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi_conf3_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi_out_ping_ra_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi_out_pong_ra_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi_sync03b_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi_conf3b_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi_out_ping_rd_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi_out_pong_rd_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi_dma_write_chnl_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_staller(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_staller(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi_write_req_PopNB_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi_read_req_PopNB_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12_sync_out_mioi_sync12_sync_out_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12b_sync_out_mioi_sync12b_sync_out_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync12_sync_in_mioi_sync12_sync_in_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23_sync_out_mioi_sync23_sync_out_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23b_sync_out_mioi_sync23b_sync_out_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync12b_sync_in_mioi_sync12b_sync_in_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3_sync_out_mioi_sync2b3_sync_out_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3b_sync_out_mioi_sync2b3b_sync_out_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync23_sync_in_mioi_sync23_sync_in_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync2b3_sync_in_mioi_sync2b3_sync_in_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync23b_sync_in_mioi_sync23b_sync_in_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync2b3b_sync_in_mioi_sync2b3b_sync_in_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_out(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_in(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_ccs_in_v1(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9650): (vopt-2685) [TFMPC] - Too few port connections for 'read_req_PopNB_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9650): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9572): (vopt-2685) [TFMPC] - Too few port connections for 'read_rsp_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9572): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7561): (vopt-2685) [TFMPC] - Too few port connections for 'conf2b_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7561): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8527): (vopt-2685) [TFMPC] - Too few port connections for 'conf1_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8527): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8396): (vopt-2685) [TFMPC] - Too few port connections for 'dma_read_chnl_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8396): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8004): (vopt-2685) [TFMPC] - Too few port connections for 'conf2_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8004): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6546): (vopt-2685) [TFMPC] - Too few port connections for 'conf3b_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6546): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6315): (vopt-2685) [TFMPC] - Too few port connections for 'out_ping_rd_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6315): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6239): (vopt-2685) [TFMPC] - Too few port connections for 'out_pong_rd_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6239): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7637): (vopt-2685) [TFMPC] - Too few port connections for 'sync02b_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7637): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi_in_ping_rd_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi_in_pong_rd_Pop_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8322): (vopt-2685) [TFMPC] - Too few port connections for 'in_ping_w_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8322): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8249): (vopt-2685) [TFMPC] - Too few port connections for 'in_pong_w_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8249): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7882): (vopt-2685) [TFMPC] - Too few port connections for 'in_ping_ra_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7882): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7809): (vopt-2685) [TFMPC] - Too few port connections for 'in_pong_ra_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7809): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6764): (vopt-2685) [TFMPC] - Too few port connections for 'out_ping_ra_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6764): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6691): (vopt-2685) [TFMPC] - Too few port connections for 'out_pong_ra_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6691): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6165): (vopt-2685) [TFMPC] - Too few port connections for 'dma_write_chnl_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6165): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi_conf1_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi_conf2_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi_conf2b_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi_conf3_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi_conf3b_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi_sync01_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi_sync02_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi_sync02b_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi_sync03_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi_sync03b_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_config_fsm(fast)
+# ** Note: (vopt-143) Recognized 1 FSM in module "esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_config_fsm(fast)".
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8598): (vopt-2685) [TFMPC] - Too few port connections for 'sync01_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8598): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8078): (vopt-2685) [TFMPC] - Too few port connections for 'sync02_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8078): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7011): (vopt-2685) [TFMPC] - Too few port connections for 'sync03_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7011): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6618): (vopt-2685) [TFMPC] - Too few port connections for 'sync03b_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6618): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi_out_ping_w_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi_out_pong_w_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_ctrl_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8469): (vopt-2685) [TFMPC] - Too few port connections for 'dma_read_ctrl_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8469): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_ctrl_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6388): (vopt-2685) [TFMPC] - Too few port connections for 'dma_write_ctrl_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6388): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf_info_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9510): (vopt-2685) [TFMPC] - Too few port connections for 'conf_info_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9510): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_mem_run_fsm(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi_conf1_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi_conf2_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi_conf2b_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi_conf3_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi_conf3b_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi_sync01_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi_sync02_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi_sync02b_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi_sync03_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi_sync03b_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync02b_Pop_mioi_sync02b_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi_read_rsp_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_staller(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_DUAL_PORT_RBW_DUAL_PORT_RBW_rwport_en_19_16_32_65536_65536_32_gen(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync01_Pop_mioi_sync01_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_ping_w_Push_mioi_in_ping_w_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_in_pong_w_Push_mioi_in_pong_w_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync02_Pop_mioi_sync02_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_ping_ra_Push_mioi_in_ping_ra_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_in_pong_ra_Push_mioi_in_pong_ra_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync03_Pop_mioi_sync03_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_ping_ra_Push_mioi_out_ping_ra_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_out_pong_ra_Push_mioi_out_pong_ra_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync03b_Pop_mioi_sync03b_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_dma_write_chnl_Push_mioi_dma_write_chnl_Push_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12_sync_out_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_sync12b_sync_out_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync12_sync_in_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23_sync_out_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_sync23b_sync_out_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync12b_sync_in_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3_sync_out_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_sync2b3b_sync_out_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync23_sync_in_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_sync2b3_sync_in_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync23b_sync_in_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_sync2b3b_sync_in_mioi(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_rsp_Push_mioi_read_rsp_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi_out_ping_w_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi_out_pong_w_Push_mio_wait_ctrl(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_staller(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi_in_ping_rd_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi_in_pong_rd_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_conf2b_Pop_mioi_conf2b_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_conf1_Pop_mioi_conf1_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_dma_read_chnl_Pop_mioi_dma_read_chnl_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_conf2_Pop_mioi_conf2_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi_conf3_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_conf3b_Pop_mioi_conf3b_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_ping_rd_Pop_mioi_out_ping_rd_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_out_pong_rd_Pop_mioi_out_pong_rd_Pop_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_out_core(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_esp_acc_mac_sysc_catapult_Connections_conn_sync_chan_sync_in_core(fast)
+# -- Optimizing module DUAL_PORT_RBW(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync01_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9009): (vopt-2685) [TFMPC] - Too few port connections for 'sync01_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9009): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8925): (vopt-2685) [TFMPC] - Too few port connections for 'sync02_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8925): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync02b_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8841): (vopt-2685) [TFMPC] - Too few port connections for 'sync02b_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8841): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8757): (vopt-2685) [TFMPC] - Too few port connections for 'sync03_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8757): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_sync03b_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(8673): (vopt-2685) [TFMPC] - Too few port connections for 'sync03b_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(8673): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf1_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9434): (vopt-2685) [TFMPC] - Too few port connections for 'conf1_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9434): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9349): (vopt-2685) [TFMPC] - Too few port connections for 'conf2_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9349): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf2b_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9264): (vopt-2685) [TFMPC] - Too few port connections for 'conf2b_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9264): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9179): (vopt-2685) [TFMPC] - Too few port connections for 'conf3_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9179): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_conf3b_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9094): (vopt-2685) [TFMPC] - Too few port connections for 'conf3b_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9094): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_ping_rd_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7431): (vopt-2685) [TFMPC] - Too few port connections for 'in_ping_rd_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7431): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_in_pong_rd_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7347): (vopt-2685) [TFMPC] - Too few port connections for 'in_pong_rd_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7347): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_ping_w_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7266): (vopt-2685) [TFMPC] - Too few port connections for 'out_ping_w_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7266): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_out_pong_w_Push_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(7186): (vopt-2685) [TFMPC] - Too few port connections for 'out_pong_w_Push_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(7186): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_conf3_Pop_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(6936): (vopt-2685) [TFMPC] - Too few port connections for 'conf3_Pop_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(6936): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi(fast)
+# ** Warning: concat_sim_mac_sysc_catapult.v(9727): (vopt-2685) [TFMPC] - Too few port connections for 'write_req_PopNB_mioi'.  Expected 11, found 10.
+# ** Warning: concat_sim_mac_sysc_catapult.v(9727): (vopt-2718) [TFMPC] - Missing connection for port 'is_idle'.
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mgc_mul_pipe(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5(fast__1)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5(fast__2)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5(fast__3)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5(fast__4)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_out_buf_wait_v5(fast__5)
+# -- Optimizing module esp_acc_mac_sysc_catapult_leading_sign_24_0(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_ctrl_in_buf_wait_v4(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_ctrl_in_buf_wait_v4(fast__1)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_ctrl_in_buf_wait_v4(fast__2)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_ctrl_in_buf_wait_v4(fast__3)
+# -- Optimizing module esp_acc_mac_sysc_catapult_ccs_ctrl_in_buf_wait_v4(fast__4)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mgc_shift_br_v5(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_store_fsm(fast)
+# ** Note: (vopt-143) Recognized 1 FSM in module "esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_store_store_fsm(fast)".
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_compute_fsm(fast)
+# ** Note: (vopt-143) Recognized 1 FSM in module "esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_compute_compute_fsm(fast)".
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_load_fsm(fast)
+# ** Note: (vopt-143) Recognized 1 FSM in module "esp_acc_mac_sysc_catapult_mac_sysc_catapult_load_load_load_fsm(fast)".
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_compute_dataReq_fsm(fast)
+# ** Note: (vopt-143) Recognized 1 FSM in module "esp_acc_mac_sysc_catapult_mac_sysc_catapult_compute_dataReq_compute_dataReq_compute_dataReq_fsm(fast)".
+# -- Optimizing module esp_acc_mac_sysc_catapult_mgc_shift_l_v5(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mgc_shift_l_v5(fast__1)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_config_config_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_store_dataReq_fsm(fast)
+# ** Note: (vopt-143) Recognized 1 FSM in module "esp_acc_mac_sysc_catapult_mac_sysc_catapult_store_dataReq_store_dataReq_store_dataReq_fsm(fast)".
+# -- Optimizing module esp_acc_mac_sysc_catapult_mgc_shift_r_v5(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_write_req_PopNB_mioi_write_req_PopNB_mio_wait_dp(fast)
+# -- Optimizing module esp_acc_mac_sysc_catapult_mem_wrap_1U_1U_1U_65536U_DATA_TYPE_nvhls_nvhls_t_16U_nvuint_t_plm_WR_16U_1U_plm_RRq_16U_1U_plm_RRs_1U_mem_run_read_req_PopNB_mioi_read_req_PopNB_mio_wait_dp(fast)
+# Optimized design name is sc_main_opt
+# End time: 17:50:35 on Dec 15,2024, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 80
+# make[2]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'
+#     /opt/siemens_eda/catapult_synthesis/2021.1-950854/Mgc_home/bin/make -f ./scverify/Verify_concat_sim_mac_sysc_catapult_v_msim.mk SIMTOOL=msim simgui < "/dev/null" (BASIC-15)
+make[2]: Entering directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'
 ============================================
 Simulating design entity: sc_main
-cd ../..; /opt/cad/modelsim/bin/vsim -i -t ps -coverage -onfinish stop -wlf ./kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1/scverify/concat_sim_kalman_filter_sysc_catapult_v_msim/vsim.wlf  -l "./kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1/scverify/concat_sim_kalman_filter_sysc_catapult_v_msim/sim.log"   -L "./kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1/scverify/concat_sim_kalman_filter_sysc_catapult_v_msim/work"   sc_main_opt   -do "do {./kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1/scverify/concat_sim_kalman_filter_sysc_catapult_v_msim/scverify_msim_wave.tcl}"
+cd ../..; /opt/cad/modelsim/bin/vsim -i -t ps -coverage -onfinish stop -wlf ./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/vsim.wlf  -l "./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/sim.log"   -L "./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/work"   sc_main_opt   -do "do {./mac_sysc_catapult_dma32/mac_sysc_catapult.v1/scverify/concat_sim_mac_sysc_catapult_v_msim/scverify_msim_wave.tcl}"
 Reading pref.tcl
 # > end dofile ./rtl_sim.tcl
-make[2]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/hls-work-virtexup/kalman_filter_sysc_catapult_dma32/kalman_filter_sysc_catapult.v1'
+make[2]: Leaving directory `/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/hls-work-virtexup/mac_sysc_catapult_dma32/mac_sysc_catapult.v1'

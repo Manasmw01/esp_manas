@@ -36,30 +36,36 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
             plm_WR<inb_as,inwp> wreqb;
             if(d)
             {
-            wreq.indx[0]=mem_index++;
+            // wreq.indx[0]=mem_index++;
+            wreq.indx[0]=mem_index;
             wreq.data[0]=data_mask & r;
+            // std::cout << "\tin_ping_w Mem index: " << mem_index << "\n";;
             }
             else
             {
-            wreqb.indx[0]=mem_index++;
+            // wreqb.indx[0]=mem_index++;
+            wreqb.indx[0]=mem_index;
             wreqb.data[0]=data_mask & r;
+            // std::cout << "\tin_b_ping_w Mem index: " << mem_index << "\n";;
             }
             // wreq.indx[0]=mem_index++;
             // wreq.data[0]=data_mask & r;
-            std::cout << "\tmem_index: " << mem_index << "\n";
+            // std::cout << "\tmem_index: " << mem_index << "\n";
+
+            // std::cout << "\t\tmem_index: " << mem_index << "\n";;
 
             if (ping)
             {
                 if(d)
                 {
+                // std::cout << "\t\t\tin_ping_w.Push: " << mem_index << "\n";;
                 in_ping_w.Push(wreq);
-                std::cout << "\t\tin_ping_w.Push:\n";
                 }
                 else
                 {
                 // in_b_ping_w.Push(wreq);
                 in_b_ping_w.Push(wreqb);
-                std::cout << "\tin_b_ping_w.push: " << mem_index << "\n";
+                // std::cout << "\tin_b_ping_w.push in_b_ping_w.push: " << mem_index << "\n";
                 }
             }
             else
@@ -67,15 +73,16 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
                 if(d)
                 {
                 in_pong_w.Push(wreq);
-                std::cout << "\t\tin_pong_w.Push:\n";
+                // std::cout << "\t\tin_pong_w.Push:\n";
                 }
                 else
                 {
                 // in_b_pong_w.Push(wreq);
                 in_b_pong_w.Push(wreqb);
-                std::cout << "\t\tin_b_pong_w.Push:\n";
+                // std::cout << "\t\tin_b_pong_w.Push:\n";
                 }
             }
+            mem_index++;
 
         }
 
@@ -112,13 +119,15 @@ void kalman_filter_sysc_catapult::load_b(bool ping, uint32_t base_addr, uint32_t
 
             // plm_WR<in_as,inwp> wreq;
             plm_WR<inb_as,inwp> wreq;
-            wreq.indx[0]=mem_index++;
+            wreq.indx[0]=mem_index;
             wreq.data[0]=data_mask & r;
 
             if (ping)
                 in_b_ping_w.Push(wreq);
             else
                 in_b_pong_w.Push(wreq);
+
+            mem_index++;
 
         }
 

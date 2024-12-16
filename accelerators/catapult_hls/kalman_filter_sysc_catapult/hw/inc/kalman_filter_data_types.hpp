@@ -96,12 +96,12 @@ inline void print_matrix_new(FN_DATATYPE* matrix, int rows, int cols) {
         // printf("(Row %d)\t:", i);
         for (int j = 0; j < cols; j++) {
 #ifdef FL_POINT
-            printf("%.30f ", matrix[i * cols + j]);
+            // printf("%.30f ", matrix[i * cols + j]);
 #else
-            printf("%.30f ", matrix[i * cols + j].to_float());
+            // printf("%.30f ", matrix[i * cols + j].to_float());
 #endif
         }
-        cout << std::endl;
+        // cout << std::endl;
     }
 }
 #endif
@@ -114,7 +114,9 @@ inline void copymat(FN_DATATYPE A[N][N], FN_DATATYPE result[N][N], uint32_t kalm
     }
 }
 
-inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint32_t n, uint32_t m, uint32_t p) {
+// inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint32_t n, uint32_t m, uint32_t p) {
+inline void matrix_multiply(FN_DATATYPE A[MAX_MEAS_SIZE*MAX_MEAS_SIZE], FN_DATATYPE B[MAX_MEAS_SIZE*MAX_MEAS_SIZE], FN_DATATYPE C[MAX_MEAS_SIZE*MAX_MEAS_SIZE], uint32_t n, uint32_t m, uint32_t p) {
+    // std::cout << "\tMatrix Multiply: " << n << "\t" << m << "\t" << p << "\n";;
     for (uint32_t i = 0; i < n; i++) {
         for (uint32_t j = 0; j < p; j++) {
             // C[i * p + j] = 0;
@@ -129,11 +131,11 @@ inline void matrix_multiply(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, uint
 
 
 
-inline void inverse_clean(FN_DATATYPE new_mat[MAX_MEAS_SIZE][MAX_MEAS_SIZE], FN_DATATYPE out[MAX_MEAS_SIZE][MAX_MEAS_SIZE], uint32_t meas_size_reg)
+inline void inverse_clean(FN_DATATYPE new_mat[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV], FN_DATATYPE out[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV], uint32_t meas_size_reg)
 {
 
 		 FN_DATATYPE ratio;
-		 int i,j,k;
+		 uint32_t i,j,k;
 
 		 if(meas_size_reg == 2){
 			 FN_DATATYPE a = new_mat[0][0];
@@ -272,7 +274,10 @@ inline void gauss_inverse(FN_DATATYPE* A, FN_DATATYPE* A_inv, int n) {
 }
 
 
-inline void matrix_add(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, int n, int m) {
+// inline void matrix_add(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, int n, int m) {
+inline void matrix_add(FN_DATATYPE A[MAX_MEAS_SIZE*MAX_MEAS_SIZE], FN_DATATYPE B[MAX_MEAS_SIZE*MAX_MEAS_SIZE], FN_DATATYPE C[MAX_MEAS_SIZE*MAX_MEAS_SIZE], int n, int m) {
+    // std::cout << "\tMatrix Add: " << n << "\t" << m << "\n";;
+
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             C[i * m + j] = FLOAT_TYPE(A[i * m + j] + B[i * m + j]);
@@ -281,7 +286,9 @@ inline void matrix_add(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, int n, in
 }
 
 
-inline void matrix_transpose(FN_DATATYPE* A, FN_DATATYPE* AT, int n, int m) {
+// inline void matrix_transpose(FN_DATATYPE* A, FN_DATATYPE* AT, int n, int m) {
+inline void matrix_transpose(FN_DATATYPE A[MAX_MEAS_SIZE*STATE_SIZE], FN_DATATYPE AT[MAX_MEAS_SIZE*STATE_SIZE], int n, int m) {
+    // std::cout << "\tMatrix Transpose: " << n << "\t" << m << "\n";;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             AT[j * n + i] = A[i * m + j];
@@ -289,7 +296,9 @@ inline void matrix_transpose(FN_DATATYPE* A, FN_DATATYPE* AT, int n, int m) {
     }
 }
 
-inline void matrix_subtract(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, int n) {
+// inline void matrix_subtract(FN_DATATYPE* A, FN_DATATYPE* B, FN_DATATYPE* C, int n) {
+inline void matrix_subtract(FN_DATATYPE A[MAX_MEAS_SIZE], FN_DATATYPE B[MAX_MEAS_SIZE], FN_DATATYPE C[MAX_MEAS_SIZE], int n) {
+    // std::cout << "\tMatrix Subtract: " << n << "\n";;
     for (int i = 0; i < n; i++) {
         C[i] = FLOAT_TYPE(A[i] - B[i]);
     }

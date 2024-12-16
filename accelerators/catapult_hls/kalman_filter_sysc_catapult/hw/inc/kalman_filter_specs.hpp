@@ -25,10 +25,12 @@
 // #define MEAS_SIZE 164  // Number of measurements m
 // #define MEAS_SIZE 52  // Number of measurements m
 
-// #define MAX_MEAS_SIZE 52  // Number of measurements m
-#define MAX_MEAS_SIZE 124  // Number of measurements m
+#define MAX_MEAS_SIZE 52  // Number of measurements m
+// #define MAX_MEAS_SIZE 164  // Number of measurements m
+#define TMP_MAX_SIZE_SPECS 52
+#define TMP_MAX_SIZE_INV 52
 
-#define SAMPLES 20  // Number of measurements m
+#define SAMPLES 10  // Number of measurements m
 
 #define iterations SAMPLES
 #define dimensions STATE_SIZE
@@ -46,9 +48,10 @@
 #define PLM_B_IN_WORD 3000
 
 // #define PLM_IN_WORD 3650
-#define PLM_OUT_WORD 3000
+#define PLM_OUT_WORD 4096
+#define PLMB_OUT_WORD 8192
 
-#define MEM_SIZE 416000/(DMA_WIDTH/8)
+#define MEM_SIZE 67371008/(DMA_WIDTH/8)
 
 #if (DMA_WIDTH == 32)
 /* <<--defines_32-->> */
@@ -74,15 +77,26 @@
 
 const unsigned int inwp = PLM_IN_WP;
 const unsigned int inrp = PLM_IN_RP;
+
 const unsigned int outwp = PLM_OUT_WP;
 const unsigned int outrp = PLM_OUT_RP;
+
+const unsigned int outbwp = PLM_OUT_WP;
+const unsigned int outbrp = PLM_OUT_RP;
+
 const unsigned int inbks = PLM_IN_WP;
-const unsigned int outbks = PLM_OUT_RP;
+// const unsigned int outbks = PLM_OUT_RP;
+const unsigned int outbks = 1;
+const unsigned int outbbks = 1;
 // const unsigned int inebks = PLM_IN_WORD/PLM_IN_WP;
+
 const unsigned int inebks = PLM_B_IN_WORD/PLM_IN_WP;
 const unsigned int outebks = PLM_OUT_WORD/PLM_OUT_RP;
+const unsigned int outbebks = PLMB_OUT_WORD/PLM_OUT_RP;
+
 const unsigned int in_as = nvhls::index_width<inbks * inebks>::val;
 const unsigned int out_as = nvhls::index_width<outbks * outebks>::val;
+const unsigned int outb_as = nvhls::index_width<outbbks * outbebks>::val;
 
 const unsigned int inbebks = PLM_IN_WORD/PLM_IN_WP;
 // const unsigned int inbebks = PLM_B_IN_WORD/PLM_IN_WP;

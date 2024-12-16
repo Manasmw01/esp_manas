@@ -58,6 +58,7 @@ int err=0;
 FPDATA data;
 float float_data;
 FPDATA Pp_Final[STATE_SIZE][STATE_SIZE];
+uint32_t twice = 0;
 
 #ifdef GOLDEN_OP
 inline void print_matrix_golden(float matrixx[N][N], uint32_t kalman_mat_rows)
@@ -221,9 +222,9 @@ void testbench::proc()
     mac_n = 1;
     mac_vec = 100;
     meas_size_reg = MEAS_SIZE;
-    kalman_iters = num_iterations; // Number of readings taken
-    kalman_mat_rows = STATE_SIZE; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
-    kalman_mat_cols = STATE_SIZE; // Number of num_iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
+    kalman_iters = 50; // Number of readings taken
+    kalman_mat_rows = STATE_SIZE; // Number of iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
+    kalman_mat_cols = STATE_SIZE; // Number of iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
 
     vec_X_address = 0;
     Mat_F_address = vec_X_address + (STATE_SIZE);
@@ -236,10 +237,13 @@ void testbench::proc()
 
     measurement_vecs_base_address = constant_matrices_size;
 
-    input_vecs_total_size = measurement_vecs_base_address + SAMPLES*MEAS_SIZE;
+    input_vecs_total_size = measurement_vecs_base_address + kalman_iters*MEAS_SIZE;
 
     output_size_per_iter = STATE_SIZE + STATE_SIZE*STATE_SIZE; // xp and Pp
     output_total_size = output_size_per_iter;
+
+        // cout << "TB: constant_matrices_size: \t" << constant_matrices_size << "\n";
+        // cout << "TB: input_vecs_total_size: \t" << input_vecs_total_size << "\n";
 
     wait();
 
@@ -262,46 +266,79 @@ void testbench::proc()
     CCS_LOG("--------------------------------");
 
 
-    in = new ac_int<DATA_WIDTH,false>[in_size];
+    // in = new ac_int<DATA_WIDTH,false>[in_size];
     in_float = new float[in_size];
-    gold= new ac_int<DATA_WIDTH,false>[out_size];
-    gold_float = new float[out_size];
+    // gold= new ac_int<DATA_WIDTH,false>[out_size];
+    // gold_float = new float[out_size];
     master_array = new float[in_size];
-    golden_array = new float[out_size];
+    // golden_array = new float[out_size];
 
+    // CCS_LOG("vec_X_address\t" << vec_X_address << "\n");
 
-    std::cout << "vec_X_address\t" << vec_X_address << std::endl;
-    std::cout << "Mat_F_address\t" << Mat_F_address << std::endl;
-    std::cout << "Mat_Q_address\t" << Mat_Q_address << std::endl;
-    std::cout << "Mat_R_address\t" << Mat_R_address << std::endl;
-    std::cout << "Mat_H_address\t" << Mat_H_address << std::endl;
-    std::cout << "Mat_P_address\t" << Mat_P_address << std::endl;
+    // std::cout << "vec_X_address\t" << vec_X_address << "\n";
+    // std::cout << "Mat_F_address\t" << Mat_F_address << "\n";
+    // std::cout << "Mat_Q_address\t" << Mat_Q_address << "\n";
+    // std::cout << "Mat_R_address\t" << Mat_R_address << "\n";
+    // std::cout << "Mat_H_address\t" << Mat_H_address << "\n";
+    // std::cout << "Mat_P_address\t" << Mat_P_address << "\n";
+    CCS_LOG("vec_X_address\t" << vec_X_address << "\n");
+    CCS_LOG("Mat_F_address\t" << Mat_F_address << "\n");
+    CCS_LOG("Mat_Q_address\t" << Mat_Q_address << "\n");
+    CCS_LOG("Mat_R_address\t" << Mat_R_address << "\n");
+    CCS_LOG("Mat_H_address\t" << Mat_H_address << "\n");
+    CCS_LOG("Mat_P_address\t" << Mat_P_address << "\n");
 
-    std::cout << "constant_matrices_size\t" << constant_matrices_size << std::endl << std::endl;
-    std::cout << "input_vecs_total_size\t" << input_vecs_total_size << std::endl;
-    std::cout << "output_size_per_iter\t" << output_size_per_iter << std::endl;
-    std::cout << "output_total_size\t" << output_total_size << std::endl;
-    std::cout << "in_size\t" << in_size << std::endl;
-    std::cout << "out_size\t" << out_size << std::endl;
-
+    // std::cout << "constant_matrices_size\t" << constant_matrices_size << "\n" << "\n";
+    // std::cout << "input_vecs_total_size\t" << input_vecs_total_size << "\n";
+    // std::cout << "output_size_per_iter\t" << output_size_per_iter << "\n";
+    // std::cout << "output_total_size\t" << output_total_size << "\n";
+    // std::cout << "in_size\t" << in_size << "\n";
+    // std::cout << "out_size\t" << out_size << "\n";
+    CCS_LOG("constant_matrices_size\t" << constant_matrices_size << "\n\n");
+    CCS_LOG("input_vecs_total_size\t" << input_vecs_total_size << "\n");
+    CCS_LOG("output_size_per_iter\t" << output_size_per_iter << "\n");
+    CCS_LOG("output_total_size\t" << output_total_size << "\n");
+    CCS_LOG("in_size\t" << in_size << "\n");
+    CCS_LOG("out_size\t" << out_size << "\n");
     partition();
-    std::cout << "Partition completed\n";
+
+    
+    // std::cout << "Partition completed\n";
+    CCS_LOG("Partition completed\n");
 
 
     single_input_array(); // Updates in_float by merging all the inputs
-    std::cout << "Single input array completed\n";
+    // std::cout << "Single input array completed\n";
+    CCS_LOG("Single input array completed\n");
 
-    std::cout << "load_data\t" << input_vecs_total_size << std::endl;
+    // std::cout << "load_data\t" << input_vecs_total_size << "\n";
+    CCS_LOG("load_data\t" << input_vecs_total_size << "\n");
+
     load_data(in_float, input_vecs_total_size); // Writes data in mem[i]
-    std::cout << "Load datafloat done\n";
+    delete[] in_float; // Caller is responsible for cleanup
+
+    // std::cout << "Load datafloat done\n";
+    CCS_LOG("Load datafloat done\n");
 
     do_config();
-    std::cout << "Do config done\n";
+    // std::cout << "Do config done\n";
+    CCS_LOG("Do config done\n");
 
     dump_memory();
-    std::cout << "Dump memory completed\n";
+    // std::cout << "Dump memory completed\n";
+    CCS_LOG("Dump memory completed\n");
 
-    // validate();
+    kalman_iters = 20;
+    // // validate();
+    in_float = new float[in_size];
+
+    single_input_array(); // Updates in_float by merging all the inputs
+    load_data(in_float, input_vecs_total_size); // Writes data in mem[i]
+    delete[] in_float; // Caller is responsible for cleanup
+    do_config();
+    CCS_LOG("Do config 2nd done\n");
+
+    dump_memory();
 
     
     sc_stop();
@@ -312,7 +349,9 @@ void testbench::proc()
 
 void testbench::load_data(float *inn, uint32_t inn_size)
 {
-    std::cout << "inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n";
+    // std::cout << "inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n";
+    CCS_LOG("inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT 
+        << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n");
     for (uint32_t i = 0; i < inn_size / DMA_WORD_PER_BEAT; i++)  {
         ac_int<DMA_WIDTH> data_bv;
         for (int wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
@@ -368,14 +407,14 @@ void testbench::partition()
             master_array[Mat_P_address + (i*STATE_SIZE + j)] = 0; 
         }
     }
-    for(int iter = 1; iter <= SAMPLES; iter++)
+    for(int iter = 1; iter <= kalman_iters; iter++)
     {
         for(int i = MEAS_SIZE*iter; i < MEAS_SIZE*(iter+1); i++)
         {
             master_array[measurement_vecs_base_address + i-MEAS_SIZE*iter + MEAS_SIZE*(iter-1)] = measurements[i];    
 
         }
-        std::cout << std::endl;
+        // std::cout << "\n";
     }
 }
 
@@ -416,27 +455,31 @@ void testbench::dump_memory()
     FPDATA ref_prediction[STATE_SIZE];
     float ref_prediction_float[STATE_SIZE];
 
-    std::cout << "Entered Dump Memory\n";
+    // std::cout << "Entered Dump Memory\n";
+    CCS_LOG("Entered Dump Memory\n");
     do 
     {
         wait(); 
     } while (!acc_done.read());
     int offset=in_size;
-    std::cout << "Dump memory offset address: "<< offset << "\n";
+    // std::cout << "Dump memory offset address: "<< offset << "\n";
+    CCS_LOG("Dump memory offset address: " << offset << "\n");
 
     out= new ac_int<DATA_WIDTH,false>[out_size];
     out_float= new float[out_size];
 
     offset = offset / DMA_WORD_PER_BEAT;
     ofs.open("accelerator_output.txt", std::ofstream::out);
-    std::cout << "\nOUT_SIZE[" << out_size << "]:\n";
-    std::cout << "\noffset[" << offset << "]:\n";
+    // std::cout << "\nOUT_SIZE[" << out_size << "]:\n";
+    // std::cout << "\noffset[" << offset << "]:\n";
+    CCS_LOG("OUT_SIZE[" << out_size << "]");
+    CCS_LOG("offset[" << offset << "]");
     uint32_t tot_size = STATE_SIZE + STATE_SIZE*STATE_SIZE;
 
 
   float sum_sqr_vec = 0.0;
   float abs_diff = 0.0;
-    for (uint32_t iters = 0; iters < SAMPLES; iters++)
+    for (uint32_t iters = 0; iters < kalman_iters; iters++)
     {
         float diff_vec[STATE_SIZE];
         float sqr_diff;
@@ -470,16 +513,20 @@ void testbench::dump_memory()
 
         }
 
+        // CCS_LOG("(" << iters << "): vecX:");
         std::cout << "\n(" << iters << "): vecX:\t";
         for (uint32_t i = 0; i < STATE_SIZE; i++)
         {
             std::cout << std::setprecision(30) << output_xp_float[i] << "\t";
+            // CCS_LOG(std::setprecision(30) << output_xp_float[i] << "\t");
         }
 
         std::cout << "\n(" << iters << "): REF PRED:\t";
+        // CCS_LOG("(" << iters << "): REF PRED:");
         for (uint32_t i = 0; i < STATE_SIZE; i++)
         {
             std::cout << std::setprecision(30) << ref_prediction_float[i] << "\t";            
+            // CCS_LOG(std::setprecision(30) << ref_prediction_float[i] << "\t");
         }
             std::cout << "\n"; 
 
@@ -495,9 +542,10 @@ void testbench::dump_memory()
 
 
     }
-    sum_sqr_vec = sum_sqr_vec/((SAMPLES-1)*STATE_SIZE);
+    sum_sqr_vec = sum_sqr_vec/((kalman_iters-1)*STATE_SIZE);
 
-    std::cout << "\nMSE: " << sum_sqr_vec << "\n";
+    // std::cout << "\nMSE: " << sum_sqr_vec << "\n";
+    // CCS_LOG("MSE: " << sum_sqr_vec << "");
     CCS_LOG("SIMULATION PASSED "<< sum_sqr_vec);
 
 
@@ -510,7 +558,7 @@ void testbench::validate()
     int tot_errors = 0;
 
     for (uint32_t i = 0; i < mac_n; i++)
-        for (uint32_t j = 0; j < output_size_per_iter*num_iterations; j++)
+        for (uint32_t j = 0; j < output_size_per_iter*kalman_iters; j++)
         {
 
             // FPDATA out_gold_fx = 0;

@@ -2,6 +2,7 @@
 
 # Absolute path to the directory
 SIM_DIR="/home/manas/NEW/esp_manas/accelerators/catapult_hls/kalman_filter_sysc_catapult/hw/sim"
+# SIM_DIR="/home/manas/NEW/esp_manas/accelerators/catapult_hls/mac_sysc_catapult/hw/sim"
 
 # List of files to delete
 FILES=(
@@ -15,6 +16,18 @@ FILES=(
     "sc_main.o"
     "testbench.o"
 )
+
+# FILES=(
+#     "accelerator_output.txt"
+#     "mac.o"
+#     "log.txt"
+#     "sc_main.d"
+#     "testbench.d"
+#     "mac.d"
+#     "mac_sysc_catapult"
+#     "sc_main.o"
+#     "testbench.o"
+# )
 
 # Check if the directory exists
 if [ -d "$SIM_DIR" ]; then
