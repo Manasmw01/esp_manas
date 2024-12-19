@@ -7,9 +7,9 @@
 
 // #define TMP_MAX_SIZE TMP_MAX_SIZE_SPECS
 #include "kalman_filter.hpp"
+#include "testbench.hpp"
 void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_dim, uint32_t constant_matrices_size, bool pingpong, bool out_pingpong, uint32_t meas_size_reg)
 {
-    
         // for (uint32_t i = 0; i < meas_size_reg; i++)
         // {
         //     plm_RRq<in_as,inrp> rreq;

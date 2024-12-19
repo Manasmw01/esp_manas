@@ -282,4 +282,8 @@ kalman_filter.o: ../src/kalman_filter.cpp ../inc/kalman_filter.hpp \
  ../inc/kalman_filter_data_types.hpp \
  ../../../common/matchlib_toolkit/examples/ac_types/include/ac_std_float.h \
  ../../../common/matchlib_toolkit/examples/ac_simutils/include/mc_scverify.h \
- ../inc/kalman_filter_utils.hpp ../inc/kalman_filter_functions.hpp
+ ../inc/kalman_filter_utils.hpp ../inc/kalman_filter_functions.hpp \
+ ../tb/testbench.hpp ../inc/kalman_filter_specs.hpp \
+ ../inc/kalman_filter_data_types.hpp \
+ ../../../common/inc/core/systems/esp_dma_controller.hpp \
+ ../../../common/inc/core/systems/esp_dma_controller.i.hpp

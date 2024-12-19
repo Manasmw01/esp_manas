@@ -508,6 +508,7 @@ void testbench::dump_memory()
     // CCS_LOG("Do config done");
     for (uint32_t iters = 0; iters < kalman_iters; iters++)
     {
+        load_data(in_float, constant_matrices_size, input_vecs_total_size); // Writes data in mem[i]
         do 
         {
             wait(); 
