@@ -308,6 +308,7 @@ void testbench::proc()
 
 
     single_input_array(); // Updates in_float by merging all the inputs
+    single_input_meas(); 
     // std::cout << "Single input array completed\n";
     CCS_LOG("Single input array completed");
 
@@ -454,12 +455,11 @@ void testbench::dump_memory()
 
     // std::cout << "Entered Dump Memory\n";
     CCS_LOG("Entered Dump Memory\n");
-    do 
-    {
-        wait(); 
-    } while (!acc_done.read());
+    // do 
+    // {
+    //     wait(); 
+    // } while (!acc_done.read());
     int offset=in_size;
-    // std::cout << "Dump memory offset address: "<< offset << "\n";
     CCS_LOG("Dump memory offset address: " << offset << "\n");
 
     out= new ac_int<DATA_WIDTH,false>[out_size];
@@ -478,13 +478,21 @@ void testbench::dump_memory()
   float abs_diff = 0.0;
     for (uint32_t iters = 0; iters < kalman_iters; iters++)
     {
+        do 
+        {
+            wait(); 
+        } while (!acc_done.read());
+        CCS_LOG("Iteration(" << iters << ")");
+
         float diff_vec[STATE_SIZE];
         float sqr_diff;
+        cout << "Reading from: (" << offset << " " << out_size << ")\t" << (offset + out_size) << "\n";
         for (uint32_t i = 0; i < out_size / DMA_WORD_PER_BEAT; i++)
         {
             for (uint32_t wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
             {
-                out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + tot_size*iters +  i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
+                out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset +  i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
+                // out[i * DMA_WORD_PER_BEAT + wordd] = mem[offset + tot_size*iters +  i].slc<DATA_WIDTH>(wordd*DATA_WIDTH);
                 FPDATA out_fixed = 0;
                 FLOAT_TYPE out_floating = FLOAT_TYPE(0);
                 int2fp(out[i * DMA_WORD_PER_BEAT + wordd],out_floating);
@@ -567,17 +575,56 @@ void testbench::validate()
 
         }
 }
-
 void testbench::single_input_array()
 {
-    for (uint32_t i= 0; i< mac_n ; i++)
+    // Handles `j` from 0 to `measurement_vecs_base_address`
+    for (uint32_t i = 0; i < mac_n; i++)
     {
-        for (uint32_t j=0; j< in_size ; j+=1)
+        for (uint32_t j = 0; j < measurement_vecs_base_address; j += 1)
         {
             float_data = master_array[j];
             FPDATA_WORD data_int32;
-            data_int32.set_slc(0,data.slc<DATA_WIDTH>(0));
-            in_float[i*in_words_adj+j]=float_data;
+            data_int32.set_slc(0, data.slc<DATA_WIDTH>(0));
+            in_float[i * in_words_adj + j] = float_data;
         }
     }
 }
+
+void testbench::single_input_meas()
+{
+    // Handles `j` from `measurement_vecs_base_address` for `MEAS_SIZE`, across `kalman_iters`
+    for (uint32_t i = 0; i < mac_n; i++)
+    {
+        for (uint32_t iter = 1; iter <= kalman_iters; iter++) // Iterate from 1 to `kalman_iters`
+        {
+            for (uint32_t j = 0; j < MEAS_SIZE; j++) // Loop over `MEAS_SIZE`
+            {
+                // Compute the adjusted index for master_array based on the given logic
+                uint32_t master_index = measurement_vecs_base_address + j + MEAS_SIZE * (iter - 1);
+
+                // Access the value from master_array and process it
+                float_data = master_array[master_index];
+                FPDATA_WORD data_int32;
+                data_int32.set_slc(0, data.slc<DATA_WIDTH>(0));
+
+                // Compute the index for in_float and assign the value
+                uint32_t in_float_index = i * in_words_adj + master_index;
+                in_float[in_float_index] = float_data;
+            }
+        }
+    }
+}
+
+// void testbench::single_input_array()
+// {
+//     for (uint32_t i= 0; i< mac_n ; i++)
+//     {
+//         for (uint32_t j=0; j< in_size ; j+=1)
+//         {
+//             float_data = master_array[j];
+//             FPDATA_WORD data_int32;
+//             data_int32.set_slc(0,data.slc<DATA_WIDTH>(0));
+//             in_float[i*in_words_adj+j]=float_data;
+//         }
+//     }
+// }

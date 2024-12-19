@@ -101,8 +101,8 @@ void kalman_filter_sysc_catapult:: load() {
                 current_chunk_size = constant_matrices_size - (chunk * chunk_reg);
             }
             uint32_t current_chunk_address = regs_base_address + (chunk * chunk_reg);
-            cout << "Load_d const" << "(" << chunk << "): " << current_chunk_address << "\t" << current_chunk_size 
-                << "\t" << (current_chunk_address + current_chunk_size) << "\n";
+            // cout << "Load_d const" << "(" << chunk << "): " << current_chunk_address << "\t" << current_chunk_size 
+                // << "\t" << (current_chunk_address + current_chunk_size) << "\n";
 
             load_d(ping_pong, current_chunk_address, current_chunk_size, 0, temp_indx_const);
             // load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
@@ -127,8 +127,8 @@ void kalman_filter_sysc_catapult:: load() {
                     current_chunk_size = meas_size_reg - (chunk * chunk_meas_size_reg);
                 }
                 uint32_t current_chunk_address = inputs_base_address + (chunk * chunk_meas_size_reg);
-                cout << "Load_d measurements" << "(" << iter << "): " << current_chunk_address << "\t" << current_chunk_size 
-                    << "\t" << (current_chunk_address + current_chunk_size) << "\n";
+                // cout << "Load_d measurements" << "(" << iter << "): " << current_chunk_address << "\t" << current_chunk_size 
+                    // << "\t" << (current_chunk_address + current_chunk_size) << "\n";
 
                 load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
                 temp_indx += current_chunk_size;
@@ -342,17 +342,23 @@ void kalman_filter_sysc_catapult:: store() {
         const int out_len = kalman_mat_rows + kalman_mat_rows*kalman_mat_rows;
         for (uint32_t b = 0; b < kalman_iters; b++)
         {
-            out_index = input_vecs_total_size + out_len*b;
+            // acc_done.write(false);
+            // out_index = input_vecs_total_size + out_len*b;
             sync23b.sync_in();
             sync2b3b.sync_in();
-            out_index = input_vecs_total_size + out_len*b;
-            // cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
+            // out_index = input_vecs_total_size + out_len*b;
+            out_index = input_vecs_total_size ;
+            cout << "store_data: (" << out_index << " " << out_len << ")\t" << (out_index + out_len) << "\n";
             store_data(ping_pong, out_index, out_len);
             // cout << "store_data(" << b << "): " << out_index << "\t" << out_len << "\n";        
-        }
+            acc_done.write(true); wait();
+            acc_done.write(false);
+            wait();
 
-        acc_done.write(true); wait();
-        acc_done.write(false);
+        }
+        // acc_done.write(true);
+        wait();
+        // acc_done.write(true); wait();
     }
 
 

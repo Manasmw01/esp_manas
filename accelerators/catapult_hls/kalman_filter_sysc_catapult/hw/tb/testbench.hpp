@@ -79,6 +79,7 @@ SC_MODULE(testbench)
     void dump_memory(void);
     void validate(void);
     void single_input_array(void);
+    void single_input_meas(void);
 
     // Accelerator-specific data
     /* <<--params-->> */
