@@ -55,9 +55,9 @@ void kalman_filter_sysc_catapult:: load() {
     conf1.ResetRead();
 
     in_ping_w.ResetWrite();
-    in_pong_w.ResetWrite();
+    // in_pong_w.ResetWrite();
     in_b_ping_w.ResetWrite();
-    in_b_pong_w.ResetWrite();
+    // in_b_pong_w.ResetWrite();
 
     wait();
 
@@ -91,7 +91,7 @@ void kalman_filter_sysc_catapult:: load() {
 
         // load_d(ping_pong, regs_base_address, constant_matrices_size, 0, 0);
         uint32_t temp_indx_const = 0;  
-        uint32_t chunk_reg = 25; 
+        uint32_t chunk_reg = 1000; 
         uint32_t num_chunks_d = (constant_matrices_size + chunk_reg - 1) / chunk_reg; 
         for (uint32_t chunk = 0; chunk < num_chunks_d; ++chunk)
         {
@@ -101,8 +101,8 @@ void kalman_filter_sysc_catapult:: load() {
                 current_chunk_size = constant_matrices_size - (chunk * chunk_reg);
             }
             uint32_t current_chunk_address = regs_base_address + (chunk * chunk_reg);
-            // cout << "Load_d const" << "(" << chunk << "): " << current_chunk_address << "\t" << current_chunk_size 
-                // << "\t" << (current_chunk_address + current_chunk_size) << "\n";
+            cout << "Load_d const" << "(" << chunk << "): " << current_chunk_address << "\t" << current_chunk_size 
+                << "\t" << (current_chunk_address + current_chunk_size) << "\n";
 
             load_d(ping_pong, current_chunk_address, current_chunk_size, 0, temp_indx_const);
             // load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
@@ -127,8 +127,8 @@ void kalman_filter_sysc_catapult:: load() {
                     current_chunk_size = meas_size_reg - (chunk * chunk_meas_size_reg);
                 }
                 uint32_t current_chunk_address = inputs_base_address + (chunk * chunk_meas_size_reg);
-                // cout << "Load_d measurements" << "(" << iter << "): " << current_chunk_address << "\t" << current_chunk_size 
-                    // << "\t" << (current_chunk_address + current_chunk_size) << "\n";
+                cout << "Load_d measurements" << "(" << iter << "): " << current_chunk_address << "\t" << current_chunk_size 
+                    << "\t" << (current_chunk_address + current_chunk_size) << "\n";
 
                 load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
                 temp_indx += current_chunk_size;
@@ -159,12 +159,12 @@ void kalman_filter_sysc_catapult::compute_dataReq() {
     sync_comp.reset_sync_out();
 
     in_ping_ra.ResetWrite();
-    in_pong_ra.ResetWrite();
+    // in_pong_ra.ResetWrite();
     in_b_ping_ra.ResetWrite();
-    in_b_pong_ra.ResetWrite();
+    // in_b_pong_ra.ResetWrite();
 
     xp_ping_ra.ResetWrite();
-    xp_pong_ra.ResetWrite();
+    // xp_pong_ra.ResetWrite();
 
     wait();
 
@@ -213,16 +213,16 @@ void kalman_filter_sysc_catapult:: compute() {
     // sync_comp.reset_sync_in();
 
     xp_ping_w.ResetWrite();
-    xp_pong_w.ResetWrite();
+    // xp_pong_w.ResetWrite();
     out_ping_w.ResetWrite();
-    out_pong_w.ResetWrite();
+    // out_pong_w.ResetWrite();
     in_ping_rd.ResetRead();
-    in_pong_rd.ResetRead();
+    // in_pong_rd.ResetRead();
     in_b_ping_rd.ResetRead();
-    in_b_pong_rd.ResetRead();
+    // in_b_pong_rd.ResetRead();
 
     xp_ping_rd.ResetRead();
-    xp_pong_rd.ResetRead();
+    // xp_pong_rd.ResetRead();
     wait();
 
     while(1) {
@@ -271,7 +271,7 @@ void kalman_filter_sysc_catapult:: store_dataReq() {
     sync03.ResetRead();
     conf3.ResetRead();
 
-    out_pong_ra.ResetWrite();
+    // out_pong_ra.ResetWrite();
     out_ping_ra.ResetWrite();
 
     wait();
@@ -317,7 +317,7 @@ void kalman_filter_sysc_catapult:: store() {
     sync03b.ResetRead();
     conf3b.ResetRead();
 
-    out_pong_rd.ResetRead();
+    // out_pong_rd.ResetRead();
     out_ping_rd.ResetRead();
 
     acc_done.write(false);

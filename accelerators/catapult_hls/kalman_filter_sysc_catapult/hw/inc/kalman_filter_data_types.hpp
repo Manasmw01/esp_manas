@@ -131,96 +131,179 @@ inline void matrix_multiply(FN_DATATYPE A[MAX_MEAS_SIZE*MAX_MEAS_SIZE], FN_DATAT
 
 
 
-inline void inverse_clean(FN_DATATYPE new_mat[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV], FN_DATATYPE out[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV], uint32_t meas_size_reg)
+// inline void inverse_clean(FN_DATATYPE new_mat[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV], FN_DATATYPE out[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV], uint32_t meas_size_reg)
+// {
+
+// 		 FN_DATATYPE ratio;
+// 		 uint32_t i,j,k;
+
+// 		 if(meas_size_reg == 2){
+// 			 FN_DATATYPE a = new_mat[0][0];
+// 			 FN_DATATYPE b = new_mat[0][1];
+// 			 FN_DATATYPE c = new_mat[1][0];
+// 			 FN_DATATYPE d = new_mat[1][1];
+
+// 			 FN_DATATYPE det = FN_DATATYPE((a * d) - (b * c));
+
+
+// 			 if (det == FN_DATATYPE(0.0)) {
+// 			     return;
+// 			 }
+
+// 			 out[0][0] = d / det;
+// 			 out[0][1] = FN_DATATYPE(-1.0) * b / det;
+// 			 out[1][0] = FN_DATATYPE(-1.0) * c / det;
+// 			 out[1][1] = a / det;
+
+// 			 return;
+// 		 }
+
+// 		 /* Applying Gauss Jordan Elimination */
+// 		 for(i = 0; i < meas_size_reg; i++)
+// 		 {
+// 			  for(j = 0; j < meas_size_reg; j++)
+// 			  {
+// 				   if(i != j)
+// 				   {
+// 					    ratio = new_mat[j][i]/new_mat[i][i];
+// 					    for(k = 0; k < meas_size_reg; k++)
+// 					    {
+
+// 					    	if(i == meas_size_reg-1){
+// 					    		if(k == 0){//Calc the diagonal element first
+// 					    			new_mat[j][j] = FN_DATATYPE(new_mat[j][j] - ratio*new_mat[i][j]);
+// 					    		}
+// 					    		else if(k == j){
+// 					    			new_mat[j][0] = FN_DATATYPE(new_mat[j][0] - ratio*new_mat[i][0]);
+// 					    		}
+// 					    		else{
+// 					    			new_mat[j][k] = FN_DATATYPE(new_mat[j][k] - ratio*new_mat[i][k]);
+// 					    		}
+
+// 					    		out[j][k] = FN_DATATYPE((out[j][k] - ratio*out[i][k]) / new_mat[j][j]);
+// 					    	}
+// 					    	else{
+
+// 								new_mat[j][k] = FN_DATATYPE(new_mat[j][k] - ratio*new_mat[i][k]);
+
+// 								if(i > 0)
+// 									out[j][k] = FN_DATATYPE(out[j][k] - ratio*out[i][k]);
+// 								else{ //(i == 0)
+// 									if(i == k)
+// 										out[i][k] = FN_DATATYPE(1);
+// 									else
+// 										out[i][k] = FN_DATATYPE(0);
+// 									if(j == k){
+// 										if(i == k)
+// 											out[j][k] = FN_DATATYPE((FN_DATATYPE)1 - ratio);
+// 											// out[j][k] = FN_DATATYPE(1 - ratio.to_float());
+// 										else
+// 											out[j][k] = FN_DATATYPE(1);
+// 									}
+// 									else{
+// 										if(i == k)
+// 											out[j][k] = -ratio;
+// 										else
+// 											out[j][k] = FN_DATATYPE(0);
+// 									}
+// 								}
+// 					    	}
+
+// 					    }
+
+// 				   }
+
+// 			  }
+// 		 }
+// 		 for(i = 0; i < meas_size_reg; i++)
+// 		 {
+// 			 out[meas_size_reg-1][i] = out[meas_size_reg-1][i] / new_mat[meas_size_reg-1][meas_size_reg-1];
+// 		 }
+// 		 return;
+// }
+
+// inline void inverse_clean(FN_DATATYPE* new_mat, FN_DATATYPE* out, uint32_t meas_size_reg)
+inline void inverse_clean(FN_DATATYPE new_mat[TMP_MAX_SIZE_INV*TMP_MAX_SIZE_INV], FN_DATATYPE out[TMP_MAX_SIZE_INV*TMP_MAX_SIZE_INV], uint32_t meas_size_reg)
 {
+    FN_DATATYPE ratio;
+    uint32_t i, j, k;
 
-		 FN_DATATYPE ratio;
-		 uint32_t i,j,k;
+    if (meas_size_reg == 2) {
+        FN_DATATYPE a = new_mat[0 * meas_size_reg + 0];
+        FN_DATATYPE b = new_mat[0 * meas_size_reg + 1];
+        FN_DATATYPE c = new_mat[1 * meas_size_reg + 0];
+        FN_DATATYPE d = new_mat[1 * meas_size_reg + 1];
 
-		 if(meas_size_reg == 2){
-			 FN_DATATYPE a = new_mat[0][0];
-			 FN_DATATYPE b = new_mat[0][1];
-			 FN_DATATYPE c = new_mat[1][0];
-			 FN_DATATYPE d = new_mat[1][1];
+        FN_DATATYPE det = FN_DATATYPE((a * d) - (b * c));
 
-			 FN_DATATYPE det = FN_DATATYPE((a * d) - (b * c));
+        if (det == FN_DATATYPE(0.0)) {
+            return;
+        }
 
+        out[0 * meas_size_reg + 0] = d / det;
+        out[0 * meas_size_reg + 1] = FN_DATATYPE(-1.0) * b / det;
+        out[1 * meas_size_reg + 0] = FN_DATATYPE(-1.0) * c / det;
+        out[1 * meas_size_reg + 1] = a / det;
 
-			 if (det == FN_DATATYPE(0.0)) {
-			     return;
-			 }
+        return;
+    }
 
-			 out[0][0] = d / det;
-			 out[0][1] = FN_DATATYPE(-1.0) * b / det;
-			 out[1][0] = FN_DATATYPE(-1.0) * c / det;
-			 out[1][1] = a / det;
+    /* Applying Gauss Jordan Elimination */
+    for (i = 0; i < meas_size_reg; i++) {
+        for (j = 0; j < meas_size_reg; j++) {
+            if (i != j) {
+                ratio = new_mat[j * meas_size_reg + i] / new_mat[i * meas_size_reg + i];
+                for (k = 0; k < meas_size_reg; k++) {
+                    if (i == meas_size_reg - 1) {
+                        if (k == 0) {
+                            new_mat[j * meas_size_reg + j] -= ratio * new_mat[i * meas_size_reg + j];
+                        } else if (k == j) {
+                            new_mat[j * meas_size_reg + 0] -= ratio * new_mat[i * meas_size_reg + 0];
+                        } else {
+                            new_mat[j * meas_size_reg + k] -= ratio * new_mat[i * meas_size_reg + k];
+                        }
 
-			 return;
-		 }
+                        out[j * meas_size_reg + k] =
+                            (out[j * meas_size_reg + k] - ratio * out[i * meas_size_reg + k]) /
+                            new_mat[j * meas_size_reg + j];
+                    } else {
+                        new_mat[j * meas_size_reg + k] -= ratio * new_mat[i * meas_size_reg + k];
 
-		 /* Applying Gauss Jordan Elimination */
-		 for(i = 0; i < meas_size_reg; i++)
-		 {
-			  for(j = 0; j < meas_size_reg; j++)
-			  {
-				   if(i != j)
-				   {
-					    ratio = new_mat[j][i]/new_mat[i][i];
-					    for(k = 0; k < meas_size_reg; k++)
-					    {
+                        if (i > 0) {
+                            out[j * meas_size_reg + k] -= ratio * out[i * meas_size_reg + k];
+                        } else {
+                            if (i == k) {
+                                out[i * meas_size_reg + k] = FN_DATATYPE(1);
+                            } else {
+                                out[i * meas_size_reg + k] = FN_DATATYPE(0);
+                            }
+                            if (j == k) {
+                                if (i == k) {
+                                    out[j * meas_size_reg + k] = FN_DATATYPE(1) - ratio;
+                                } else {
+                                    out[j * meas_size_reg + k] = FN_DATATYPE(1);
+                                }
+                            } else {
+                                if (i == k) {
+                                    out[j * meas_size_reg + k] = -ratio;
+                                } else {
+                                    out[j * meas_size_reg + k] = FN_DATATYPE(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-					    	if(i == meas_size_reg-1){
-					    		if(k == 0){//Calc the diagonal element first
-					    			new_mat[j][j] = FN_DATATYPE(new_mat[j][j] - ratio*new_mat[i][j]);
-					    		}
-					    		else if(k == j){
-					    			new_mat[j][0] = FN_DATATYPE(new_mat[j][0] - ratio*new_mat[i][0]);
-					    		}
-					    		else{
-					    			new_mat[j][k] = FN_DATATYPE(new_mat[j][k] - ratio*new_mat[i][k]);
-					    		}
-
-					    		out[j][k] = FN_DATATYPE((out[j][k] - ratio*out[i][k]) / new_mat[j][j]);
-					    	}
-					    	else{
-
-								new_mat[j][k] = FN_DATATYPE(new_mat[j][k] - ratio*new_mat[i][k]);
-
-								if(i > 0)
-									out[j][k] = FN_DATATYPE(out[j][k] - ratio*out[i][k]);
-								else{ //(i == 0)
-									if(i == k)
-										out[i][k] = FN_DATATYPE(1);
-									else
-										out[i][k] = FN_DATATYPE(0);
-									if(j == k){
-										if(i == k)
-											out[j][k] = FN_DATATYPE((FN_DATATYPE)1 - ratio);
-											// out[j][k] = FN_DATATYPE(1 - ratio.to_float());
-										else
-											out[j][k] = FN_DATATYPE(1);
-									}
-									else{
-										if(i == k)
-											out[j][k] = -ratio;
-										else
-											out[j][k] = FN_DATATYPE(0);
-									}
-								}
-					    	}
-
-					    }
-
-				   }
-
-			  }
-		 }
-		 for(i = 0; i < meas_size_reg; i++)
-		 {
-			 out[meas_size_reg-1][i] = out[meas_size_reg-1][i] / new_mat[meas_size_reg-1][meas_size_reg-1];
-		 }
-		 return;
+    for (i = 0; i < meas_size_reg; i++) {
+        out[(meas_size_reg - 1) * meas_size_reg + i] /=
+            new_mat[(meas_size_reg - 1) * meas_size_reg + (meas_size_reg - 1)];
+    }
+    return;
 }
+
 
 // Utility function implementations
 

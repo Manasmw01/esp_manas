@@ -72,13 +72,12 @@ void kalman_filter_sysc_catapult::load_d(bool ping, uint32_t base_addr, uint32_t
             {
                 if(d)
                 {
-                in_pong_w.Push(wreq);
+                // in_pong_w.Push(wreq);
                 // std::cout << "\t\tin_pong_w.Push:\n";
                 }
                 else
                 {
-                // in_b_pong_w.Push(wreq);
-                in_b_pong_w.Push(wreqb);
+                // in_b_pong_w.Push(wreqb);
                 // std::cout << "\t\tin_b_pong_w.Push:\n";
                 }
             }
@@ -125,7 +124,9 @@ void kalman_filter_sysc_catapult::load_b(bool ping, uint32_t base_addr, uint32_t
             if (ping)
                 in_b_ping_w.Push(wreq);
             else
-                in_b_pong_w.Push(wreq);
+            {
+                // in_b_pong_w.Push(wreq);
+            }
 
             mem_index++;
 
@@ -157,7 +158,9 @@ void kalman_filter_sysc_catapult::store_data_req(bool ping, uint32_t base_addr, 
             if (ping)
                 out_ping_ra.Push(rreq);
             else
-                out_pong_ra.Push(rreq);
+            {
+                // out_pong_ra.Push(rreq);
+            }
             mem_index++;
         }
         mem_off += beats ;
@@ -189,7 +192,9 @@ void kalman_filter_sysc_catapult::store_data(bool ping, uint32_t base_addr, uint
             if (ping)
                 w=out_ping_rd.Pop().data[0];
             else
-                w=out_pong_rd.Pop().data[0];
+            {
+                // w=out_pong_rd.Pop().data[0];
+            }
 
             dma_write_chnl.Push(w);
 

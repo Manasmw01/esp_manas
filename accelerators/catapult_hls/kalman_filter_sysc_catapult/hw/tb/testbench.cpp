@@ -222,7 +222,7 @@ void testbench::proc()
     mac_n = 1;
     mac_vec = 100;
     meas_size_reg = MEAS_SIZE;
-    kalman_iters = 50; // Number of readings taken
+    kalman_iters = SAMPLES; // Number of readings taken
     kalman_mat_rows = STATE_SIZE; // Number of iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
     kalman_mat_cols = STATE_SIZE; // Number of iterations (matrix_dim: [X_GPS(i); X_pos(i); Y_GPS(i); Y_pos(i)])
 
@@ -281,12 +281,12 @@ void testbench::proc()
     // std::cout << "Mat_R_address\t" << Mat_R_address << "\n";
     // std::cout << "Mat_H_address\t" << Mat_H_address << "\n";
     // std::cout << "Mat_P_address\t" << Mat_P_address << "\n";
-    CCS_LOG("vec_X_address\t" << vec_X_address << "\n");
-    CCS_LOG("Mat_F_address\t" << Mat_F_address << "\n");
-    CCS_LOG("Mat_Q_address\t" << Mat_Q_address << "\n");
-    CCS_LOG("Mat_R_address\t" << Mat_R_address << "\n");
-    CCS_LOG("Mat_H_address\t" << Mat_H_address << "\n");
-    CCS_LOG("Mat_P_address\t" << Mat_P_address << "\n");
+    CCS_LOG("vec_X_address\t" << vec_X_address );
+    CCS_LOG("Mat_F_address\t" << Mat_F_address );
+    CCS_LOG("Mat_Q_address\t" << Mat_Q_address );
+    CCS_LOG("Mat_R_address\t" << Mat_R_address );
+    CCS_LOG("Mat_H_address\t" << Mat_H_address );
+    CCS_LOG("Mat_P_address\t" << Mat_P_address );
 
     // std::cout << "constant_matrices_size\t" << constant_matrices_size << "\n" << "\n";
     // std::cout << "input_vecs_total_size\t" << input_vecs_total_size << "\n";
@@ -294,51 +294,48 @@ void testbench::proc()
     // std::cout << "output_total_size\t" << output_total_size << "\n";
     // std::cout << "in_size\t" << in_size << "\n";
     // std::cout << "out_size\t" << out_size << "\n";
-    CCS_LOG("constant_matrices_size\t" << constant_matrices_size << "\n\n");
-    CCS_LOG("input_vecs_total_size\t" << input_vecs_total_size << "\n");
-    CCS_LOG("output_size_per_iter\t" << output_size_per_iter << "\n");
-    CCS_LOG("output_total_size\t" << output_total_size << "\n");
-    CCS_LOG("in_size\t" << in_size << "\n");
-    CCS_LOG("out_size\t" << out_size << "\n");
+    CCS_LOG("constant_matrices_size\t" << constant_matrices_size);
+    CCS_LOG("input_vecs_total_size\t" << input_vecs_total_size);
+    CCS_LOG("output_size_per_iter\t" << output_size_per_iter);
+    CCS_LOG("output_total_size\t" << output_total_size);
+    CCS_LOG("in_size\t" << in_size );
+    CCS_LOG("out_size\t" << out_size );
     partition();
 
     
     // std::cout << "Partition completed\n";
-    CCS_LOG("Partition completed\n");
+    CCS_LOG("Partition completed");
 
 
     single_input_array(); // Updates in_float by merging all the inputs
     // std::cout << "Single input array completed\n";
-    CCS_LOG("Single input array completed\n");
+    CCS_LOG("Single input array completed");
 
     // std::cout << "load_data\t" << input_vecs_total_size << "\n";
-    CCS_LOG("load_data\t" << input_vecs_total_size << "\n");
+    CCS_LOG("load_data\t" << input_vecs_total_size );
 
     load_data(in_float, input_vecs_total_size); // Writes data in mem[i]
     delete[] in_float; // Caller is responsible for cleanup
 
     // std::cout << "Load datafloat done\n";
-    CCS_LOG("Load datafloat done\n");
+    CCS_LOG("Load datafloat done");
 
     do_config();
     // std::cout << "Do config done\n";
-    CCS_LOG("Do config done\n");
+    CCS_LOG("Do config done");
 
     dump_memory();
-    // std::cout << "Dump memory completed\n";
-    CCS_LOG("Dump memory completed\n");
+    CCS_LOG("Dump memory completed");
 
-    kalman_iters = 20;
-    // // validate();
-    in_float = new float[in_size];
+    // kalman_iters = 20;
+    // in_float = new float[in_size];
+    // single_input_array(); // Updates in_float by merging all the inputs
+    // load_data(in_float, input_vecs_total_size); // Writes data in mem[i]
+    // delete[] in_float; // Caller is responsible for cleanup
+    // do_config();
+    // CCS_LOG("Do config 2nd done");
 
-    single_input_array(); // Updates in_float by merging all the inputs
-    load_data(in_float, input_vecs_total_size); // Writes data in mem[i]
-    delete[] in_float; // Caller is responsible for cleanup
-    do_config();
-    CCS_LOG("Do config 2nd done\n");
-
-    dump_memory();
+    // dump_memory();
 
     
     sc_stop();

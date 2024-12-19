@@ -22,7 +22,7 @@ void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_ite
         // }
 
         // uint32_t chunk_meas_size_reg = 52; // Define chunk size
-        uint32_t chunk_meas_size_reg = 50; // Define chunk size
+        uint32_t chunk_meas_size_reg = 3000; // Define chunk size
         uint32_t num_chunks = (meas_size_reg + chunk_meas_size_reg - 1) / chunk_meas_size_reg; // Calculate number of chunks
         sync_load.sync_in();
 
@@ -40,7 +40,7 @@ void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_ite
                 if (pingpong) {
                     in_ping_ra.Push(rreq);
                 } else {
-                    in_pong_ra.Push(rreq);
+                    // in_pong_ra.Push(rreq);
                 }
                 // cout << "in_ping_ra: " << (chunk * chunk_meas_size_reg) + i << "\n";
             }
@@ -55,7 +55,9 @@ void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_ite
             if(pingpong)            
                 in_b_ping_ra.Push(rreq);
             else
-                in_b_pong_ra.Push(rreq);
+            {
+                // in_b_pong_ra.Push(rreq);
+            }
         }
 
         if(iter > 0)
@@ -66,9 +68,14 @@ void kalman_filter_sysc_catapult::compute_req(uint32_t iter, uint32_t kalman_ite
                 plm_RRq<outb_as,outbrp> rreq;
                 rreq.indx[0]=k;
                 if (pingpong)
+                {
                     xp_ping_ra.Push(rreq);
+                }
                 else
-                    xp_pong_ra.Push(rreq);
+                {
+                    
+                }
+                    // xp_pong_ra.Push(rreq);
             }
         }
         wait();
@@ -126,7 +133,9 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         if(pingpong)            
             input_measurements_word=in_ping_rd.Pop().data[0];
         else
-            input_measurements_word=in_pong_rd.Pop().data[0];            
+        {
+            // input_measurements_word=in_pong_rd.Pop().data[0];            
+        }
 
         // int2fx(input_measurements_word,input_measurements_fx);
             // vec_Z[k] = input_measurements_fx;
@@ -146,7 +155,9 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
         if(pingpong)            
             important_matrices_word=in_b_ping_rd.Pop().data[0];
         else
-            important_matrices_word=in_b_pong_rd.Pop().data[0];
+        {
+            // important_matrices_word=in_b_pong_rd.Pop().data[0];
+        }
 
         // int2fx(important_matrices_word,input_regs_fx);
         int2fp(important_matrices_word,input_regs_fp);
@@ -204,7 +215,9 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             if (pingpong)
                 op_word=xp_ping_rd.Pop().data[0];
             else
-                op_word=xp_pong_rd.Pop().data[0];
+            {
+                // op_word=xp_pong_rd.Pop().data[0];
+            }
             // int2fx(op_word,op_fx);
             int2fp(op_word,op_fp);
 
@@ -341,25 +354,30 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
     // FLOAT_TYPE S_inv[MAX_MEAS_SIZE * MAX_MEAS_SIZE];
     // FLOAT_TYPE S_inv_2D[MAX_MEAS_SIZE][MAX_MEAS_SIZE];
     FLOAT_TYPE S_inv[TMP_MAX_SIZE_INV * TMP_MAX_SIZE_INV];
-    FLOAT_TYPE S_inv_2D[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV];
+    // FLOAT_TYPE S_inv_2D[TMP_MAX_SIZE_INV][TMP_MAX_SIZE_INV];
     // gauss_inverse(Mat_S, S_inv, MEAS_SIZE); 
 
     // // INVERSE CLEAN IMPLEMENTATION STARTS
-    for (uint32_t i = 0; i < meas_size_reg; i++)  
-    {
-        for (uint32_t j = 0; j < meas_size_reg; j++) 
-        {
-            Mat_S_2D[i][j] = Mat_S[i * meas_size_reg + j]; // Accessing the 1D array using the row-major order formula
-        }
-    }
-    inverse_clean(Mat_S_2D, S_inv_2D, meas_size_reg);
-    for (uint32_t i = 0; i < meas_size_reg; i++)  
-    {
-        for (uint32_t j = 0; j < meas_size_reg; j++) 
-        {
-            S_inv[i * meas_size_reg + j] = S_inv_2D[i][j];  // Converting 2D element back to 1D
-        }
-    }
+
+    // for (uint32_t i = 0; i < meas_size_reg; i++)  
+    // {
+    //     for (uint32_t j = 0; j < meas_size_reg; j++) 
+    //     {
+    //         Mat_S_2D[i][j] = Mat_S[i * meas_size_reg + j]; // Accessing the 1D array using the row-major order formula
+    //     }
+    // }
+
+    // inverse_clean(Mat_S_2D, S_inv_2D, meas_size_reg);
+    inverse_clean(Mat_S, S_inv, meas_size_reg);
+
+    
+    // for (uint32_t i = 0; i < meas_size_reg; i++)  
+    // {
+    //     for (uint32_t j = 0; j < meas_size_reg; j++) 
+    //     {
+    //         S_inv[i * meas_size_reg + j] = S_inv_2D[i][j];  // Converting 2D element back to 1D
+    //     }
+    // }
     // printf("S_inv\n");
     // print_matrix_new(S_inv, MEAS_SIZE, MEAS_SIZE);
 
@@ -453,7 +471,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             }
             else
             {
-                out_pong_w.Push(wreq);
+                // out_pong_w.Push(wreq);
             }
             input_ptr++;
         }
@@ -491,7 +509,7 @@ void kalman_filter_sysc_catapult::compute(uint32_t iter, uint32_t kalman_iters, 
             }
             else
             {
-                xp_pong_w.Push(wreq1);
+                // xp_pong_w.Push(wreq1);
             }
             input_ptr++;
         }

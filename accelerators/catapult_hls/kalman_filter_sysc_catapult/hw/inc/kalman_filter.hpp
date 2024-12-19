@@ -52,11 +52,11 @@ inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_di
   //     plm_out_pong("plm_out_pong"){
   SC_CTOR(kalman_filter_sysc_catapult):  
       plm_in_ping("plm_in_ping"), 
-      plm_in_pong("plm_in_pong"), 
+      // plm_in_pong("plm_in_pong"), 
       plm_out_ping("plm_out_ping"), 
-      plm_out_pong("plm_out_pong"),
-      plm_in_b_ping("plm_in_b_ping"), 
-      plm_in_b_pong("plm_in_b_pong"){
+      // plm_out_pong("plm_out_pong"),
+      plm_in_b_ping("plm_in_b_ping"){ 
+      // plm_in_b_pong("plm_in_b_pong"){
 
 
       SC_THREAD(config);
@@ -89,11 +89,11 @@ inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_di
       plm_in_ping.read_req(in_ping_ra);
       plm_in_ping.read_rsp(in_ping_rd);
 
-      plm_in_pong.clk(clk);
-      plm_in_pong.rst(rst);
-      plm_in_pong.write_req(in_pong_w);
-      plm_in_pong.read_req(in_pong_ra);
-      plm_in_pong.read_rsp(in_pong_rd);
+      // plm_in_pong.clk(clk);
+      // plm_in_pong.rst(rst);
+      // plm_in_pong.write_req(in_pong_w);
+      // plm_in_pong.read_req(in_pong_ra);
+      // plm_in_pong.read_rsp(in_pong_rd);
 
       plm_in_b_ping.clk(clk);
       plm_in_b_ping.rst(rst);
@@ -101,11 +101,11 @@ inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_di
       plm_in_b_ping.read_req(in_b_ping_ra);
       plm_in_b_ping.read_rsp(in_b_ping_rd);
 
-      plm_in_b_pong.clk(clk);
-      plm_in_b_pong.rst(rst);
-      plm_in_b_pong.write_req(in_b_pong_w);
-      plm_in_b_pong.read_req(in_b_pong_ra);
-      plm_in_b_pong.read_rsp(in_b_pong_rd);
+      // plm_in_b_pong.clk(clk);
+      // plm_in_b_pong.rst(rst);
+      // plm_in_b_pong.write_req(in_b_pong_w);
+      // plm_in_b_pong.read_req(in_b_pong_ra);
+      // plm_in_b_pong.read_rsp(in_b_pong_rd);
 
 
 
@@ -115,11 +115,11 @@ inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_di
       plm_xp_ping.read_req(xp_ping_ra);
       plm_xp_ping.read_rsp(xp_ping_rd);
 
-      plm_xp_pong.clk(clk);
-      plm_xp_pong.rst(rst);
-      plm_xp_pong.write_req(xp_pong_w);
-      plm_xp_pong.read_req(xp_pong_ra);
-      plm_xp_pong.read_rsp(xp_pong_rd);
+      // plm_xp_pong.clk(clk);
+      // plm_xp_pong.rst(rst);
+      // plm_xp_pong.write_req(xp_pong_w);
+      // plm_xp_pong.read_req(xp_pong_ra);
+      // plm_xp_pong.read_rsp(xp_pong_rd);
 
 
 
@@ -130,11 +130,11 @@ inline void compute(uint32_t iter, uint32_t kalman_iters, uint32_t kalman_mat_di
       plm_out_ping.read_req(out_ping_ra);
       plm_out_ping.read_rsp(out_ping_rd);
 
-      plm_out_pong.clk(clk);
-      plm_out_pong.rst(rst);
-      plm_out_pong.write_req(out_pong_w);
-      plm_out_pong.read_req(out_pong_ra);
-      plm_out_pong.read_rsp(out_pong_rd);
+      // plm_out_pong.clk(clk);
+      // plm_out_pong.rst(rst);
+      // plm_out_pong.write_req(out_pong_w);
+      // plm_out_pong.read_req(out_pong_ra);
+      // plm_out_pong.read_rsp(out_pong_rd);
     }
   Connections::SyncChannel CCS_INIT_S1(sync12);
   Connections::SyncChannel CCS_INIT_S1(sync12b);
@@ -164,12 +164,12 @@ mem_wrap<inbks, inrp,
            plm_WR<in_as, inwp>,
            plm_RRq<in_as,inrp>,
            plm_RRs<inrp>> CCS_INIT_S1(plm_in_ping);
-  mem_wrap<inbks, inrp,
-           inwp, inebks,
-           DATA_TYPE, NVUINTW(in_as),
-           plm_WR<in_as, inwp>,
-           plm_RRq<in_as, inrp>,
-           plm_RRs<inrp>> CCS_INIT_S1(plm_in_pong);
+  // mem_wrap<inbks, inrp,
+  //          inwp, inebks,
+  //          DATA_TYPE, NVUINTW(in_as),
+  //          plm_WR<in_as, inwp>,
+  //          plm_RRq<in_as, inrp>,
+  //          plm_RRs<inrp>> CCS_INIT_S1(plm_in_pong);
 
   mem_wrap<inbks, inrp,
           //  inwp, inebks,
@@ -178,12 +178,12 @@ mem_wrap<inbks, inrp,
            plm_WR<inb_as, inwp>,
            plm_RRq<inb_as,inrp>,
            plm_RRs<inrp>> CCS_INIT_S1(plm_in_b_ping);
-  mem_wrap<inbks, inrp,
-           inwp, inbebks,
-           DATA_TYPE, NVUINTW(inb_as),
-           plm_WR<inb_as, inwp>,
-           plm_RRq<inb_as, inrp>,
-           plm_RRs<inrp>> CCS_INIT_S1(plm_in_b_pong);
+  // mem_wrap<inbks, inrp,
+  //          inwp, inbebks,
+  //          DATA_TYPE, NVUINTW(inb_as),
+  //          plm_WR<inb_as, inwp>,
+  //          plm_RRq<inb_as, inrp>,
+  //          plm_RRs<inrp>> CCS_INIT_S1(plm_in_b_pong);
 
 
 
@@ -193,12 +193,12 @@ mem_wrap<inbks, inrp,
            plm_WR<outb_as, outbwp>,
            plm_RRq<outb_as, outbrp>,
            plm_RRs<outbrp>> CCS_INIT_S1(plm_xp_ping);
-  mem_wrap<outbbks, outbrp,
-           outbwp, outbebks,
-           DATA_TYPE, NVUINTW(outb_as),
-           plm_WR<outb_as, outbwp>,
-           plm_RRq<outb_as, outbrp>,
-           plm_RRs<outbrp>> CCS_INIT_S1(plm_xp_pong);
+  // mem_wrap<outbbks, outbrp,
+  //          outbwp, outbebks,
+  //          DATA_TYPE, NVUINTW(outb_as),
+  //          plm_WR<outb_as, outbwp>,
+  //          plm_RRq<outb_as, outbrp>,
+  //          plm_RRs<outbrp>> CCS_INIT_S1(plm_xp_pong);
 
 
   mem_wrap<outbks, outrp,
@@ -207,20 +207,20 @@ mem_wrap<inbks, inrp,
            plm_WR<out_as, outwp>,
            plm_RRq<out_as, outrp>,
            plm_RRs<outrp>> CCS_INIT_S1(plm_out_ping);
-  mem_wrap<outbks, outrp,
-           outwp, outebks,
-           DATA_TYPE, NVUINTW(out_as),
-           plm_WR<out_as, outwp>,
-           plm_RRq<out_as, outrp>,
-           plm_RRs<outrp>> CCS_INIT_S1(plm_out_pong);
+  // mem_wrap<outbks, outrp,
+  //          outwp, outebks,
+  //          DATA_TYPE, NVUINTW(out_as),
+  //          plm_WR<out_as, outwp>,
+  //          plm_RRq<out_as, outrp>,
+  //          plm_RRs<outrp>> CCS_INIT_S1(plm_out_pong);
 
     Connections::Combinational<plm_WR<in_as,inwp>> in_ping_w;
   Connections::Combinational<plm_RRq<in_as,inrp>> in_ping_ra;
   Connections::Combinational<plm_RRs<inrp>> in_ping_rd;
 
-  Connections::Combinational<plm_WR<in_as,inwp>> in_pong_w;
-  Connections::Combinational<plm_RRq<in_as,inrp>> in_pong_ra;
-  Connections::Combinational<plm_RRs<inrp>> in_pong_rd;
+  // Connections::Combinational<plm_WR<in_as,inwp>> in_pong_w;
+  // Connections::Combinational<plm_RRq<in_as,inrp>> in_pong_ra;
+  // Connections::Combinational<plm_RRs<inrp>> in_pong_rd;
 
 
   // Connections::Combinational<plm_WR<in_as,inwp>> in_b_ping_w;
@@ -235,9 +235,9 @@ mem_wrap<inbks, inrp,
   Connections::Combinational<plm_RRq<inb_as,inrp>> in_b_ping_ra;
   Connections::Combinational<plm_RRs<inrp>> in_b_ping_rd;
 
-  Connections::Combinational<plm_WR<inb_as,inwp>> in_b_pong_w;
-  Connections::Combinational<plm_RRq<inb_as,inrp>> in_b_pong_ra;
-  Connections::Combinational<plm_RRs<inrp>> in_b_pong_rd;
+  // Connections::Combinational<plm_WR<inb_as,inwp>> in_b_pong_w;
+  // Connections::Combinational<plm_RRq<inb_as,inrp>> in_b_pong_ra;
+  // Connections::Combinational<plm_RRs<inrp>> in_b_pong_rd;
 
 
 
@@ -245,18 +245,18 @@ mem_wrap<inbks, inrp,
   Connections::Combinational<plm_RRq<outb_as,outbrp>> xp_ping_ra;
   Connections::Combinational<plm_RRs<outbrp>> xp_ping_rd;
 
-  Connections::Combinational<plm_WR<outb_as,outbwp>> xp_pong_w;
-  Connections::Combinational<plm_RRq<outb_as,outbrp>> xp_pong_ra;
-  Connections::Combinational<plm_RRs<outbrp>> xp_pong_rd;
+  // Connections::Combinational<plm_WR<outb_as,outbwp>> xp_pong_w;
+  // Connections::Combinational<plm_RRq<outb_as,outbrp>> xp_pong_ra;
+  // Connections::Combinational<plm_RRs<outbrp>> xp_pong_rd;
   
 
   Connections::Combinational<plm_WR<out_as,outwp>> out_ping_w;
   Connections::Combinational<plm_RRq<out_as,outrp>> out_ping_ra;
   Connections::Combinational<plm_RRs<outrp>> out_ping_rd;
 
-  Connections::Combinational<plm_WR<out_as,outwp>> out_pong_w;
-  Connections::Combinational<plm_RRq<out_as,outrp>> out_pong_ra;
-  Connections::Combinational<plm_RRs<outrp>> out_pong_rd;
+  // Connections::Combinational<plm_WR<out_as,outwp>> out_pong_w;
+  // Connections::Combinational<plm_RRq<out_as,outrp>> out_pong_ra;
+  // Connections::Combinational<plm_RRs<outrp>> out_pong_rd;
 };
 
 #endif

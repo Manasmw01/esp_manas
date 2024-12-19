@@ -24,11 +24,11 @@
 
 // #define MEAS_SIZE 164  // Number of measurements m
 // #define MEAS_SIZE 52  // Number of measurements m
-
-#define MAX_MEAS_SIZE 52  // Number of measurements m
+#define common_size 112
+#define MAX_MEAS_SIZE common_size  // Number of measurements m
 // #define MAX_MEAS_SIZE 164  // Number of measurements m
-#define TMP_MAX_SIZE_SPECS 52
-#define TMP_MAX_SIZE_INV 52
+#define TMP_MAX_SIZE_SPECS common_size
+#define TMP_MAX_SIZE_INV common_size
 
 #define SAMPLES 10  // Number of measurements m
 
@@ -43,13 +43,13 @@
 #define DMA_SIZE SIZE_WORD
 // #define PLM_OUT_WORD 1000
 
-// #define PLM_IN_WORD 80000
+// #define PLM_IN_WORD 800
 #define PLM_IN_WORD (STATE_SIZE + (STATE_SIZE*STATE_SIZE) + (STATE_SIZE*STATE_SIZE) + (MAX_MEAS_SIZE*MAX_MEAS_SIZE) + (MAX_MEAS_SIZE*STATE_SIZE) + (STATE_SIZE*STATE_SIZE) + (SAMPLES*MAX_MEAS_SIZE))
-#define PLM_B_IN_WORD 3000
+#define PLM_B_IN_WORD MAX_MEAS_SIZE
 
 // #define PLM_IN_WORD 3650
-#define PLM_OUT_WORD 4096
-#define PLMB_OUT_WORD 8192
+#define PLM_OUT_WORD MAX_MEAS_SIZE
+#define PLMB_OUT_WORD MAX_MEAS_SIZE
 
 #define MEM_SIZE 67371008/(DMA_WIDTH/8)
 
