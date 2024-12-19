@@ -313,16 +313,18 @@ void testbench::proc()
     CCS_LOG("Single input array completed");
 
     // std::cout << "load_data\t" << input_vecs_total_size << "\n";
-    CCS_LOG("load_data\t" << input_vecs_total_size );
+    // CCS_LOG("load_data\t" << input_vecs_total_size );
 
-    load_data(in_float, input_vecs_total_size); // Writes data in mem[i]
-    delete[] in_float; // Caller is responsible for cleanup
+    // load_data(in_float, 0, input_vecs_total_size); // Writes data in mem[i]
+    load_data(in_float, 0, constant_matrices_size); // Writes data in mem[i]
+    load_data(in_float, constant_matrices_size, input_vecs_total_size); // Writes data in mem[i]
+    // delete[] in_float; // Caller is responsible for cleanup
 
     // std::cout << "Load datafloat done\n";
     CCS_LOG("Load datafloat done");
 
     do_config();
-    // std::cout << "Do config done\n";
+    std::cout << "Do config done\n";
     CCS_LOG("Do config done");
 
     dump_memory();
@@ -344,28 +346,54 @@ void testbench::proc()
     wait();
 }
 
-
-void testbench::load_data(float *inn, uint32_t inn_size)
+void testbench::load_data(float *inn, uint32_t start_index, uint32_t inn_size)
 {
-    // std::cout << "inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n";
-    CCS_LOG("inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT 
-        << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n");
-    for (uint32_t i = 0; i < inn_size / DMA_WORD_PER_BEAT; i++)  {
+    // Log the inputs to the function for debugging purposes
+    CCS_LOG("start_index:" << start_index << "\tinn_size:" << inn_size);
+
+    for (uint32_t i = start_index; i < inn_size / DMA_WORD_PER_BEAT; i++)  
+    {
         ac_int<DMA_WIDTH> data_bv;
         for (int wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
         {
-            const uint32_t index = i + wordd;
+            const uint32_t index = i * DMA_WORD_PER_BEAT + wordd; // Adjusted index calculation
             FLOAT_TYPE data = inn[index];
             FPDATA_WORD fpdata_word;
-            FPDATA_WORD integer_representation;
 
-        fp2int(data, fpdata_word);
+            // Convert float data to fixed-point representation
+            fp2int(data, fpdata_word);
 
-        data_bv.set_slc(wordd*FPDATA_WL,fpdata_word);
+            // Set the value in the bit-vector
+            data_bv.set_slc(wordd * FPDATA_WL, fpdata_word);
         }
+
+        // Store the resulting data bit-vector in memory
         mem[i] = data_bv;
     }
 }
+
+
+// void testbench::load_data(float *inn, uint32_t inn_size)
+// {
+//     // std::cout << "inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n";
+//     CCS_LOG("inn_size:" << inn_size << "\tDMA_WORD_PER_BEAT:" << DMA_WORD_PER_BEAT 
+//         << "\tinn_size / DMA_WORD_PER_BEAT:" << inn_size / DMA_WORD_PER_BEAT << "\n");
+//     for (uint32_t i = 0; i < inn_size / DMA_WORD_PER_BEAT; i++)  {
+//         ac_int<DMA_WIDTH> data_bv;
+//         for (int wordd = 0; wordd < DMA_WORD_PER_BEAT; wordd++)
+//         {
+//             const uint32_t index = i + wordd;
+//             FLOAT_TYPE data = inn[index];
+//             FPDATA_WORD fpdata_word;
+//             FPDATA_WORD integer_representation;
+
+//         fp2int(data, fpdata_word);
+
+//         data_bv.set_slc(wordd*FPDATA_WL,fpdata_word);
+//         }
+//         mem[i] = data_bv;
+//     }
+// }
 
 void testbench::partition()
 {
@@ -454,13 +482,16 @@ void testbench::dump_memory()
     float ref_prediction_float[STATE_SIZE];
 
     // std::cout << "Entered Dump Memory\n";
-    CCS_LOG("Entered Dump Memory\n");
+    CCS_LOG("Entered Dump Memory");
     // do 
     // {
     //     wait(); 
     // } while (!acc_done.read());
+    uint32_t tot_size = STATE_SIZE + STATE_SIZE*STATE_SIZE;
+    float sum_sqr_vec = 0.0;
+    float abs_diff = 0.0;
     int offset=in_size;
-    CCS_LOG("Dump memory offset address: " << offset << "\n");
+    CCS_LOG("Dump memory offset address: " << offset);
 
     out= new ac_int<DATA_WIDTH,false>[out_size];
     out_float= new float[out_size];
@@ -471,11 +502,10 @@ void testbench::dump_memory()
     // std::cout << "\noffset[" << offset << "]:\n";
     CCS_LOG("OUT_SIZE[" << out_size << "]");
     CCS_LOG("offset[" << offset << "]");
-    uint32_t tot_size = STATE_SIZE + STATE_SIZE*STATE_SIZE;
 
-
-  float sum_sqr_vec = 0.0;
-  float abs_diff = 0.0;
+    CCS_LOG("Waiting for acc_done");
+    // do_config();
+    // CCS_LOG("Do config done");
     for (uint32_t iters = 0; iters < kalman_iters; iters++)
     {
         do 
@@ -592,7 +622,11 @@ void testbench::single_input_array()
 
 void testbench::single_input_meas()
 {
-    // Handles `j` from `measurement_vecs_base_address` for `MEAS_SIZE`, across `kalman_iters`
+    uint32_t first_in_float_index = 0 * in_words_adj + (measurement_vecs_base_address + 0 + MEAS_SIZE * (1 - 1));
+    uint32_t last_in_float_index = (mac_n - 1) * in_words_adj + (measurement_vecs_base_address + (MEAS_SIZE - 1) + MEAS_SIZE * (kalman_iters - 1));
+
+    // Print the first and last `in_float_index` values
+    CCS_LOG("Measurement addresses: (" << first_in_float_index << "\t" << last_in_float_index << ")");
     for (uint32_t i = 0; i < mac_n; i++)
     {
         for (uint32_t iter = 1; iter <= kalman_iters; iter++) // Iterate from 1 to `kalman_iters`

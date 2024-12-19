@@ -70,6 +70,7 @@ SC_MODULE(testbench)
     }
     void load_data(ac_int<DATA_WIDTH,false> *inn, uint32_t load_size);
     void load_data(float *inn, uint32_t load_size);
+    void load_data(float *inn, uint32_t start_index, uint32_t load_size);
     void copy_array(float* a, float* b, int offset_b, int n);
     void partition(void);
     // void print_variables(void);

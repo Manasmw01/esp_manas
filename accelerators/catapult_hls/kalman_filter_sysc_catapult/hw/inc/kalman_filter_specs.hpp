@@ -30,7 +30,7 @@
 #define TMP_MAX_SIZE_SPECS common_size
 #define TMP_MAX_SIZE_INV common_size
 
-#define SAMPLES 10  // Number of measurements m
+#define SAMPLES 2  // Number of measurements m
 
 #define iterations SAMPLES
 #define dimensions STATE_SIZE

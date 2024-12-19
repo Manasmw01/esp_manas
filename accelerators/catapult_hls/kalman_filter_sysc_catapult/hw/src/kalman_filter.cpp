@@ -101,8 +101,8 @@ void kalman_filter_sysc_catapult:: load() {
                 current_chunk_size = constant_matrices_size - (chunk * chunk_reg);
             }
             uint32_t current_chunk_address = regs_base_address + (chunk * chunk_reg);
-            // cout << "Load_d const" << "(" << chunk << "): " << current_chunk_address << "\t" << current_chunk_size 
-                // << "\t" << (current_chunk_address + current_chunk_size) << "\n";
+            cout << "Load_d const" << "(" << chunk << "): " << current_chunk_address << "\t" << current_chunk_size 
+                << "\t" << (current_chunk_address + current_chunk_size) << "\n";
 
             load_d(ping_pong, current_chunk_address, current_chunk_size, 0, temp_indx_const);
             // load_d(ping_pong, current_chunk_address, current_chunk_size, 1, temp_indx);
